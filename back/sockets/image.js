@@ -1,8 +1,10 @@
 module.exports = function (io) {
-  io.on("imagePrev", (data) => {
+  const SOCKET_TYPE = require("../constants/socket-type");
+
+  io.on(SOCKET_TYPE.IMAGE_PREV, (data) => {
     // TODO: 자료 이전으로 넘기기
   });
-  io.on("imageNext", (data) => {
+  io.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
     // TODO: 자료 다음으로 넘기기
   });
 };
