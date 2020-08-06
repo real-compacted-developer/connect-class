@@ -6,6 +6,8 @@ const http = require("http");
 const socket = require("socket.io");
 const config = require("../config");
 
+const initSocket = require("../sockets");
+
 const port = normalizePort(process.env.PORT || config.DEFAULT_PORT);
 app.set("port", port);
 
@@ -55,4 +57,8 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
+
+  initSocket();
 }
+
+exports.io = io;
