@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const usersRouter = require("./apis/users");
+const RoomStore = require("./stores/RoomStore");
 
 const app = express();
 
@@ -26,4 +27,7 @@ app.use(function (err, req, res) {
   res.render("error");
 });
 
-module.exports = app;
+const RoomInstance = new RoomStore();
+
+exports.RoomInstance = RoomInstance;
+exports.app = app;
