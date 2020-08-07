@@ -22,10 +22,14 @@ module.exports = function (io) {
   });
 
   io.on(SOCKET_TYPE.JOIN, (data) => {
-    // TODO: 방 입장
+    const { roomId, userId } = data;
+    if(!Room.getRoom(roomId)) return;
+    Room.addUser(roomId, userId);
   });
   io.on(SOCKET_TYPE.EXIT, (data) => {
-    // TODO: 방 퇴장
+    const { roomId, userId } = data;
+    if(!Room.getRoom(roomId)) return;
+    Room.deleteUser(roomId, userId);
   });
   io.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
     // TODO: 유저 목록 업데이트
