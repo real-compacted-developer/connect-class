@@ -3,28 +3,28 @@ class RoomStore {
     this.roomList = [];
   }
 
-  addRoom(id, data) {
-    this.roomList[id] = data;
-    return this.roomList[id];
+  addRoom(roomId, data) {
+    this.roomList[roomId] = data;
+    return this.roomList[roomId];
   }
 
-  getRoom(id) {
-      return this.roomList[id];
+  getRoom(roomId) {
+    return this.roomList[roomId];
   }
 
-  deleteRoom(id) {
-    const tempRoom = this.roomList[id];
-    delete this.roomList[id];
+  deleteRoom(roomId) {
+    const tempRoom = this.roomList[roomId];
+    delete this.roomList[roomId];
     return tempRoom;
   }
 
-  updateRoom(id, data) {
-    if (!this.roomList[id]) {
+  updateRoom(roomId, data) {
+    if (!this.roomList[roomId]) {
       return undefined;
     }
 
-    this.roomList[id] = data;
-    return this.roomList[id];
+    this.roomList[roomId] = data;
+    return this.roomList[roomId];
   }
 }
 
