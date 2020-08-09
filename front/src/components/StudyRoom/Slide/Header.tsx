@@ -13,6 +13,14 @@ const Wrapper = styled.div`
   z-index: 1000;
 `;
 
+const FullButton = styled.button`
+  width: 80px;
+  height: 80px;
+
+  position: absolute;
+  right: 30px;
+`;
+
 type Props = {};
 
 type States = {};
@@ -27,6 +35,10 @@ export default class Header extends Component<Props, States> {
   componentDidMount() {}
 
   render() {
-    return <Wrapper>헤더버튼</Wrapper>;
+    return (
+      <Wrapper>
+        <FullButton>전체화면</FullButton>
+      </Wrapper>
+    );
   }
 }
