@@ -6,7 +6,9 @@ const logger = require("morgan");
 const usersRouter = require("./apis/users");
 const RoomStore = require("./stores/RoomStore");
 
+const { sequelize } = require("./models");
 const app = express();
+sequelize.sync();
 
 app.use(logger("dev"));
 app.use(express.json());
