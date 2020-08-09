@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import Information from "./Information";
+
 const Wrapper = styled.div`
   width: 100%;
   height: 800px;
@@ -29,6 +31,10 @@ export default class StudyButton extends Component<Props, States> {
   componentDidMount() {}
 
   render() {
-    return <Wrapper></Wrapper>;
+    return (
+      <Wrapper>
+        <Information></Information>
+      </Wrapper>
+    );
   }
 }
