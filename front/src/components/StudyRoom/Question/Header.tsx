@@ -14,6 +14,24 @@ const Wrapper = styled.div`
   z-index: 1000;
 `;
 
+const MenuButton = styled.button`
+  width: 30px;
+  height: 30px;
+  margin: 15px;
+
+  background-color: transparent;
+
+  position: absolute;
+  right: 20px;
+
+  background-image: url("https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/8A1B6F6C-32D3-4A04-A0BF-31585ADFBEFE.svg");
+  background-repeat: none;
+  background-size: 30px 30px;
+
+  border: none;
+  outline: none;
+`;
+
 type Props = {};
 
 type States = {};
@@ -28,6 +46,10 @@ export default class Form extends Component<Props, States> {
   componentDidMount() {}
 
   render() {
-    return <Wrapper></Wrapper>;
+    return (
+      <Wrapper>
+        <MenuButton></MenuButton>
+      </Wrapper>
+    );
   }
 }

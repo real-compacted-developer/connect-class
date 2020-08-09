@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import QuestionList from "./QuestionList";
+
 const Wrapper = styled.div`
   width: 100%;
   height: calc(100vh - 120px - 60px);
@@ -20,7 +22,7 @@ const Menu = styled.div`
   background-color: #ffffff;
 `;
 
-const Best = styled.p`
+const Best = styled.button`
   width: 63px;
   height: 25px;
   font-family: GmarketSans;
@@ -35,9 +37,13 @@ const Best = styled.p`
 
   margin: 0;
   padding: 0;
+
+  outline: none;
+  border: none;
+  background-color: transparent;
 `;
 
-const Recent = styled.p`
+const Recent = styled.button`
   width: 98px;
   height: 25px;
   object-fit: contain;
@@ -53,6 +59,10 @@ const Recent = styled.p`
 
   margin: 0;
   padding: 0;
+
+  outline: none;
+  border: none;
+  background-color: transparent;
 `;
 
 const Gradation = styled.div`
@@ -67,7 +77,7 @@ type Props = {};
 
 type States = {};
 
-export default class QuestionList extends Component<Props, States> {
+export default class Content extends Component<Props, States> {
   constructor(props: Props) {
     super(props);
   }
@@ -84,7 +94,7 @@ export default class QuestionList extends Component<Props, States> {
           <Recent>Recent</Recent>
         </Menu>
         <Gradation></Gradation>
-        asdfasdf
+        <QuestionList></QuestionList>
       </Wrapper>
     );
   }
