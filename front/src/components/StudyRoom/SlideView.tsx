@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Header from "./Slide/Header";
 import Menu from "./Slide/Menu";
+import Content from "./Slide/Content";
 
 const Wrapper = styled.div`
   width: 1453px;
@@ -30,6 +31,7 @@ export default class SlideView extends Component<Props, States> {
     return (
       <Wrapper>
         <Header></Header>
+        <Content></Content>
         <Menu></Menu>
       </Wrapper>
     );

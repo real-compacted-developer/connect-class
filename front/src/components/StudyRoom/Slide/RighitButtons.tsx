@@ -1,26 +1,23 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import LeftButtons from "./LeftButtons";
-import RightButtons from "./RighitButtons";
-
 const Wrapper = styled.div`
-  width: 100%;
+  width: 300px;
+  padding: 0 50px 0 50px;
   height: 80px;
 
+  display: flex;
+  justify-content: space-between;
+
   position: absolute;
-  bottom: 0;
-
-  background-color: #ffffff;
-
-  z-index: 1000;
+  right: 0;
 `;
 
 type Props = {};
 
 type States = {};
 
-export default class Menu extends Component<Props, States> {
+export default class StudyButton extends Component<Props, States> {
   constructor(props: Props) {
     super(props);
   }
@@ -32,8 +29,9 @@ export default class Menu extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <LeftButtons></LeftButtons>
-        <RightButtons></RightButtons>
+        <button>필기하기</button>
+        <button>선물</button>
+        <button>종료</button>
       </Wrapper>
     );
   }
