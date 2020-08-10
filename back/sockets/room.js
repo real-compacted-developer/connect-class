@@ -1,12 +1,32 @@
 module.exports = function (io) {
+  const crypto = require("crypto");
   const SOCKET_TYPE = require("../constants/socket-type");
   const Room = require("../app").RoomInstance;
+  const RoomModel = require("../models/index").StudyGroup;
 
-  io.on(SOCKET_TYPE.CREATE_ROOM, (data) => {
-    // const createRoom = RoomModel.insert(data);
-    const id = 1; // TODO: DB Model 추가 후 DB에서 id 가져오기
+  io.on(SOCKET_TYPE.CREATE_ROOM, async (data) => {
+    const { title, category, password, limitCount, isPremium } = data;
 
-    Room.addRoom(id, data);
+    const salt = crypto.randomBytes(64);
+    const encodePassword = crypto.pbkdf2Sync(
+      password,
+      salt,
+      100000,
+      64,
+      "sha512"
+    );
+
+    await RoomModel.create({
+      title,
+      category,
+      limitCount,
+      isPremium,
+      people: 0,
+      salt,
+      password: encodePassword,
+    });
+
+    Room.addRoom(title, data);
 
     console.log(`새로운 방 생성: ${JSON.stringify(data)}`);
 
@@ -15,7 +35,7 @@ module.exports = function (io) {
 
   io.on(SOCKET_TYPE.DELETE_ROOM, (data) => {
     const deleteRoom = Room.deleteRoom(data);
-    
+
     console.log(`방 삭제: ${JSON.stringify(deleteRoom)}`);
 
     io.emit(SOCKET_TYPE.DELETE_ROOM, deleteRoom);
@@ -23,14 +43,16 @@ module.exports = function (io) {
 
   io.on(SOCKET_TYPE.JOIN, (data) => {
     const { roomId, userId } = data;
-    if(!Room.getRoom(roomId)) return;
+    if (!Room.getRoom(roomId)) return;
     Room.addUser(roomId, userId);
   });
+
   io.on(SOCKET_TYPE.EXIT, (data) => {
     const { roomId, userId } = data;
-    if(!Room.getRoom(roomId)) return;
+    if (!Room.getRoom(roomId)) return;
     Room.deleteUser(roomId, userId);
   });
+
   io.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
     // TODO: 유저 목록 업데이트
   });
