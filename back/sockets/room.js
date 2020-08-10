@@ -10,7 +10,7 @@ module.exports = function (io) {
     const salt = crypto.randomBytes(64);
     const encodePassword = crypto.pbkdf2Sync(
       password,
-      salt,
+      salt.toString("base64"),
       100000,
       64,
       "sha512"
@@ -19,11 +19,11 @@ module.exports = function (io) {
     await RoomModel.create({
       title,
       category,
-      limitCount,
-      isPremium,
+      limitCount: parseInt(limitCount, 10),
+      isPremium: (isPremium === "true"),
       people: 0,
-      salt,
-      password: encodePassword,
+      salt: salt.toString("base64"),
+      password: encodePassword.toString("base64"),
     });
 
     Room.addRoom(title, data);
