@@ -45,12 +45,14 @@ module.exports = function (io) {
     const { roomId, userId } = data;
     if (!Room.getRoom(roomId)) return;
     Room.addUser(roomId, userId);
+    io.join(roomId);
   });
 
   io.on(SOCKET_TYPE.EXIT, (data) => {
     const { roomId, userId } = data;
     if (!Room.getRoom(roomId)) return;
     Room.deleteUser(roomId, userId);
+    io.leave(roomId);
   });
 
   io.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
