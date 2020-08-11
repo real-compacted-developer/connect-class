@@ -7,6 +7,15 @@ module.exports = function (io) {
   io.on(SOCKET_TYPE.CREATE_ROOM, async (data) => {
     const { title, category, password, limitCount, isPremium } = data;
 
+    const room = await RoomModel.findOne({
+      where: {
+        title,
+      },
+    });
+    if (room) {
+      throw new Error("이미 스터디 방이 존재합니다.");
+    }
+
     const salt = crypto.randomBytes(64);
     const encodePassword = crypto.pbkdf2Sync(
       password,
@@ -20,7 +29,7 @@ module.exports = function (io) {
       title,
       category,
       limitCount: parseInt(limitCount, 10),
-      isPremium: (isPremium === "true"),
+      isPremium: isPremium === "true",
       people: 0,
       salt: salt.toString("base64"),
       password: encodePassword.toString("base64"),
@@ -33,7 +42,16 @@ module.exports = function (io) {
     io.emit(SOCKET_TYPE.CREATE_ROOM, data);
   });
 
-  io.on(SOCKET_TYPE.DELETE_ROOM, (data) => {
+  io.on(SOCKET_TYPE.DELETE_ROOM, async (data) => {
+    const room = await RoomModel.findOne({
+      where: {
+        title: data,
+      },
+    });
+    if (!room) {
+      throw new Error("스터디 방이 존재하지 않습니다.");
+    }
+
     const deleteRoom = Room.deleteRoom(data);
 
     console.log(`방 삭제: ${JSON.stringify(deleteRoom)}`);
@@ -41,16 +59,40 @@ module.exports = function (io) {
     io.emit(SOCKET_TYPE.DELETE_ROOM, deleteRoom);
   });
 
-  io.on(SOCKET_TYPE.JOIN, (data) => {
+  io.on(SOCKET_TYPE.JOIN, async (data) => {
     const { roomId, userId } = data;
-    if (!Room.getRoom(roomId)) return;
+
+    const room = await RoomModel.findOne({
+      where: {
+        title: roomId,
+      },
+    });
+    if (!room) {
+      throw new Error("스터디 방이 존재하지 않습니다.");
+    }
+    if (!Room.getRoom(roomId)) {
+      throw new Error("스터디 방이 존재하지 않습니다.");
+    }
+
     Room.addUser(roomId, userId);
     io.join(roomId);
   });
 
-  io.on(SOCKET_TYPE.EXIT, (data) => {
+  io.on(SOCKET_TYPE.EXIT, async (data) => {
     const { roomId, userId } = data;
-    if (!Room.getRoom(roomId)) return;
+
+    const room = await RoomModel.findOne({
+      where: {
+        title: roomId,
+      },
+    });
+    if (!room) {
+      throw new Error("스터디 방이 존재하지 않습니다.");
+    }
+    if (!Room.getRoom(roomId)) {
+      throw new Error("스터디 방이 존재하지 않습니다.");
+    }
+
     Room.deleteUser(roomId, userId);
     io.leave(roomId);
   });
