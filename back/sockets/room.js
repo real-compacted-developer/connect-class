@@ -52,6 +52,12 @@ module.exports = function (io) {
       throw new Error("스터디 방이 존재하지 않습니다.");
     }
 
+    await RoomModel.destroy({
+      where: {
+        title: data,
+      },
+    });
+
     const deleteRoom = Room.deleteRoom(data);
 
     console.log(`방 삭제: ${JSON.stringify(deleteRoom)}`);
