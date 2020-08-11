@@ -4,6 +4,7 @@ const imagesPath = [
   "https://connect-class-test.s3.ap-northeast-2.amazonaws.com/StudyGroup1/week1/cat3.jpg",
   "https://connect-class-test.s3.ap-northeast-2.amazonaws.com/StudyGroup1/week1/puppy1.jpg"
 ];
+const io = require("../bin/www").io;
 const size = imagesPath.length;
 module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
