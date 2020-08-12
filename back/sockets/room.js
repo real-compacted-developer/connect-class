@@ -3,6 +3,10 @@ module.exports = function (io) {
   const SOCKET_TYPE = require("../constants/socket-type");
   const Room = require("../app").RoomInstance;
   const RoomModel = require("../models/index").StudyGroup;
+  const StudyMemeberModel = require("../models/index").studyMember;
+
+  const Sequelize = require("sequelize");
+  const Op = Sequelize.Op;
 
   io.on(SOCKET_TYPE.CREATE_ROOM, async (data) => {
     const { title, category, password, limitCount, isPremium } = data;
@@ -80,6 +84,11 @@ module.exports = function (io) {
       throw new Error("스터디 방이 존재하지 않습니다.");
     }
 
+    await StudyMemeberModel.create({
+      nickname: userId,
+      studyTitle: roomId,
+    });
+
     Room.addUser(roomId, userId);
     io.join(roomId);
   });
@@ -98,6 +107,12 @@ module.exports = function (io) {
     if (!Room.getRoom(roomId)) {
       throw new Error("스터디 방이 존재하지 않습니다.");
     }
+
+    await StudyMemeberModel.destroy({
+      where: {
+        [Op.and]: [{ nickname: userId }, { studyTitle: roomId }],
+      },
+    });
 
     Room.deleteUser(roomId, userId);
     io.leave(roomId);
