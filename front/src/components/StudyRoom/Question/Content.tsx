@@ -38,6 +38,8 @@ const Best = styled.button`
   margin: 0;
   padding: 0;
 
+  margin-right: 15px;
+
   outline: none;
   border: none;
   background-color: transparent;
