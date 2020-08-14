@@ -25,7 +25,7 @@ const Menu = styled.div`
 const Best = styled.button`
   width: 63px;
   height: 25px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans";
   font-size: 25px;
   font-weight: bold;
   font-stretch: normal;
@@ -47,7 +47,7 @@ const Recent = styled.button`
   width: 98px;
   height: 25px;
   object-fit: contain;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans";
   font-size: 25px;
   font-weight: bold;
   font-stretch: normal;

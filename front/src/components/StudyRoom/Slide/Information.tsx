@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
 const Title = styled.p`
   height: 30px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans";
   font-size: 30px;
   font-weight: bold;
   font-stretch: normal;
@@ -30,7 +30,7 @@ const Title = styled.p`
 const SubInformation = styled.p`
   width: 100%;
   height: 18px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans";
   font-size: 18px;
   font-weight: bold;
   font-stretch: normal;

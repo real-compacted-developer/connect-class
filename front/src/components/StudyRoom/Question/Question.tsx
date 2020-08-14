@@ -35,7 +35,7 @@ const Icon = styled.div`
 
 const Name = styled.p`
   height: 12px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans";
   font-size: 12px;
   font-weight: 300;
   font-stretch: normal;

@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 const Input = styled.input`
   height: 82px;
 
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans";
   font-size: 15px;
   font-weight: 300;
   font-stretch: normal;
