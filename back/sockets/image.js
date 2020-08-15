@@ -1,5 +1,14 @@
 module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
+    const Canvas = require("../app").CanvasInstance;
+
+  function sendStoredDrawData(io, slideId) {
+    const drawDataList = Canvas.getDrawData(slideId);
+    drawDataList.forEach((draw) => {
+      io.broadcast.emit(SOCKET_TYPE.DRAW, draw);
+    });
+  }
+
   // const { Slide, StudyData } = require("../models/index");
   // S3에 있는 더미 이미지 사용
   const imagesPath = [
@@ -10,18 +19,25 @@ module.exports = function (socket) {
   ];
   const io = require("../bin/www").io;
   const size = imagesPath.length;
+  
   socket.on(SOCKET_TYPE.IMAGE_PREV, (data) => {
     // TODO: 슬라이드 이미지 이전으로 넘기기
-    if (data.index == 0) {
+    const slideId = ""; // 이미지를 넘길 때 슬라이드 ID 가져오는 부분이 필요
+
+    if (data.index === 0) {
       data.index = size - 1;
     } else {
       data.index -= 1;
     }
     data.urlInfo = imagesPath[data.index];
     io.in("roomNumber").emit("imageChange", data);
+    sendStoredDrawData(io, slideId);
   });
+  
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
     // TODO: 슬라이드 이미지 다음으로 넘기기
+    const slideId = ""; // 이미지를 넘길 때 슬라이드 ID 가져오는 부분이 필요
+    
     if (data.index >= size - 1) {
       data.index = 0;
     } else {
@@ -29,5 +45,6 @@ module.exports = function (socket) {
     }
     data.urlInfo = imagesPath[data.index];
     io.in("roomNumber").emit("imageChange", data);
+    sendStoredDrawData(io, slideId);
   });
 };

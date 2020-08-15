@@ -5,8 +5,13 @@ const logger = require("morgan");
 
 const usersRouter = require("./apis/users");
 
+const RoomStore = require("./stores/RoomStore");
+const CanvasStore = require("./stores/CanvasStore");
+
 const { sequelize } = require("./models");
+
 const app = express();
+
 sequelize.sync();
 
 app.use(logger("dev"));
@@ -28,4 +33,9 @@ app.use(function (err, req, res) {
   res.render("error");
 });
 
-module.exports = app;
+const RoomInstance = new RoomStore();
+const CanvasInstance = new CanvasStore();
+
+exports.RoomInstance = RoomInstance;
+exports.CanvasInstance = CanvasInstance;
+exports.app = app;

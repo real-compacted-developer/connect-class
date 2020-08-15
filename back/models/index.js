@@ -18,14 +18,14 @@ db.studyMember = require("./studyMemberModel")(sequelize, Sequelize);
 /** 1:N Study : Study_data
  * 스터디에 쓰이는 스터디 자료
  * */
-db.StudyGroup.hasMany(db.StudyData, { foreignKey: "studyName" });
-db.StudyData.belongsTo(db.StudyGroup, { foreignKey: "studyName" });
+db.StudyGroup.hasMany(db.StudyData, { foreignKey: "studyTitle" });
+db.StudyData.belongsTo(db.StudyGroup, { foreignKey: "studyTitle" });
 
 /** 1:N Study_data : Slide
  * 각 스터디 자료의 슬라이드
  * */
-db.StudyData.hasMany(db.Slide);
-db.Slide.belongsTo(db.StudyData);
+db.StudyData.hasMany(db.Slide, { foreignKey: "dataId" });
+db.Slide.belongsTo(db.StudyData, { foreignKey: "dataId" });
 
 /** 1:N User : Question 
  * writer(글쓴이(닉네임)를 얻어오기 위해) 
