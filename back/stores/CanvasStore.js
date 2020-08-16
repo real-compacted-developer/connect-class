@@ -4,8 +4,12 @@ class CanvasStore {
   }
 
   addDraw(slideId, data) {
-    this.canvasList[slideId] = data;
+    if (this.canvasList[slideId] === undefined) {
+      this.canvasList[slideId] = [];
+    }
+
     this.canvasList[slideId].push(data);
+
     return this.canvasList[slideId][this.canvasList.length - 1];
   }
 
