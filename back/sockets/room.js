@@ -1,4 +1,4 @@
-module.exports = function (io) {
+module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
   const RoomModel = require("../models/index").StudyGroup;
   const StudyMemeberModel = require("../models/index").studyMember;
@@ -6,7 +6,7 @@ module.exports = function (io) {
   const Sequelize = require("sequelize");
   const Op = Sequelize.Op;
 
-  io.on(SOCKET_TYPE.JOIN, async (data) => {
+  socket.on(SOCKET_TYPE.JOIN, async (data) => {
     const { roomId, userId } = data;
 
     const room = await RoomModel.findOne({
@@ -23,10 +23,10 @@ module.exports = function (io) {
       studyTitle: roomId,
     });
 
-    io.join(roomId);
+    socket.join(roomId);
   });
 
-  io.on(SOCKET_TYPE.EXIT, async (data) => {
+  socket.on(SOCKET_TYPE.EXIT, async (data) => {
     const { roomId, userId } = data;
 
     const room = await RoomModel.findOne({
@@ -44,10 +44,10 @@ module.exports = function (io) {
       },
     });
 
-    io.leave(roomId);
+    socket.leave(roomId);
   });
 
-  io.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
+  socket.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
     // TODO: 유저 목록 업데이트
   });
 };
