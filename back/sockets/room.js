@@ -26,6 +26,8 @@ module.exports = function (socket) {
 
     socket.join(roomId);
 
+    console.log(`${userId}가 ${roomId} 스터디룸에 입장하였습니다.`);
+
     const slideId = 1; // TODO: 첫번째 슬라이드 아이디를 가져오는 코드로 대체
     sendStoredDrawData(socket, slideId);
   });
@@ -49,6 +51,8 @@ module.exports = function (socket) {
     });
 
     socket.leave(roomId);
+
+    console.log(`${userId}가 ${roomId} 스터디룸에 퇴장하였습니다.`);
   });
 
   socket.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
