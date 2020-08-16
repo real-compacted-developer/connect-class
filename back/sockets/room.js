@@ -2,6 +2,7 @@ module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
   const RoomModel = require("../models/index").StudyGroup;
   const StudyMemeberModel = require("../models/index").studyMember;
+  const sendStoredDrawData = require("../services/draw").sendStoredDrawData;
 
   const Sequelize = require("sequelize");
   const Op = Sequelize.Op;
@@ -24,6 +25,9 @@ module.exports = function (socket) {
     });
 
     socket.join(roomId);
+
+    const slideId = 1; // TODO: 첫번째 슬라이드 아이디를 가져오는 코드로 대체
+    sendStoredDrawData(socket, slideId);
   });
 
   socket.on(SOCKET_TYPE.EXIT, async (data) => {

@@ -1,14 +1,7 @@
 module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
-    const Canvas = require("../app").CanvasInstance;
-
-  function sendStoredDrawData(io, slideId) {
-    const drawDataList = Canvas.getDrawData(slideId);
-    drawDataList.forEach((draw) => {
-      io.broadcast.emit(SOCKET_TYPE.DRAW, draw);
-    });
-  }
-
+  const sendStoredDrawData = require("../services/draw").sendStoredDrawData;
+  
   // const { Slide, StudyData } = require("../models/index");
   // S3에 있는 더미 이미지 사용
   const imagesPath = [
@@ -31,7 +24,7 @@ module.exports = function (socket) {
     }
     data.urlInfo = imagesPath[data.index];
     io.in("roomNumber").emit("imageChange", data);
-    sendStoredDrawData(io, slideId);
+    sendStoredDrawData(socket, slideId);
   });
   
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
@@ -45,6 +38,6 @@ module.exports = function (socket) {
     }
     data.urlInfo = imagesPath[data.index];
     io.in("roomNumber").emit("imageChange", data);
-    sendStoredDrawData(io, slideId);
+    sendStoredDrawData(socket, slideId);
   });
 };
