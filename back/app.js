@@ -3,7 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
-const usersRouter = require("./apis/users");
+const api = require("./apis");
 
 const RoomStore = require("./stores/RoomStore");
 const CanvasStore = require("./stores/CanvasStore");
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/", usersRouter);
+app.use("/api", api);
 
 app.use(function (req, res, next) {
   next(createError(404));
