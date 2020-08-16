@@ -31,6 +31,7 @@ const sketch = (s: any) => {
     pY: number
   ) => {
     const data = {
+      slideId: 1, // TODO: 실제 slideId로 넣어야함
       x: x,
       y: y,
       px: pX,
