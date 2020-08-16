@@ -4,11 +4,15 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const usersRouter = require("./apis/users");
+const studyRoomRouter = require("./apis/studyRoom");
 
 const RoomStore = require("./stores/RoomStore");
 const CanvasStore = require("./stores/CanvasStore");
 
 const { sequelize } = require("./models");
+
+const RoomInstance = new RoomStore();
+const CanvasInstance = new CanvasStore();
 
 const app = express();
 
@@ -20,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/", usersRouter);
+app.use("/study", studyRoomRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
@@ -32,9 +37,6 @@ app.use(function (err, req, res) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-const RoomInstance = new RoomStore();
-const CanvasInstance = new CanvasStore();
 
 exports.RoomInstance = RoomInstance;
 exports.CanvasInstance = CanvasInstance;
