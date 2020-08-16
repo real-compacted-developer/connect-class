@@ -7,6 +7,8 @@ module.exports = {
   CREATE_OFFER: "createOffer",
   TRANSMIT_OFFER: "transmitOffer",
 
+  CREATE_ROOM: "createRoom",
+  DELETE_ROOM: "deleteRoom",
   JOIN: "join",
   EXIT: "exit",
   UPDATE_USER_LIST: "updateUserList",
