@@ -34,7 +34,7 @@ const SelectList = styled.div`
   flex-direction: row;
 `;
 
-const Select = styled.div`
+const Select = styled.button`
   width: 139px;
   height: 64px;
   border-radius: 32px;
@@ -55,6 +55,8 @@ const Select = styled.div`
   align-items: center;
 
   margin-right: 68px;
+  border: none;
+  cursor: pointer;
 `;
 
 export default class StudyMaxPeopleInput extends React.Component {

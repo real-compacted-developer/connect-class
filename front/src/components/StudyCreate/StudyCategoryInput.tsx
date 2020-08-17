@@ -34,7 +34,7 @@ const CircleList = styled.div`
   flex-direction: row;
 `;
 
-const Circle = styled.div`
+const Circle = styled.button`
   width: 140px;
   height: 140px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
@@ -54,6 +54,9 @@ const Circle = styled.div`
   line-height: 1.19;
   letter-spacing: normal;
   text-align: center;
+
+  border: none;
+  cursor: pointer;
 
   & > div {
     margin-top: 24px;
