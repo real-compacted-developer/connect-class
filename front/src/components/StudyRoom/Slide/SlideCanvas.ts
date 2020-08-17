@@ -1,12 +1,9 @@
-import io from "socket.io-client";
+import { socket } from "../../../index";
 
 const sketch = (s: any) => {
   let color = "#FFFFFF";
-  let socket: SocketIOClient.Socket;
 
   s.setup = () => {
-    socket = io.connect("http://localhost:8080");
-
     const cv = s.createCanvas(1000, 800);
     cv.id("Slide__canvasTest");
 

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import Router from "./router";
+import io from "socket.io-client";
 
 import "./stylesheets/main.css";
 
@@ -10,6 +11,8 @@ const index = (
     <Router />
   </React.StrictMode>
 );
+
+export const socket = io.connect("http://localhost:8080");
 
 ReactDOM.render(index, document.getElementById("root"));
 
