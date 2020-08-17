@@ -4,6 +4,7 @@ import CreateSideBar from "../components/StudyCreate/CreateSideBar";
 import Header from "../components/StudyCreate/Body/Header";
 import StudyNameInput from "../components/StudyCreate/StudyNameInput";
 import StudyCategoryInput from "../components/StudyCreate/StudyCategoryInput";
+import StudyMaxPeopleInput from "../components/StudyCreate/StudyMaxPeopleInput";
 
 const Wrapper = styled.div`
   display: flex;
@@ -62,6 +63,8 @@ class StudyCreate extends React.Component {
             <StudyNameInput />
             <Blank value={85} />
             <StudyCategoryInput />
+            <Blank value={85} />
+            <StudyMaxPeopleInput />
           </Body>
         </BodyWrapper>
       </Wrapper>
