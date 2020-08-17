@@ -1,12 +1,13 @@
-module.exports = function (io) {
+module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
   const RoomModel = require("../models/index").StudyGroup;
   const StudyMemeberModel = require("../models/index").studyMember;
+  const sendStoredDrawData = require("../services/draw").sendStoredDrawData;
 
   const Sequelize = require("sequelize");
   const Op = Sequelize.Op;
 
-  io.on(SOCKET_TYPE.JOIN, async (data) => {
+  socket.on(SOCKET_TYPE.JOIN, async (data) => {
     const { roomId, userId } = data;
 
     const room = await RoomModel.findOne({
@@ -23,10 +24,15 @@ module.exports = function (io) {
       studyTitle: roomId,
     });
 
-    io.join(roomId);
+    socket.join(roomId);
+
+    console.log(`${userId}가 ${roomId} 스터디룸에 입장하였습니다.`);
+
+    const slideId = 1; // TODO: 첫번째 슬라이드 아이디를 가져오는 코드로 대체
+    sendStoredDrawData(socket, slideId);
   });
 
-  io.on(SOCKET_TYPE.EXIT, async (data) => {
+  socket.on(SOCKET_TYPE.EXIT, async (data) => {
     const { roomId, userId } = data;
 
     const room = await RoomModel.findOne({
@@ -44,10 +50,12 @@ module.exports = function (io) {
       },
     });
 
-    io.leave(roomId);
+    socket.leave(roomId);
+
+    console.log(`${userId}가 ${roomId} 스터디룸에 퇴장하였습니다.`);
   });
 
-  io.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
+  socket.on(SOCKET_TYPE.UPDATE_USER_LIST, (data) => {
     // TODO: 유저 목록 업데이트
   });
 };

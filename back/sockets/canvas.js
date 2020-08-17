@@ -1,12 +1,12 @@
-module.exports = function (io) {
+module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
   const Canvas = require("../app").CanvasInstance;
 
-  io.on(SOCKET_TYPE.DRAW, (data) => {
+  socket.on(SOCKET_TYPE.DRAW, (data) => {
     const { slideId } = data;
     delete data["slideId"];
 
     Canvas.addDraw(slideId, data);
-    io.broadcast.emit(SOCKET_TYPE.DRAW, data);
+    socket.broadcast.emit(SOCKET_TYPE.DRAW, data);
   });
 };
