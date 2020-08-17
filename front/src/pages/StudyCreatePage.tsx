@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CreateSideBar from "../components/StudyCreate/CreateSideBar";
 import Header from "../components/StudyCreate/Body/Header";
+import StudyNameInput from "../components/StudyCreate/StudyNameInput";
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,6 +43,10 @@ const SubTitle = styled.p`
   color: #9a9fac;
 `;
 
+const Blank = styled.div`
+  margin-top: 65px;
+`;
+
 class StudyCreate extends React.Component {
   render() {
     return (
@@ -52,6 +57,8 @@ class StudyCreate extends React.Component {
           <Body>
             <Title>스터디 개설하기</Title>
             <SubTitle>만들고 싶은 스터디를 직접 만들고 참여해보세요.</SubTitle>
+            <Blank />
+            <StudyNameInput />
           </Body>
         </BodyWrapper>
       </Wrapper>
