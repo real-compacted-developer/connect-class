@@ -12,10 +12,12 @@ const Wrapper = styled.div`
   background-color: #f8fafd;
 
   display: flex;
+  justify-content: space-between;
 `;
 
 const Input = styled.input`
   height: 82px;
+  width: 200px;
 
   font-family: "Gmarket Sans";
   font-size: 15px;
