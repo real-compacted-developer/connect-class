@@ -1,4 +1,5 @@
 import { socket } from "../../../index";
+import SOCKET_TYPE from "../../../constants/socket-type";
 
 const sketch = (s: any) => {
   let color = "#FFFFFF";
@@ -7,7 +8,7 @@ const sketch = (s: any) => {
     const cv = s.createCanvas(1000, 800);
     cv.id("Slide__canvasTest");
 
-    socket.on("draw", (data: Record<string, any>) => {
+    socket.on(SOCKET_TYPE.DRAW, (data: Record<string, any>) => {
       s.stroke(data.color);
       s.strokeWeight(data.strokeWidth);
       s.line(data.x, data.y, data.px, data.py);
@@ -36,7 +37,7 @@ const sketch = (s: any) => {
       color,
       strokeWidth: 4,
     };
-    socket.emit("draw", data);
+    socket.emit(SOCKET_TYPE.DRAW, data);
   };
 };
 
