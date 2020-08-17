@@ -5,6 +5,7 @@ import Header from "../components/StudyCreate/Body/Header";
 import StudyNameInput from "../components/StudyCreate/StudyNameInput";
 import StudyCategoryInput from "../components/StudyCreate/StudyCategoryInput";
 import StudyMaxPeopleInput from "../components/StudyCreate/StudyMaxPeopleInput";
+import StudyPasswordInput from "../components/StudyCreate/StudyPasswordInput";
 
 const Wrapper = styled.div`
   display: flex;
@@ -67,6 +68,9 @@ class StudyCreate extends React.Component {
 
             <Blank value={85} />
             <StudyMaxPeopleInput />
+
+            <Blank value={85} />
+            <StudyPasswordInput />
           </Body>
         </BodyWrapper>
       </Wrapper>
