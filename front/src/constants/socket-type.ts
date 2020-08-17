@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   DRAW: "draw",
 
   IMAGE_PREV: "imagePrev",
