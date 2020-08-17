@@ -6,6 +6,7 @@ import StudyNameInput from "../components/StudyCreate/StudyNameInput";
 import StudyCategoryInput from "../components/StudyCreate/StudyCategoryInput";
 import StudyMaxPeopleInput from "../components/StudyCreate/StudyMaxPeopleInput";
 import StudyPasswordInput from "../components/StudyCreate/StudyPasswordInput";
+import CreateButton from "../components/StudyCreate/CreateButton";
 
 const Wrapper = styled.div`
   display: flex;
@@ -49,6 +50,11 @@ const Blank = styled.div<{ value: number }>`
   margin-top: ${(props) => props.value}px;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 class StudyCreate extends React.Component {
   render() {
     return (
@@ -71,6 +77,11 @@ class StudyCreate extends React.Component {
 
             <Blank value={85} />
             <StudyPasswordInput />
+
+            <Blank value={81} />
+            <ButtonWrapper>
+              <CreateButton />
+            </ButtonWrapper>
           </Body>
         </BodyWrapper>
       </Wrapper>
