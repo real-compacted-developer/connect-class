@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CreateSideBar from "../components/StudyCreate/CreateSideBar";
 import Header from "../components/StudyCreate/Body/Header";
 import StudyNameInput from "../components/StudyCreate/StudyNameInput";
+import StudyCategoryInput from "../components/StudyCreate/StudyCategoryInput";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const Title = styled.h1`
 
 const SubTitle = styled.p`
   font-family: "Spoqa Han Sans";
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -43,8 +44,8 @@ const SubTitle = styled.p`
   color: #9a9fac;
 `;
 
-const Blank = styled.div`
-  margin-top: 65px;
+const Blank = styled.div<{ value: number }>`
+  margin-top: ${(props) => props.value}px;
 `;
 
 class StudyCreate extends React.Component {
@@ -57,8 +58,10 @@ class StudyCreate extends React.Component {
           <Body>
             <Title>스터디 개설하기</Title>
             <SubTitle>만들고 싶은 스터디를 직접 만들고 참여해보세요.</SubTitle>
-            <Blank />
+            <Blank value={65} />
             <StudyNameInput />
+            <Blank value={85} />
+            <StudyCategoryInput />
           </Body>
         </BodyWrapper>
       </Wrapper>
