@@ -1,19 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import CreateSideBar from "../components/StudyCreate/CreateSideBar";
+import Header from "../components/StudyCreate/Body/Header";
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
 `;
 
 class StudyCreate extends React.Component {
   render() {
     return (
-      <>
+      <Wrapper>
         <CreateSideBar />
-      </>
+        <Header />
+      </Wrapper>
     );
   }
 }
