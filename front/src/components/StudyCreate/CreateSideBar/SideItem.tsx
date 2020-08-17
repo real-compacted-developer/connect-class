@@ -4,6 +4,11 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Icon = styled.div<{ icon: string }>`
@@ -33,10 +38,6 @@ type Props = {
 };
 
 export default class SideItem extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   render() {
     return (
       <Wrapper>
