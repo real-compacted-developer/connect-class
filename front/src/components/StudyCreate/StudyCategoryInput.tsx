@@ -72,6 +72,7 @@ export default class StudyCategoryInput extends React.Component {
             <div>
               <img
                 src="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
+                alt="IT 분야"
                 width="68"
                 height="52"
               ></img>
