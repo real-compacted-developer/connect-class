@@ -16,8 +16,7 @@ const BodyWrapper = styled.div`
 `;
 
 const Body = styled.div`
-  width: 1609px;
-  margin: auto 312px;
+  margin: auto 14vw;
   margin-top: 65px;
 `;
 
@@ -59,10 +58,13 @@ class StudyCreate extends React.Component {
           <Body>
             <Title>스터디 개설하기</Title>
             <SubTitle>만들고 싶은 스터디를 직접 만들고 참여해보세요.</SubTitle>
+
             <Blank value={65} />
             <StudyNameInput />
+
             <Blank value={85} />
             <StudyCategoryInput />
+
             <Blank value={85} />
             <StudyMaxPeopleInput />
           </Body>
