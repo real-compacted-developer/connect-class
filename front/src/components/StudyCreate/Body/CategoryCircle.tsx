@@ -59,12 +59,7 @@ export default class CategoryCircle extends React.Component<Props> {
           <img src={this.props.icon} alt={this.props.value}></img>
           <p>{this.props.children}</p>
         </CircleContent>
-        <Circle
-          className="Circle__body"
-          type="radio"
-          name="category"
-          value={this.props.value}
-        />
+        <Circle type="radio" name="category" value={this.props.value} />
       </CircleWrapper>
     );
   }
