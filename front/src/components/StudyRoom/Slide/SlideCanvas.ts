@@ -1,14 +1,13 @@
 import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
 
-export const isDraw = {
-  state: false,
+export const drawState = {
+  isDraw: false,
+  color: "#FF0000",
 };
 
 const sketch = (slideId: number) => {
   return (s: any) => {
-    let color = "#FF0000";
-
     s.setup = () => {
       const cv = s.createCanvas(1000, 1000);
       cv.id("Slide__canvas");
@@ -21,9 +20,9 @@ const sketch = (slideId: number) => {
     };
 
     s.mouseDragged = () => {
-      if (!isDraw.state) return;
+      if (!drawState.isDraw) return;
 
-      s.stroke(color);
+      s.stroke(drawState.color);
       s.strokeWeight(4);
       s.line(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY);
       sendDrawDataToServer(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY);
@@ -41,7 +40,7 @@ const sketch = (slideId: number) => {
         y: y,
         px: pX,
         py: pY,
-        color,
+        color: drawState.color,
         strokeWidth: 4,
       };
       socket.emit(SOCKET_TYPE.DRAW, data);

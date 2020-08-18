@@ -4,7 +4,7 @@ import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
-import SlideCanvas, { isDraw } from "./SlideCanvas";
+import SlideCanvas, { drawState } from "./SlideCanvas";
 import p5 from "p5";
 
 import PencilButton from "./Buttons/PencilButton";
@@ -66,7 +66,11 @@ class StudyButton extends Component<
     this.setState((v) => ({
       toggleDraw: !v.toggleDraw,
     }));
-    isDraw.state = this.state.toggleDraw;
+    if (this.state.toggleDraw) {
+      const input = prompt("색깔 (HEX)");
+      drawState.color = input || "#FF0000";
+    }
+    drawState.isDraw = this.state.toggleDraw;
   }
 
   render() {
