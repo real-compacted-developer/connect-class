@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 300px;
@@ -19,9 +20,17 @@ type Props = {};
 
 type States = {};
 
-export default class StudyButton extends Component<Props, States> {
-  constructor(props: Props) {
+type Params = {
+  id: string;
+};
+
+class StudyButton extends Component<
+  Props & RouteComponentProps<Params>,
+  States
+> {
+  constructor(props: Props & RouteComponentProps<Params>) {
     super(props);
+    this.exit = this.exit.bind(this);
   }
 
   componentWillMount() {}
@@ -31,7 +40,7 @@ export default class StudyButton extends Component<Props, States> {
   exit() {
     // TODO: 실제 방 ID하고 유저 ID 가져오는거 구현
     socket.emit(SOCKET_TYPE.EXIT, {
-      roomId: 1,
+      roomId: this.props.match.params.id,
       userId: "사용자1",
     });
   }
@@ -46,3 +55,5 @@ export default class StudyButton extends Component<Props, States> {
     );
   }
 }
+
+export default withRouter(StudyButton);
