@@ -1,15 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import PeopleRadio from "./Body/PeopleRadio";
 
 const InputTitle = styled.p`
   font-family: "Gmarket Sans";
   font-size: 20px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
   margin-bottom: 0;
 `;
@@ -17,12 +13,6 @@ const InputTitle = styled.p`
 const InputSubTitle = styled.p`
   font-family: "Spoqa Han Sans";
   font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.17;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
   margin-top: 4px;
 `;
@@ -34,21 +24,34 @@ const SelectList = styled.div`
   flex-direction: row;
 `;
 
-const Select = styled.button`
+const SelectWrapper = styled.div`
+  position: relative;
+  width: 139px;
+  height: 64px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Gmarket Sans";
+  font-size: 16px;
+  font-weight: 500;
+  color: #9a9fac;
+
+  &:hover {
+    color: #346bff;
+  }
+`;
+
+const Select = styled.input`
+  position: absolute;
+  appearance: none;
+
   width: 139px;
   height: 64px;
   border-radius: 32px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.08);
   background-color: #ffffff;
-
-  font-family: GmarketSans;
-  font-size: 18px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.22;
-  letter-spacing: normal;
-  color: #9a9fac;
 
   display: flex;
   justify-content: center;
@@ -57,6 +60,18 @@ const Select = styled.button`
   margin-right: 68px;
   border: none;
   cursor: pointer;
+
+  &:checked {
+    box-shadow: 0 5px 10px 0 rgba(52, 107, 255, 0.2);
+  }
+`;
+
+const SelectText = styled.div`
+  position: absolute;
+
+  z-index: 1;
+  margin-left: 6px;
+  margin-top: 3px;
 `;
 
 export default class StudyMaxPeopleInput extends React.Component {
@@ -67,11 +82,11 @@ export default class StudyMaxPeopleInput extends React.Component {
         <InputSubTitle>원하시는 스터디 최대인원을 설정해주세요.</InputSubTitle>
 
         <SelectList>
-          <Select>2명</Select>
-          <Select>3명</Select>
-          <Select>4명</Select>
-          <Select>5명</Select>
-          <Select>6명</Select>
+          <PeopleRadio value="2">2명</PeopleRadio>
+          <PeopleRadio value="3">3명</PeopleRadio>
+          <PeopleRadio value="4">4명</PeopleRadio>
+          <PeopleRadio value="5">5명</PeopleRadio>
+          <PeopleRadio value="6">6명</PeopleRadio>
         </SelectList>
       </>
     );
