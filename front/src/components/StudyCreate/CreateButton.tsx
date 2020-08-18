@@ -20,6 +20,11 @@ const Button = styled.button`
   color: #d0d4de;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: #346bff;
+    color: #ffffff;
+  }
 `;
 
 export default class CreateButton extends React.Component {
