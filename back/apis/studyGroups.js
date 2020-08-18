@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const pdf = require("pdf-poppler");
 const fs = require("fs");
-// const Zip = require("machinepack-zip");
-// const axios = require("axios");
 //  /* 아마존 S3에 올리기 */
 // const uploadS3 = require("../config/multer");
 
 /* multer로 서버에 올리기 */
 const upload = require("../config/localMulter");
 
+// pdf 파일 받아서 각 슬라이드 별 이미지화
 router.post("/pdfToImage", upload.any(), async (req, res) => {
   const filename = req.files[0].filename;
   const filePath = req.files[0].filename.split(".pdf")[0];
