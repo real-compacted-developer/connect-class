@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import PencilButton from "./Buttons/PencilButton";
+import PresentButton from "./Buttons/PresentButton";
+import ExitButton from "./Buttons/ExitButton";
+
 const Wrapper = styled.div`
   width: 300px;
   padding: 0 50px 0 50px;
@@ -8,6 +12,7 @@ const Wrapper = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   position: absolute;
   right: 0;
@@ -29,9 +34,9 @@ export default class StudyButton extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <button>필기하기</button>
-        <button>선물</button>
-        <button>종료</button>
+        <PencilButton />
+        <PresentButton />
+        <ExitButton>종료</ExitButton>
       </Wrapper>
     );
   }

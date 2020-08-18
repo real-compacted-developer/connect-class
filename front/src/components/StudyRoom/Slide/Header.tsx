@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import FullButton from "./Buttons/FullButton";
+
 const Wrapper = styled.div`
   width: 100%;
   height: 90px;
@@ -11,14 +13,6 @@ const Wrapper = styled.div`
   background-color: #000;
 
   z-index: 1000;
-`;
-
-const FullButton = styled.button`
-  width: 80px;
-  height: 80px;
-
-  position: absolute;
-  right: 30px;
 `;
 
 type Props = {};
@@ -37,7 +31,7 @@ export default class Header extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <FullButton>전체화면</FullButton>
+        <FullButton />
       </Wrapper>
     );
   }
