@@ -49,6 +49,10 @@ export default class StudyCategoryInput extends React.Component {
           >
             IT 분야
           </CategoryCircle>
+
+          <CategoryCircle icon="" value=""></CategoryCircle>
+          <CategoryCircle icon="" value=""></CategoryCircle>
+          <CategoryCircle icon="" value=""></CategoryCircle>
         </CircleList>
       </>
     );
