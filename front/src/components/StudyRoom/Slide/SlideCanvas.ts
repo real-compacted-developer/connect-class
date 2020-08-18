@@ -1,6 +1,10 @@
 import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
 
+export const isDraw = {
+  state: false,
+};
+
 const sketch = (slideId: number) => {
   return (s: any) => {
     let color = "#FF0000";
@@ -17,6 +21,8 @@ const sketch = (slideId: number) => {
     };
 
     s.mouseDragged = () => {
+      if (!isDraw.state) return;
+
       s.stroke(color);
       s.strokeWeight(4);
       s.line(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY);

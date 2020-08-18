@@ -4,6 +4,9 @@ import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
+import SlideCanvas, { isDraw } from "./SlideCanvas";
+import p5 from "p5";
+
 const Wrapper = styled.div`
   width: 300px;
   padding: 0 50px 0 50px;
@@ -18,7 +21,9 @@ const Wrapper = styled.div`
 
 type Props = {};
 
-type States = {};
+type States = {
+  toggleDraw: boolean;
+};
 
 type Params = {
   id: string;
@@ -31,11 +36,18 @@ class StudyButton extends Component<
   constructor(props: Props & RouteComponentProps<Params>) {
     super(props);
     this.exit = this.exit.bind(this);
+    this.toggleDraw = this.toggleDraw.bind(this);
+
+    this.state = {
+      toggleDraw: true,
+    };
   }
 
   componentWillMount() {}
 
-  componentDidMount() {}
+  componentDidMount() {
+    new p5(SlideCanvas(1));
+  }
 
   exit() {
     // TODO: 실제 방 ID하고 유저 ID 가져오는거 구현
@@ -45,10 +57,17 @@ class StudyButton extends Component<
     });
   }
 
+  toggleDraw() {
+    this.setState((v) => ({
+      toggleDraw: !v.toggleDraw,
+    }));
+    isDraw.state = this.state.toggleDraw;
+  }
+
   render() {
     return (
       <Wrapper>
-        <button>필기하기</button>
+        <button onClick={this.toggleDraw}>필기하기</button>
         <button>선물</button>
         <button onClick={this.exit}>종료</button>
       </Wrapper>
