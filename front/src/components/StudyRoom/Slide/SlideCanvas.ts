@@ -3,11 +3,11 @@ import SOCKET_TYPE from "../../../constants/socket-type";
 
 const sketch = (slideId: number) => {
   return (s: any) => {
-    let color = "#FFFFFF";
+    let color = "#FF0000";
 
     s.setup = () => {
-      const cv = s.createCanvas(1000, 800);
-      cv.id("Slide__canvasTest");
+      const cv = s.createCanvas(1000, 1000);
+      cv.id("Slide__canvas");
 
       socket.on(SOCKET_TYPE.DRAW, (data: Record<string, any>) => {
         s.stroke(data.color);

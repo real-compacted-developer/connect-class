@@ -30,8 +30,10 @@ body {
   padding: 0;
 }
 
-#Slide__canvasTest {
+#Slide__canvas {
   position: absolute;
+  width: 75vw !important;
+  height: 800px !important;
   top: 0;
   left: 0;
 }
