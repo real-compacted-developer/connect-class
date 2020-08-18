@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37">
+    <defs>
+        <style>
+            .cls-3{fill:#346bff}
+        </style>
+    </defs>
+    <g id="ic_logo_tabbar" transform="translate(-52 -12)">
+        <g id="그룹_21" data-name="그룹 21" transform="translate(0 4)">
+            <g id="그룹_20" fill="#fff" data-name="그룹 20" transform="translate(52 11)">
+                <path id="사각형_56" d="M15 0a15 15 0 0 1 15 15 15 15 0 0 1-15 15H0V15A15 15 0 0 1 15 0z" data-name="사각형 56" opacity="0.62"/>
+                <path id="사각형_55" d="M11.5 0A11.5 11.5 0 0 1 23 11.5 11.5 11.5 0 0 1 11.5 23H0V11.5A11.5 11.5 0 0 1 11.5 0z" data-name="사각형 55" transform="translate(14 7)"/>
+            </g>
+            <rect id="사각형_77" width="1.416" height="2.361" class="cls-3" data-name="사각형 77" rx=".708" transform="translate(79.673 26.262)"/>
+            <rect id="사각형_78" width="1.416" height="2.361" class="cls-3" data-name="사각형 78" rx=".708" transform="translate(83.03 26.262)"/>
+        </g>
+        <path id="사각형_79" fill="none" d="M0 0H37V37H0z" data-name="사각형 79" transform="translate(52 12)"/>
+    </g>
+</svg>

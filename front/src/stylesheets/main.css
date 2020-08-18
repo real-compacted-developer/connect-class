@@ -23,14 +23,17 @@
     url("http://script.ebay.co.kr/fonts/GmarketSansLight.woff2") format("woff2"),
     url("http://script.ebay.co.kr/fonts/GmarketSansLight.woff") format("woff");
 }
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 
 body {
   margin: 0;
   padding: 0;
 }
 
-#Slide__canvasTest {
+#Slide__canvas {
   position: absolute;
+  width: 75vw !important;
+  height: 800px !important;
   top: 0;
   left: 0;
 }
