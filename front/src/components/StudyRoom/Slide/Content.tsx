@@ -32,7 +32,7 @@ export default class StudyButton extends Component<Props, States> {
   componentWillMount() {}
 
   componentDidMount() {
-    new p5(SlideCanvas);
+    new p5(SlideCanvas(1)); // TODO: 실제 slideId로 넣어야함
   }
 
   render() {
