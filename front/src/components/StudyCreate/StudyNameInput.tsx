@@ -18,6 +18,10 @@ const InputForm = styled.input`
   height: 30px;
   border: none;
   border-bottom: 1px #9a9fac solid;
+
+  color: #346bff;
+  font-weight: bold;
+  font-family: "Spoqa Han Sans";
 `;
 
 export default class StudyNameInput extends React.Component {
