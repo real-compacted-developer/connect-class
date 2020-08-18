@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { RouteComponentProps } from "react-router-dom";
 
 import QuestionList from "../components/StudyRoom/QuestionList";
 import SlideView from "../components/StudyRoom/SlideView";
@@ -14,11 +15,16 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-class StudyRoom extends React.Component {
+type Params = {
+  id: string;
+};
+
+class StudyRoom extends React.Component<RouteComponentProps<Params>> {
   componentDidMount() {
+    const roomId = this.props.match.params.id;
     // TODO: 실제 방 ID하고 유저 ID 가져오는거 구현
     socket.emit(SOCKET_TYPE.JOIN, {
-      roomId: 1,
+      roomId: roomId,
       userId: "사용자1",
     });
   }
