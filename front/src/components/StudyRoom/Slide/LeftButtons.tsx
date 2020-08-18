@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import SyncButton from "./Buttons/SyncButton";
+import ShareButton from "./Buttons/ShareButton";
+import DownloadButton from "./Buttons/DownloadButton";
+
 const Wrapper = styled.div`
   width: 300px;
   padding: 0 50px 0 50px;
@@ -8,6 +12,7 @@ const Wrapper = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   position: absolute;
   left: 0;
@@ -29,9 +34,9 @@ export default class StudyButton extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <button>동기화</button>
-        <button>채널 공유</button>
-        <button>다운로드</button>
+        <SyncButton />
+        <ShareButton />
+        <DownloadButton />
       </Wrapper>
     );
   }

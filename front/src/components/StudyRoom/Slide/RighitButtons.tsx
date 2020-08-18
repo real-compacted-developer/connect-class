@@ -7,6 +7,10 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import SlideCanvas, { isDraw } from "./SlideCanvas";
 import p5 from "p5";
 
+import PencilButton from "./Buttons/PencilButton";
+import PresentButton from "./Buttons/PresentButton";
+import ExitButton from "./Buttons/ExitButton";
+
 const Wrapper = styled.div`
   width: 300px;
   padding: 0 50px 0 50px;
@@ -14,6 +18,7 @@ const Wrapper = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   position: absolute;
   right: 0;
@@ -67,9 +72,9 @@ class StudyButton extends Component<
   render() {
     return (
       <Wrapper>
-        <button onClick={this.toggleDraw}>필기하기</button>
-        <button>선물</button>
-        <button onClick={this.exit}>종료</button>
+        <PencilButton onClick={this.toggleDraw} />
+        <PresentButton />
+        <ExitButton onClick={this.exit}>종료</ExitButton>
       </Wrapper>
     );
   }
