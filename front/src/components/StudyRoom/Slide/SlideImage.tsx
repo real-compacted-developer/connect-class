@@ -32,14 +32,14 @@ class Slide extends Component<Props, States> {
 	//   socket.emit("image Change", { index, urlInfo });
 	// }
 	componentDidMount() {
-		socket.on(SOCKET_TYPE.SYNC, (data: any) => {
-			console.log('SYNC');
+		socket.on(SOCKET_TYPE.SYNC, ({ idx, url }: any) => {
 			this.setState({
-				index: data.idx,
-				urlInfo: data.url,
+				index: idx,
+				urlInfo: url,
 			});
 		});
 		socket.on(SOCKET_TYPE.IMAGE_CHANGE, (data: any) => {
+			console.log('imageChange : ', data);
 			this.setState({
 				index: data.index,
 				urlInfo: data.urlInfo,
