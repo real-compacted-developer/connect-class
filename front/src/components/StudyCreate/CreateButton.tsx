@@ -27,8 +27,16 @@ const Button = styled.button`
   }
 `;
 
-export default class CreateButton extends React.Component {
+type Props = {
+  onClick?: any;
+};
+
+export default class CreateButton extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
-    return <Button>스터디 개설하기</Button>;
+    return <Button onClick={this.props.onClick}>스터디 개설하기</Button>;
   }
 }
