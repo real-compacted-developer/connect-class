@@ -55,7 +55,49 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-class StudyCreate extends React.Component {
+type State = {
+  name: string;
+  category: string;
+  people: number;
+  password: string;
+};
+
+class StudyCreate extends React.Component<any, State> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      name: "",
+      category: "",
+      people: 0,
+      password: "",
+    };
+  }
+
+  onNameInputChange(e: any) {
+    this.setState({
+      name: e.target.value,
+    });
+  }
+
+  onCategoryInputChange(e: any) {
+    this.setState({
+      category: e.target.value,
+    });
+  }
+
+  onPeopleInputChange(e: any) {
+    this.setState({
+      people: parseInt(e.target.value, 10),
+    });
+  }
+
+  onPasswordInputChange(e: any) {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
   render() {
     return (
       <Wrapper>
@@ -67,16 +109,26 @@ class StudyCreate extends React.Component {
             <SubTitle>만들고 싶은 스터디를 직접 만들고 참여해보세요.</SubTitle>
 
             <Blank value={65} />
-            <StudyNameInput />
+            <StudyNameInput
+              onChange={this.onNameInputChange.bind(this)}
+              value={this.state.name}
+            />
 
             <Blank value={85} />
-            <StudyCategoryInput />
+            <StudyCategoryInput
+              onChange={this.onCategoryInputChange.bind(this)}
+            />
 
             <Blank value={85} />
-            <StudyMaxPeopleInput />
+            <StudyMaxPeopleInput
+              onChange={this.onPeopleInputChange.bind(this)}
+            />
 
             <Blank value={85} />
-            <StudyPasswordInput />
+            <StudyPasswordInput
+              onChange={this.onPasswordInputChange.bind(this)}
+              value={this.state.password}
+            />
 
             <Blank value={81} />
             <ButtonWrapper>
