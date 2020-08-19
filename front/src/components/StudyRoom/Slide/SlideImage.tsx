@@ -16,13 +16,7 @@ class Slide extends Component<Props, States> {
 			index: 0,
 			urlInfo: '',
 		};
-		socket.on(SOCKET_TYPE.IMAGE_CHANGE, (data: any) => {
-			this.setState({
-				index: data.index,
-				urlInfo: data.urlInfo,
-			});
-		});
-
+		
 		this.onPrevImage = this.onPrevImage.bind(this);
 		this.onNextImage = this.onNextImage.bind(this);
 		this.renderImage = this.renderImage.bind(this);
@@ -50,23 +44,11 @@ class Slide extends Component<Props, States> {
 		let { index, urlInfo } = this.state;
 		const data = { index: index, urlInfo: urlInfo };
 		socket.emit(SOCKET_TYPE.IMAGE_PREV, data);
-		socket.on(SOCKET_TYPE.IMAGE_CHANGE, (data: any) => {
-			this.setState({
-				index: data.index,
-				urlInfo: data.urlInfo,
-			});
-		});
 	}
 	onNextImage() {
 		const { index, urlInfo } = this.state;
 		const data = { index: index, urlInfo: urlInfo };
 		socket.emit(SOCKET_TYPE.IMAGE_NEXT, data);
-		socket.on(SOCKET_TYPE.IMAGE_CHANGE, (data: any) => {
-			this.setState({
-				index: data.index,
-				urlInfo: data.urlInfo,
-			});
-		});
 	}
 	renderImage() {
 		let { urlInfo } = this.state;
