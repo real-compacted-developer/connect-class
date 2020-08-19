@@ -3,6 +3,8 @@ module.exports = {
 
   IMAGE_PREV: "imagePrev",
   IMAGE_NEXT: "imageNext",
+  IMAGE_CHANGE: "imageChange",
+  SYNC: "SYNC",
 
   CREATE_OFFER: "createOffer",
   TRANSMIT_OFFER: "transmitOffer",

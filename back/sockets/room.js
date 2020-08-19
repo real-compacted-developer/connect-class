@@ -10,19 +10,19 @@ module.exports = function (socket) {
   socket.on(SOCKET_TYPE.JOIN, async (data) => {
     const { roomId, userId } = data;
 
-    const room = await RoomModel.findOne({
-      where: {
-        title: roomId,
-      },
-    });
-    if (!room) {
-      throw new Error("스터디 방이 존재하지 않습니다.");
-    }
+    // const room = await RoomModel.findOne({
+    //   where: {
+    //     title: roomId,
+    // //   },
+    // // });
+    // if (!room) {
+    //   throw new Error("스터디 방이 존재하지 않습니다.");
+    // }
 
-    await StudyMemeberModel.create({
-      nickname: userId,
-      studyTitle: roomId,
-    });
+    // await StudyMemeberModel.create({
+    //   nickname: userId,
+    //   studyTitle: roomId,
+    // });
 
     socket.join(roomId);
 
@@ -35,20 +35,20 @@ module.exports = function (socket) {
   socket.on(SOCKET_TYPE.EXIT, async (data) => {
     const { roomId, userId } = data;
 
-    const room = await RoomModel.findOne({
-      where: {
-        title: roomId,
-      },
-    });
-    if (!room) {
-      throw new Error("스터디 방이 존재하지 않습니다.");
-    }
+    // const room = await RoomModel.findOne({
+    //   where: {
+    //     title: roomId,
+    //   },
+    // });
+    // if (!room) {
+    //   throw new Error("스터디 방이 존재하지 않습니다.");
+    // }
 
-    await StudyMemeberModel.destroy({
-      where: {
-        [Op.and]: [{ nickname: userId }, { studyTitle: roomId }],
-      },
-    });
+    // await StudyMemeberModel.destroy({
+    //   where: {
+    //     [Op.and]: [{ nickname: userId }, { studyTitle: roomId }],
+    //   },
+    // });
 
     socket.leave(roomId);
 
