@@ -32,7 +32,7 @@ export default class StudyButton extends Component<Props, States> {
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper id="Slide__content">
         <Information></Information>
       </Wrapper>
     );

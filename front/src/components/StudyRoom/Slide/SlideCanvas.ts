@@ -11,6 +11,7 @@ const sketch = (slideId: number) => {
     s.setup = () => {
       const cv = s.createCanvas(1000, 1000);
       cv.id("Slide__canvas");
+      cv.parent("Slide__content");
 
       socket.on(SOCKET_TYPE.DRAW, (data: Record<string, any>) => {
         s.stroke(data.color);
