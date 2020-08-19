@@ -24,12 +24,25 @@ const InputForm = styled.input`
   font-family: "Spoqa Han Sans";
 `;
 
-export default class StudyNameInput extends React.Component {
+type Props = {
+  onChange: any;
+  value: string;
+};
+
+export default class StudyNameInput extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
     return (
       <>
         <InputTitle>스터디 그룹 이름</InputTitle>
-        <InputForm placeholder="원하는 스터디 그룹 이름을 적어주세요" />
+        <InputForm
+          placeholder="원하는 스터디 그룹 이름을 적어주세요"
+          value={this.props.value}
+          onChange={this.props.onChange}
+        />
       </>
     );
   }
