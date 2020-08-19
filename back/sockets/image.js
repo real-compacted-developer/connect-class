@@ -25,10 +25,8 @@ module.exports = function (socket) {
   const size = imagesPath.length;
   let idx = 0;
   let url = imagesPath[0];
-  const d = {};
-  d.idx = idx;
-  d.urlInfo = url;
-  socket.emit(SOCKET_TYPE.SYNC, (d));
+  const data = { idx: idx, url: url };
+  socket.emit(SOCKET_TYPE.SYNC, data);
   socket.on(SOCKET_TYPE.IMAGE_PREV, (data) => {
     // TODO: 자료 이전으로 넘기기
     if (data.index == 0) {
@@ -37,10 +35,10 @@ module.exports = function (socket) {
       data.index -= 1;
     }
     data.urlInfo = imagesPath[data.index];
-    d.idx = data.index;
-    d.urlInfo = data.urlnfo;
-    console.log(socket.id, "눌렀니?");
-    io.emit(SOCKET_TYPE.IMAGE_CHANGE, d);
+    idx = data.index;
+    url = data.urlInfo;
+    console.log("data : ", data);
+    io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
   });
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
     // TODO: 자료 다음으로 넘기기
@@ -49,11 +47,10 @@ module.exports = function (socket) {
     } else {
       data.index += 1;
     }
-    console.log(socket.id, "눌렀니?");
-
     data.urlInfo = imagesPath[data.index];
-    d.idx = data.index;
-    d.url = data.urlInfo;
-    io.emit(SOCKET_TYPE.IMAGE_CHANGE, d);
+    idx = data.index;
+    url = data.urlInfo;
+    console.log("data : ", data);
+    io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
   });
 };
