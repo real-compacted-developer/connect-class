@@ -74,7 +74,15 @@ const SelectText = styled.div`
   margin-top: 3px;
 `;
 
-export default class StudyMaxPeopleInput extends React.Component {
+type Props = {
+  onChange: any;
+};
+
+export default class StudyMaxPeopleInput extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
     return (
       <>
@@ -82,11 +90,21 @@ export default class StudyMaxPeopleInput extends React.Component {
         <InputSubTitle>원하시는 스터디 최대인원을 설정해주세요.</InputSubTitle>
 
         <SelectList>
-          <PeopleRadio value="2">2명</PeopleRadio>
-          <PeopleRadio value="3">3명</PeopleRadio>
-          <PeopleRadio value="4">4명</PeopleRadio>
-          <PeopleRadio value="5">5명</PeopleRadio>
-          <PeopleRadio value="6">6명</PeopleRadio>
+          <PeopleRadio value="2" onChange={this.props.onChange}>
+            2명
+          </PeopleRadio>
+          <PeopleRadio value="3" onChange={this.props.onChange}>
+            3명
+          </PeopleRadio>
+          <PeopleRadio value="4" onChange={this.props.onChange}>
+            4명
+          </PeopleRadio>
+          <PeopleRadio value="5" onChange={this.props.onChange}>
+            5명
+          </PeopleRadio>
+          <PeopleRadio value="6" onChange={this.props.onChange}>
+            6명
+          </PeopleRadio>
         </SelectList>
       </>
     );

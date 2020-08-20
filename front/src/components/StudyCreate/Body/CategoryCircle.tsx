@@ -49,9 +49,14 @@ const Circle = styled.input`
 type Props = {
   icon: string;
   value: string;
+  onChange: any;
 };
 
 export default class CategoryCircle extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
     return (
       <CircleWrapper>
@@ -59,7 +64,12 @@ export default class CategoryCircle extends React.Component<Props> {
           <img src={this.props.icon} alt={this.props.value}></img>
           <p>{this.props.children}</p>
         </CircleContent>
-        <Circle type="radio" name="category" value={this.props.value} />
+        <Circle
+          type="radio"
+          name="category"
+          value={this.props.value}
+          onChange={this.props.onChange}
+        />
       </CircleWrapper>
     );
   }

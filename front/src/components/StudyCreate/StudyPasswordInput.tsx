@@ -24,12 +24,25 @@ const InputForm = styled.input`
   font-family: "Spoqa Han Sans";
 `;
 
-export default class StudyPasswordInput extends React.Component {
+type Props = {
+  onChange: any;
+  value: string;
+};
+
+export default class StudyPasswordInput extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
     return (
       <>
         <InputTitle>비밀번호</InputTitle>
-        <InputForm placeholder="(4자리~15자리 영문, 숫자로 입력해주세요.)" />
+        <InputForm
+          placeholder="(4자리~15자리 영문, 숫자로 입력해주세요.)"
+          value={this.props.value}
+          onChange={this.props.onChange}
+        />
       </>
     );
   }

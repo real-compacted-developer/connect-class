@@ -31,8 +31,8 @@ export default class StudyButton extends Component<Props, States> {
 
   render() {
     return (
-      <Wrapper>
-        <Information />
+      <Wrapper id="Slide__content">
+        <Information></Information>
       </Wrapper>
     );
   }

@@ -55,14 +55,24 @@ const SelectText = styled.div`
 
 type Props = {
   value: string;
+  onChange: any;
 };
 
 export default class PeopleRadio extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
     return (
       <SelectWrapper>
         <SelectText>{this.props.children}</SelectText>
-        <Select type="radio" name="button" value={this.props.value} />
+        <Select
+          type="radio"
+          name="button"
+          value={this.props.value}
+          onChange={this.props.onChange}
+        />
       </SelectWrapper>
     );
   }

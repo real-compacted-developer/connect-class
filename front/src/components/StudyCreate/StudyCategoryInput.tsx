@@ -35,7 +35,15 @@ const CircleList = styled.div`
   flex-direction: row;
 `;
 
-export default class StudyCategoryInput extends React.Component {
+type Props = {
+  onChange: any;
+};
+
+export default class StudyCategoryInput extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
     return (
       <>
@@ -46,13 +54,26 @@ export default class StudyCategoryInput extends React.Component {
           <CategoryCircle
             icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
             value="IT분야"
+            onChange={this.props.onChange}
           >
             IT 분야
           </CategoryCircle>
 
-          <CategoryCircle icon="" value=""></CategoryCircle>
-          <CategoryCircle icon="" value=""></CategoryCircle>
-          <CategoryCircle icon="" value=""></CategoryCircle>
+          <CategoryCircle
+            icon=""
+            value=""
+            onChange={this.props.onChange}
+          ></CategoryCircle>
+          <CategoryCircle
+            icon=""
+            value=""
+            onChange={this.props.onChange}
+          ></CategoryCircle>
+          <CategoryCircle
+            icon=""
+            value=""
+            onChange={this.props.onChange}
+          ></CategoryCircle>
         </CircleList>
       </>
     );
