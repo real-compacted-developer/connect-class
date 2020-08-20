@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import FullButton from "./Buttons/FullButton";
+import SlideImage from "./SlideImage";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -31,6 +32,7 @@ export default class Header extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
+        <SlideImage />
         <FullButton />
       </Wrapper>
     );

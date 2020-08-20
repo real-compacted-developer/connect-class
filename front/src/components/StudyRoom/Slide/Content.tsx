@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
 import Information from "./Information";
 
 const Wrapper = styled.div`
