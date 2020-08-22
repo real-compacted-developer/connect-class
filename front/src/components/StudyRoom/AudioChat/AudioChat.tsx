@@ -1,16 +1,45 @@
 import React, { useState, useEffect } from "react";
 import SimplePeer from "simple-peer";
-import { socket } from "../../../index";
-
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+import { socket } from "../../../index";
+
+import microphoneImage from "./microphone.svg";
+
+const Wrapper = styled.div``;
+
+const Button = styled.button`
+  position: absolute;
+  right: 80px;
+  top: 10px;
+
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border: none;
   background-color: white;
-  z-index: 3000;
+
+  background-image: url(${microphoneImage});
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: center center;
+
+  border-radius: 20px;
+
+  transition: background-color 0.5s ease;
+
+  :hover {
+    background-color: #ccc;
+  }
+
+  :focus {
+    outline: none;
+  }
 `;
 
 const AudioChat: React.FC = () => {
-  const [myAudioStream, setMyAudioStream] = useState<any>();
+  let peer: any = undefined;
+  let myAudioStream: any = undefined;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const bindEvents = (p: any) => {
@@ -23,10 +52,13 @@ const AudioChat: React.FC = () => {
     });
 
     p.on("stream", (stream: any) => {
+      console.log("set stream");
       const audioTag: HTMLAudioElement | null = window.document.querySelector(
         "#audio-tag"
       );
+      console.log(audioTag);
       if (audioTag !== null) {
+        console.log("set stream to audioTag");
         audioTag.srcObject = stream;
       }
     });
@@ -34,67 +66,66 @@ const AudioChat: React.FC = () => {
 
   useEffect(() => {
     socket?.on("shareAudioModal", async (name: any) => {
-      // eslint-disable-next-line no-restricted-globals
-      const success = confirm(`${name} 님이 오디오 채팅을 시작하길 원합니다.`);
-
-      if (!success) return;
+      console.log("shareAudioModal");
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: false,
           audio: true,
         });
 
-        const peer = new SimplePeer({
+        console.log(stream);
+        peer = new SimplePeer({
           initiator: true,
           stream,
           config: {
             iceServers: [
-              { url: "stun:stun1.l.google.com:19302" },
+              { urls: "stun:stun.l.google.com:19302" },
+              { urls: "stun:global.stun.twilio.com:3478?transport=udp" },
               {
-                url: "turn:numb.viagenie.ca",
-                credential: "muazkh",
-                username: "webrtc@live.com",
+                urls: "turn:numb.viagenie.ca",
+                credential: "hiragana",
+                username: "mornirmornir@hotmail.com",
               },
             ],
           },
         });
-
         bindEvents(peer);
       } catch (e) {
         console.log(e.message);
       }
     });
 
-    socket?.on("transmitOffer", (data: any) => {
+    socket?.on("transmitOffer", async (data: any) => {
       console.log("receiving Offer", data);
 
-      const peer = new SimplePeer({
-        initiator: false,
-        stream: myAudioStream,
-        config: {
-          iceServers: [
-            { url: "stun:stun1.l.google.com:19302" },
-            {
-              url: "turn:numb.viagenie.ca",
-              credential: "muazkh",
-              username: "webrtc@live.com",
-            },
-          ],
-        },
-      });
-      bindEvents(peer);
-
+      if (peer === undefined) {
+        peer = new SimplePeer({
+          initiator: false,
+          stream: myAudioStream,
+          config: {
+            iceServers: [
+              {
+                urls: "stun:stun.l.google.com:19302",
+              },
+              {
+                urls: "stun:global.stun.twilio.com:3478?transport=udp",
+              },
+              {
+                urls: "turn:numb.viagenie.ca",
+                credential: "hiragana",
+                username: "mornirmornir@hotmail.com",
+              },
+            ],
+          },
+        });
+        bindEvents(peer);
+      }
       peer.signal(data);
     });
   }, []);
 
   const startAudioChat = async () => {
     try {
-      const userMedia = await navigator.mediaDevices.getUserMedia({
-        video: false,
-        audio: true,
-      });
-      setMyAudioStream(userMedia);
       socket?.emit("askAudio");
     } catch (e) {
       console.log(e.message);
@@ -103,7 +134,7 @@ const AudioChat: React.FC = () => {
 
   return (
     <Wrapper>
-      <button onClick={startAudioChat}>Audio Chat</button>
+      <Button onClick={startAudioChat} />
       <audio id="audio-tag" autoPlay playsInline></audio>
     </Wrapper>
   );
