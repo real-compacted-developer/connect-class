@@ -89,48 +89,29 @@ yarn start:dev # 개발용 서버 실행
 프론트엔드의 폴더 구조는 다음과 같습니다.
 
 ```bash
-├── config    # webpack, babel 등 설정 파일
 ├── public    # build에 사용할 html등 정적 파일
-│   └── asset
-├── scripts   # 명령에 사용되는 scripts 파일들
 └── src
     ├── components  # 컴포넌트
     ├── constants   # 사용하는 상수
     ├── pages       # 페이지 컴포넌트 (routing을 위한)
-    └── stylesheets # 공용 스타일 속성
+    ├── stylesheets  # 공용 스타일 속성
+    ├── asset
+    └── Dockerfile   # Docker 파일
+
 ```
 
 #### backend
 
 ```bash
-└── src
-    ├── constants   # 사용하는 상수
-    ├── daos        # Data Access Object
-    ├── routes      # 라우터
-    ├── types       # 타입 정의
-    └── util        # 유틸성 함수들
-```
+├──
+├── constants   # 사용하는 상수
+├── config        # AWS, Database, multer 등 개인 정보를 다룬다.
+├── apis           # Apis
+├── models      # 데이터베이스 모델
+├── services      # 기능을 다룬다.
+├── sockets       # socket 기능을 다룬다.
+└── stores         # 캔버스 기능에 필요한 store
 
-### frontend 설정 파일 .env
-
-```sh
-# API Server
-REACT_APP_API_HOST=
-```
-
-### backend 설정 파일 .env
-
-```sh
-# Server
-PORT=
-HOST=
-
-# Database Server
-DB_HOST=
-DB_PORT=
-DB_USER=
-DB_PASSWORD=
-DB_NAME=
 ```
 
 ## 🥴 Support
