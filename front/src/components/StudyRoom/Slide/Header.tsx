@@ -4,6 +4,8 @@ import styled from "styled-components";
 import FullButton from "./Buttons/FullButton";
 import SlideImage from "./SlideImage";
 
+import AudioChat from "../AudioChat/AudioChat";
+
 const Wrapper = styled.div`
   width: 100%;
   height: 90px;
@@ -33,6 +35,7 @@ export default class Header extends Component<Props, States> {
     return (
       <Wrapper>
         <SlideImage />
+        <AudioChat />
         <FullButton />
       </Wrapper>
     );
