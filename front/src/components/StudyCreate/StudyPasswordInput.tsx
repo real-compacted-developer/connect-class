@@ -30,10 +30,6 @@ type Props = {
 };
 
 export default class StudyPasswordInput extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   render() {
     return (
       <>

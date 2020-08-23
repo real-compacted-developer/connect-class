@@ -53,10 +53,6 @@ type Props = {
 };
 
 export default class CategoryCircle extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   render() {
     return (
       <CircleWrapper>

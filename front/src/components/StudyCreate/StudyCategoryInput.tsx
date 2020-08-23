@@ -40,10 +40,6 @@ type Props = {
 };
 
 export default class StudyCategoryInput extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   render() {
     return (
       <>

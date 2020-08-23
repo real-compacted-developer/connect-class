@@ -21,14 +21,6 @@ type Props = {};
 type States = {};
 
 export default class StudyButton extends Component<Props, States> {
-  constructor(props: Props) {
-    super(props);
-  }
-
-  componentWillMount() {}
-
-  componentDidMount() {}
-
   render() {
     return (
       <Wrapper id="Slide__content">
