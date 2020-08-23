@@ -1,3 +1,5 @@
+const { initStoredDrawData } = require("../services/draw");
+
 module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
   const RoomModel = require("../models/index").StudyGroup;
@@ -30,7 +32,7 @@ module.exports = function (socket) {
 
     setTimeout(() => {
       const slideId = 1; // TODO: 첫번째 슬라이드 아이디를 가져오는 코드로 대체
-      sendStoredDrawData(socket, slideId);
+      initStoredDrawData(socket, slideId);
     }, 100);
   });
 
