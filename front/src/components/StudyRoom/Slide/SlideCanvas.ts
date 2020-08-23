@@ -4,16 +4,16 @@ import SOCKET_TYPE from "../../../constants/socket-type";
 export const drawState = {
   isDraw: false,
   color: "#FF0000",
+  slideId: 1,
 };
 
-const sketch = (slideId: number) => {
-  return (s: any) => {
+const sketch = (s: any) => {
     s.setup = () => {
       const cv = s.createCanvas(1000, 1000);
       cv.id("Slide__canvas");
       cv.parent("Slide__content");
 
-      socket.on(SOCKET_TYPE.DRAW, (data: Record<string, any>) => {
+      socket.on(SOCKET_TYPE.DRAW, (data: Record<string, unknown>) => {
         s.stroke(data.color);
         s.strokeWeight(data.strokeWidth);
         s.line(data.x, data.y, data.px, data.py);
@@ -36,7 +36,7 @@ const sketch = (slideId: number) => {
       pY: number
     ) => {
       const data = {
-        slideId,
+        slideId: drawState.slideId,
         x: x,
         y: y,
         px: pX,
@@ -46,7 +46,6 @@ const sketch = (slideId: number) => {
       };
       socket.emit(SOCKET_TYPE.DRAW, data);
     };
-  };
 };
 
 export default sketch;
