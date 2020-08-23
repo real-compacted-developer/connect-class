@@ -31,7 +31,7 @@
 
 ### ⚙ 기술 스택
 
-![기술 스택](./images\skills.PNG)
+![기술 스택](./images/skills.PNG)
 
 저희 프로젝트는 Front는 Typescript, Back은 Javascript를 사용합니다.
 
@@ -81,7 +81,7 @@ yarn start:dev # 개발용 서버 실행
 
 ```bash
 ├── back   # 백엔드 관련 코드
-└── front  # 프로트엔드 관련 코드
+└── front  # 프론트엔드 관련 코드
 ```
 
 #### frontend
@@ -89,14 +89,14 @@ yarn start:dev # 개발용 서버 실행
 프론트엔드의 폴더 구조는 다음과 같습니다.
 
 ```bash
-├── public    # build에 사용할 html등 정적 파일
+├── public             # build에 사용할 html등 정적 파일
 └── src
-    ├── components  # 컴포넌트
-    ├── constants   # 사용하는 상수
-    ├── pages       # 페이지 컴포넌트 (routing을 위한)
-    ├── stylesheets  # 공용 스타일 속성
-    ├── asset
-    └── Dockerfile   # Docker 파일
+    ├── components     # 컴포넌트
+    ├── constants      # 사용하는 상수
+    ├── pages          # 페이지 컴포넌트 (routing을 위한)
+    ├── stylesheets    # 공용 스타일 속성
+    ├── asset          # 이미지 파일
+    └── Dockerfile     # Docker 파일
 
 ```
 
@@ -104,13 +104,13 @@ yarn start:dev # 개발용 서버 실행
 
 ```bash
 ├──
-├── constants   # 사용하는 상수
+├── constants     # 사용하는 상수
 ├── config        # AWS, Database, multer 등 개인 정보를 다룬다.
-├── apis           # Apis
-├── models      # 데이터베이스 모델
+├── apis          # REST API
+├── models        # 데이터베이스 모델
 ├── services      # 기능을 다룬다.
 ├── sockets       # socket 기능을 다룬다.
-└── stores         # 캔버스 기능에 필요한 store
+└── stores        # 캔버스 기능에 필요한 store
 
 ```
 
