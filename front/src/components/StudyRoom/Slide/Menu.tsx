@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import LeftButtons from "./LeftButtons";
-import RightButtons from "./RighitButtons";
+import RightButtons from "./RightButtons";
 
 const Wrapper = styled.div`
   width: 100%;
