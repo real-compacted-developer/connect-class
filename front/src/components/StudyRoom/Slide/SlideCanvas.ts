@@ -4,7 +4,7 @@ import SOCKET_TYPE from "../../../constants/socket-type";
 export const drawState = {
   isDraw: false,
   color: "#FF0000",
-  slideId: 1,
+  slideId: 0,
 };
 
 const sketch = (s: any) => {
@@ -17,6 +17,10 @@ const sketch = (s: any) => {
       s.stroke(data.color);
       s.strokeWeight(data.strokeWidth);
       s.line(data.x, data.y, data.px, data.py);
+    });
+
+    socket.on(SOCKET_TYPE.IMAGE_CHANGE, () => {
+      s.clear();
     });
   };
 

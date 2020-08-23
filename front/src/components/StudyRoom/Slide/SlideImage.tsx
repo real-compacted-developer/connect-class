@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { socket } from "../../../index";
+import { drawState } from "./SlideCanvas";
 
 type Props = {};
 
@@ -38,6 +39,7 @@ class SlideImage extends Component<Props, States> {
         index: data.index,
         urlInfo: data.urlInfo,
       });
+      drawState.slideId = data.index;
     });
   }
   onPrevImage() {

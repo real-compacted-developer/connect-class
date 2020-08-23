@@ -1,4 +1,5 @@
 const SOCKET_TYPE = require("../constants/socket-type");
+const { sendStoredDrawData } = require("../services/draw");
 // const { Slide, StudyData } = require("../models/index");
 
 const imagesPath = [
@@ -40,6 +41,7 @@ module.exports = function (socket) {
     idx = data.index;
     url = data.urlInfo;
     io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+    sendStoredDrawData(socket, idx);
   });
 
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
@@ -53,5 +55,8 @@ module.exports = function (socket) {
     idx = data.index;
     url = data.urlInfo;
     io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+    sendStoredDrawData(socket, idx);
   });
 };
+
+exports.slideIndex = idx;
