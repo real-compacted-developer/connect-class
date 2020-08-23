@@ -4,8 +4,7 @@ import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
-import SlideCanvas, { drawState } from "./SlideCanvas";
-import p5 from "p5";
+import { drawState } from "./SlideCanvas";
 
 import PencilButton from "./Buttons/PencilButton";
 import PresentButton from "./Buttons/PresentButton";
@@ -46,10 +45,6 @@ class StudyButton extends Component<
     this.state = {
       toggleDraw: true,
     };
-  }
-
-  componentDidMount() {
-    new p5(SlideCanvas);
   }
 
   exit() {
