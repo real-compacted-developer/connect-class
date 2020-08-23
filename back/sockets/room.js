@@ -28,8 +28,10 @@ module.exports = function (socket) {
 
     console.log(`${userId}가 ${roomId} 스터디룸에 입장하였습니다.`);
 
-    const slideId = 1; // TODO: 첫번째 슬라이드 아이디를 가져오는 코드로 대체
-    sendStoredDrawData(socket, slideId);
+    setTimeout(() => {
+      const slideId = 1; // TODO: 첫번째 슬라이드 아이디를 가져오는 코드로 대체
+      sendStoredDrawData(socket, slideId);
+    }, 100);
   });
 
   socket.on(SOCKET_TYPE.EXIT, async (data) => {
