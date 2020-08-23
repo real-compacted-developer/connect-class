@@ -4,7 +4,7 @@ module.exports = function (socket) {
   const StudyMemeberModel = require("../models/index").studyMember;
 
   const { initStoredDrawData } = require("../services/draw");
-  const { slideIndex } = require("./image");
+  const { SlideInstance } = require("../app");
 
   const Sequelize = require("sequelize");
   const Op = Sequelize.Op;
@@ -31,7 +31,7 @@ module.exports = function (socket) {
     console.log(`${userId}가 ${roomId} 스터디룸에 입장하였습니다.`);
 
     setTimeout(() => {
-      initStoredDrawData(socket, slideIndex);
+      initStoredDrawData(socket, SlideInstance.getSlideIndex());
     }, 100);
   });
 
