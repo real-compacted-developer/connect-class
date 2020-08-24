@@ -1,0 +1,42 @@
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  IMAGE_NAME: connectclass-back:$IMAGE_VERSION
+
+cache:
+  paths:
+    - node_modules/
+    
+test:
+  stage: test
+  image: node:12
+  script:
+    - env
+    - npm install
+
+build:
+  stage: package
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build
+  script:
+    - ls -al
+    - docker container ls -a
+    - docker build . -t $IMAGE_NAME
+    - docker push $IMAGE_NAME
+    - docker images | grep '<IP>'
+
+deploy:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker container ls -a
+    - docker container rm -f connectclass-back
+    - docker run -d -p 8080:8080 --name connectclass-back --restart always $IMAGE_NAME
+    - docker container ls -a
