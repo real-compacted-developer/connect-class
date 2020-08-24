@@ -16,8 +16,6 @@ test:
   script:
     - env
     - npm install
-  tags:
-    - deploy
 
 build:
   stage: package
@@ -31,8 +29,6 @@ build:
     - docker build . -t $IMAGE_NAME
     - docker push $IMAGE_NAME
     - docker images | grep '<IP>'
-  tags:
-    - deploy
 
 deploy:
   stage: deploy
@@ -44,5 +40,6 @@ deploy:
     - docker container rm -f connectclass-back
     - docker run -d -p 8080:8080 --name connectclass-back --restart always $IMAGE_NAME
     - docker container ls -a
-  tags:
-    - deploy
+
+tags:
+  - deploy
