@@ -17,7 +17,6 @@ back-build:
     - docker:19.03.8-dind
   script:
     - cd back
-    - docker container ls -a
     - docker build . -t $IMAGE_NAME
 
 back-deploy:
@@ -26,7 +25,5 @@ back-deploy:
   services:
     - docker:19.03.8-dind
   script:
-    - docker container ls -a
     - docker container rm -f connectclass-back
     - docker run -d -p 8080:8080 --name connectclass-back --restart always $IMAGE_NAME
-    - docker container ls -a
