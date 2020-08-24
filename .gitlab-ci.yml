@@ -1,37 +1,26 @@
 stages:
-  - test
-  - build
-  - deploy
+  - back-build
+  - back-deploy
 
 variables:
   IMAGE_NAME: connectclass-back:$IMAGE_VERSION
 
 cache:
   paths:
-    - node_modules/
-    
-test:
-  stage: test
-  image: node:12
-  script:
-    - env
-    - npm install
+    - back/node_modules/
 
-build:
-  stage: package
+back-build:
+  stage: back-build
   image: docker:latest
   services:
     - docker:dind
-  stage: build
   script:
-    - ls -al
+    - cd back
     - docker container ls -a
     - docker build . -t $IMAGE_NAME
-    - docker push $IMAGE_NAME
-    - docker images | grep '<IP>'
 
-deploy:
-  stage: deploy
+back-deploy:
+  stage: back-deploy
   image: docker:latest
   services:
     - docker:dind
