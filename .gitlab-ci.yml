@@ -1,8 +1,9 @@
 stages:
-  - back-deploy
+  - test
+  - deploy
 
 variables:
-  IMAGE_NAME: connectclass-back
+  PROJECT_NAME: connectclass-back
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
 
@@ -10,15 +11,21 @@ cache:
   paths:
     - back/node_modules/
 
-back-deploy:
-  stage: package
-  stage: back-deploy
+test:
+  stage: test
+  image: node:12
+  script:
+    - cd back
+    - npm install
+
+deploy:
+  stage: deploy
   image: docker:latest
   services:
     - docker:dind
   script:
     - cd back
-    - docker build . -t $IMAGE_NAME
-    - docker ps -q --filter "name=$IMAGE_NAME" | grep -q . && docker stop $IMAGE_NAME && docker rm $IMAGE_NAME || true
-    - docker run -d -p 8080:8080 --name $IMAGE_NAME --restart always $IMAGE_NAME
+    - docker build . -t $PROJECT_NAME
+    - docker ps -q --filter "name=$PROJECT_NAME" | grep -q . && docker stop $PROJECT_NAME && docker rm $PROJECT_NAME || true
+    - docker run -d -p 8080:8080 --name nodejs-server --restart always $PROJECT_NAME
     - docker container ls -a
