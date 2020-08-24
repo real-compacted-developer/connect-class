@@ -1,5 +1,4 @@
 stages:
-  - back-build
   - back-deploy
 
 variables:
@@ -11,20 +10,13 @@ cache:
   paths:
     - back/node_modules/
 
-back-build:
-  stage: back-build
-  image: docker:latest
-  services:
-    - docker:19.03.8-dind
-  script:
-    - cd back
-    - docker build . -t $IMAGE_NAME
-
 back-deploy:
   stage: back-deploy
   image: docker:latest
   services:
     - docker:19.03.8-dind
   script:
+    - cd back
+    - docker build . -t $IMAGE_NAME
     - docker ps -q --filter "name=$IMAGE_NAME" | grep -q . && docker stop $IMAGE_NAME && docker rm $IMAGE_NAME || true
     - docker run -d -p 8080:8080 --name $IMAGE_NAME --restart always $IMAGE_NAME
