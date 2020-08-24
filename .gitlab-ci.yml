@@ -11,10 +11,11 @@ cache:
     - back/node_modules/
 
 back-deploy:
+  stage: package
   stage: back-deploy
   image: docker:latest
   services:
-    - docker:19.03.8-dind
+    - docker:dind
   script:
     - cd back
     - docker build . -t $IMAGE_NAME
