@@ -21,3 +21,4 @@ back-deploy:
     - docker build . -t $IMAGE_NAME
     - docker ps -q --filter "name=$IMAGE_NAME" | grep -q . && docker stop $IMAGE_NAME && docker rm $IMAGE_NAME || true
     - docker run -d -p 8080:8080 --name $IMAGE_NAME --restart always $IMAGE_NAME
+    - docker container ls -a
