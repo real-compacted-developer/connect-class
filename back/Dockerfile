@@ -1,6 +1,6 @@
 FROM node:12
 
-EXPOSE 3000
+EXPOSE 8080
 
 COPY / /workspace
 WORKDIR /workspace
