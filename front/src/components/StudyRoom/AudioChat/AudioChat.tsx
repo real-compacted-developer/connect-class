@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SimplePeer from "simple-peer";
 import styled from "styled-components";
 

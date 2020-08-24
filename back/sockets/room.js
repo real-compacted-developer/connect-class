@@ -2,7 +2,9 @@ module.exports = function (socket) {
   const SOCKET_TYPE = require("../constants/socket-type");
   const RoomModel = require("../models/index").StudyGroup;
   const StudyMemeberModel = require("../models/index").studyMember;
-  const sendStoredDrawData = require("../services/draw").sendStoredDrawData;
+
+  const { initStoredDrawData } = require("../services/draw");
+  const { SlideInstance } = require("../app");
 
   const Sequelize = require("sequelize");
   const Op = Sequelize.Op;
@@ -28,8 +30,9 @@ module.exports = function (socket) {
 
     console.log(`${userId}가 ${roomId} 스터디룸에 입장하였습니다.`);
 
-    const slideId = 1; // TODO: 첫번째 슬라이드 아이디를 가져오는 코드로 대체
-    sendStoredDrawData(socket, slideId);
+    setTimeout(() => {
+      initStoredDrawData(socket, SlideInstance.getSlideIndex());
+    }, 100);
   });
 
   socket.on(SOCKET_TYPE.EXIT, async (data) => {

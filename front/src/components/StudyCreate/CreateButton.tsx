@@ -32,10 +32,6 @@ type Props = {
 };
 
 export default class CreateButton extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   render() {
     return <Button onClick={this.props.onClick}>스터디 개설하기</Button>;
   }

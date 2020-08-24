@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import LeftButtons from "./LeftButtons";
-import RightButtons from "./RighitButtons";
+import RightButtons from "./RightButtons";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,14 +21,6 @@ type Props = {};
 type States = {};
 
 export default class Menu extends Component<Props, States> {
-  constructor(props: Props) {
-    super(props);
-  }
-
-  componentWillMount() {}
-
-  componentDidMount() {}
-
   render() {
     return (
       <Wrapper>

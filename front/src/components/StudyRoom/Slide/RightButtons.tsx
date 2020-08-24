@@ -4,8 +4,7 @@ import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
-import SlideCanvas, { drawState } from "./SlideCanvas";
-import p5 from "p5";
+import { drawState } from "./SlideCanvas";
 
 import PencilButton from "./Buttons/PencilButton";
 import PresentButton from "./Buttons/PresentButton";
@@ -48,14 +47,8 @@ class StudyButton extends Component<
     };
   }
 
-  componentWillMount() {}
-
-  componentDidMount() {
-    new p5(SlideCanvas(1));
-  }
-
   exit() {
-    // TODO: 실제 방 ID하고 유저 ID 가져오는거 구현
+    // TODO: 로그인 & 회원가입 추가 후 userId(이메일) 가져오는거 구현
     socket.emit(SOCKET_TYPE.EXIT, {
       roomId: this.props.match.params.id,
       userId: "사용자1",
@@ -66,10 +59,12 @@ class StudyButton extends Component<
     this.setState((v) => ({
       toggleDraw: !v.toggleDraw,
     }));
+
     if (this.state.toggleDraw) {
-      const input = prompt("색깔 (HEX)");
+      const input = prompt("색깔(HEX) 미입력 시 빨간색으로 설정됩니다.");
       drawState.color = input || "#FF0000";
     }
+
     drawState.isDraw = this.state.toggleDraw;
   }
 

@@ -59,10 +59,6 @@ type Props = {
 };
 
 export default class PeopleRadio extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   render() {
     return (
       <SelectWrapper>

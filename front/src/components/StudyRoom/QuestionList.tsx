@@ -19,14 +19,6 @@ type Props = {};
 type States = {};
 
 export default class QuestionList extends Component<Props, States> {
-  constructor(props: Props) {
-    super(props);
-  }
-
-  componentWillMount() {}
-
-  componentDidMount() {}
-
   render() {
     return (
       <Wrapper>

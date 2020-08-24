@@ -1,4 +1,5 @@
 const SOCKET_TYPE = require("../constants/socket-type");
+const { sendStoredDrawData } = require("../services/draw");
 // const { Slide, StudyData } = require("../models/index");
 
 const imagesPath = [
@@ -23,11 +24,17 @@ const imagesPath = [
 
 const io = require("../bin/www").io;
 const size = imagesPath.length;
-let idx = 0;
-let url = imagesPath[0];
 
 module.exports = function (socket) {
-  socket.emit(SOCKET_TYPE.SYNC, { idx, url });
+  const { SlideInstance } = require("../app");
+
+  SlideInstance.setSlideIndex(0);
+  SlideInstance.setSlideUrl(imagesPath[0]);
+
+  socket.emit(SOCKET_TYPE.SYNC, {
+    idx: SlideInstance.getSlideIndex(),
+    url: SlideInstance.getSlideUrl(),
+  });
 
   socket.on(SOCKET_TYPE.IMAGE_PREV, (data) => {
     if (data.index == 0) {
@@ -37,9 +44,10 @@ module.exports = function (socket) {
     }
 
     data.urlInfo = imagesPath[data.index];
-    idx = data.index;
-    url = data.urlInfo;
+    SlideInstance.setSlideIndex(data.index);
+    SlideInstance.setSlideUrl(data.urlInfo);
     io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+    sendStoredDrawData(socket, SlideInstance.getSlideIndex());
   });
 
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
@@ -50,8 +58,9 @@ module.exports = function (socket) {
     }
 
     data.urlInfo = imagesPath[data.index];
-    idx = data.index;
-    url = data.urlInfo;
+    SlideInstance.setSlideIndex(data.index);
+    SlideInstance.setSlideUrl(data.urlInfo);
     io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+    sendStoredDrawData(socket, SlideInstance.getSlideIndex());
   });
 };

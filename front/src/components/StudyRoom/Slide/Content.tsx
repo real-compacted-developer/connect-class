@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import p5 from "p5";
+
 import Information from "./Information";
+import SlideCanvas from "./SlideCanvas";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,13 +24,9 @@ type Props = {};
 type States = {};
 
 export default class StudyButton extends Component<Props, States> {
-  constructor(props: Props) {
-    super(props);
+  componentDidMount() {
+    new p5(SlideCanvas);
   }
-
-  componentWillMount() {}
-
-  componentDidMount() {}
 
   render() {
     return (
