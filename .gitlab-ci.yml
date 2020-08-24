@@ -3,7 +3,7 @@ stages:
   - back-deploy
 
 variables:
-  IMAGE_NAME: connectclass-back:$IMAGE_VERSION
+  IMAGE_NAME: connectclass-back
   DOCKER_HOST: tcp://docker:2375
 
 cache:
