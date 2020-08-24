@@ -40,6 +40,3 @@ deploy:
     - docker container rm -f connectclass-back
     - docker run -d -p 8080:8080 --name connectclass-back --restart always $IMAGE_NAME
     - docker container ls -a
-
-tags:
-  - deploy
