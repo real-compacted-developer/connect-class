@@ -26,5 +26,5 @@ back-deploy:
   services:
     - docker:19.03.8-dind
   script:
-    - docker container rm -f connectclass-back
-    - docker run -d -p 8080:8080 --name connectclass-back --restart always $IMAGE_NAME
+    - docker ps -q --filter "name=$IMAGE_NAME" | grep -q . && docker stop $IMAGE_NAME && docker rm $IMAGE_NAME || true
+    - docker run -d -p 8080:8080 --name $IMAGE_NAME --restart always $IMAGE_NAME
