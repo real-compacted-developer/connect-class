@@ -13,7 +13,7 @@ back-build:
   stage: back-build
   image: docker:latest
   services:
-    - docker:dind
+    - docker:19.03.8-dind
   script:
     - cd back
     - docker container ls -a
@@ -23,7 +23,7 @@ back-deploy:
   stage: back-deploy
   image: docker:latest
   services:
-    - docker:dind
+    - docker:19.03.8-dind
   script:
     - docker container ls -a
     - docker container rm -f connectclass-back
