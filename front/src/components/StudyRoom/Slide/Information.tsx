@@ -70,10 +70,10 @@ export default class Information extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <Title>KB 국민은행 공채 스터디 | 후야</Title>
+        <Title>SW마에스트로 11기 | 커넥트클래스</Title>
         <FooterWrapper>
           <Icon></Icon>
-          <SubInformation>132명 참여중</SubInformation>
+          <SubInformation>1명 참여중</SubInformation>
         </FooterWrapper>
       </Wrapper>
     );

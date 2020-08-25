@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import FullButton from "./Buttons/FullButton";
-import SlideImage from "./SlideImage";
 
 import AudioChat from "../AudioChat/AudioChat";
 
@@ -26,7 +25,6 @@ export default class Header extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <SlideImage />
         <AudioChat />
         <FullButton />
       </Wrapper>
