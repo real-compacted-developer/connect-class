@@ -21,6 +21,10 @@
 
 ## 📌 프로젝트 소개
 
+![스크린샷_2020-08-25_21.06.57](https://user-images.githubusercontent.com/38618187/91175192-62721b80-e71b-11ea-996e-1507eb21e3d2.png)
+
+[프로젝트 중간데모 영상 바로가기](https://youtu.be/QuQrxEzxbcQ)
+
 저희 프로젝트를 소개합니다.
 
 ### 👨‍👨‍👧 팀원 소개
