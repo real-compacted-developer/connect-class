@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const app = require("../app").app;
 const debug = require("debug")("back:server");
 const http = require("http");
