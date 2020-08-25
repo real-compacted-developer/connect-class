@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const pdf = require("pdf-poppler");
 const fs = require("fs");
 //  /* 아마존 S3에 올리기 */
 // const uploadS3 = require("../config/multer");
