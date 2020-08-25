@@ -4,6 +4,7 @@ import p5 from "p5";
 
 import Information from "./Information";
 import SlideCanvas from "./SlideCanvas";
+import SlideImage from "./SlideImage";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,6 +33,7 @@ export default class StudyButton extends Component<Props, States> {
     return (
       <Wrapper id="Slide__content">
         <Information></Information>
+        <SlideImage></SlideImage>
       </Wrapper>
     );
   }

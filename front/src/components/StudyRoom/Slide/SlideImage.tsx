@@ -1,7 +1,32 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { socket } from "../../../index";
 import { drawState } from "./SlideCanvas";
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const ButtonWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 5000;
+`;
+
+const ImageWrapper = styled.div<{ imageURL: string }>`
+  width: 100%;
+  height: 100%;
+
+  background-image: url("${(props): string => props.imageURL}");
+  background-repeat: no-repeat;
+  /* background-size: auto; */
+  background-size: contain;
+
+  background-position:center center;
+`;
 
 type Props = {};
 
@@ -54,21 +79,17 @@ class SlideImage extends Component<Props, States> {
   }
   renderImage() {
     let { urlInfo } = this.state;
-    return (
-      <div>
-        <img src={urlInfo} alt="" />
-      </div>
-    );
+    return <ImageWrapper imageURL={urlInfo} />;
   }
   render() {
     return (
-      <div>
-        <ul>
+      <Wrapper>
+        <ButtonWrapper>
           <button onClick={this.onPrevImage}> 이전 슬라이드</button>
           <button onClick={this.onNextImage}> 다음 슬라이드</button>
-        </ul>
-        <div>{this.renderImage()}</div>
-      </div>
+        </ButtonWrapper>
+        {this.renderImage()}
+      </Wrapper>
     );
   }
 }
