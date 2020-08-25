@@ -21,7 +21,6 @@
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.0",
-    "pdf-poppler": "^0.2.1",
     "sequelize": "^6.3.3",
     "socket.io": "^2.3.0"
   },
