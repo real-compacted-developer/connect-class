@@ -28,31 +28,31 @@ type Props = {
   onChange: any;
 };
 
-export default class StudyMaxPeopleInput extends React.Component<Props> {
-  render() {
-    return (
-      <>
-        <InputTitle>최대인원 설정</InputTitle>
-        <InputSubTitle>원하시는 스터디 최대인원을 설정해주세요.</InputSubTitle>
+const StudyMaxPeopleInput: React.FC<Props> = ({ onChange }) => {
+  return (
+    <>
+      <InputTitle>최대인원 설정</InputTitle>
+      <InputSubTitle>원하시는 스터디 최대인원을 설정해주세요.</InputSubTitle>
 
-        <SelectList>
-          <PeopleRadio value="2" onChange={this.props.onChange}>
-            2명
-          </PeopleRadio>
-          <PeopleRadio value="3" onChange={this.props.onChange}>
-            3명
-          </PeopleRadio>
-          <PeopleRadio value="4" onChange={this.props.onChange}>
-            4명
-          </PeopleRadio>
-          <PeopleRadio value="5" onChange={this.props.onChange}>
-            5명
-          </PeopleRadio>
-          <PeopleRadio value="6" onChange={this.props.onChange}>
-            6명
-          </PeopleRadio>
-        </SelectList>
-      </>
-    );
-  }
-}
+      <SelectList>
+        <PeopleRadio value="2" onChange={onChange}>
+          2명
+        </PeopleRadio>
+        <PeopleRadio value="3" onChange={onChange}>
+          3명
+        </PeopleRadio>
+        <PeopleRadio value="4" onChange={onChange}>
+          4명
+        </PeopleRadio>
+        <PeopleRadio value="5" onChange={onChange}>
+          5명
+        </PeopleRadio>
+        <PeopleRadio value="6" onChange={onChange}>
+          6명
+        </PeopleRadio>
+      </SelectList>
+    </>
+  );
+};
+
+export default StudyMaxPeopleInput;

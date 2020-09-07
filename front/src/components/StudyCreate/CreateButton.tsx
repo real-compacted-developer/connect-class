@@ -12,10 +12,6 @@ const Button = styled.button`
   font-family: "Gmarket Sans";
   font-size: 22px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.18;
-  letter-spacing: normal;
   text-align: center;
   color: #d0d4de;
 
@@ -31,8 +27,8 @@ type Props = {
   onClick?: any;
 };
 
-export default class CreateButton extends React.Component<Props> {
-  render() {
-    return <Button onClick={this.props.onClick}>스터디 개설하기</Button>;
-  }
-}
+const CreateButton: React.FC<Props> = ({ onClick }) => {
+  return <Button onClick={onClick}>스터디 개설하기</Button>;
+};
+
+export default CreateButton;

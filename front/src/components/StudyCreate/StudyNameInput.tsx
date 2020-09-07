@@ -5,11 +5,6 @@ const InputTitle = styled.p`
   font-family: "Gmarket Sans";
   font-size: 20px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
 `;
 
@@ -29,17 +24,17 @@ type Props = {
   value: string;
 };
 
-export default class StudyNameInput extends React.Component<Props> {
-  render() {
-    return (
-      <>
-        <InputTitle>스터디 그룹 이름</InputTitle>
-        <InputForm
-          placeholder="원하는 스터디 그룹 이름을 적어주세요"
-          value={this.props.value}
-          onChange={this.props.onChange}
-        />
-      </>
-    );
-  }
-}
+const StudyNameInput: React.FC<Props> = ({ value, onChange }) => {
+  return (
+    <>
+      <InputTitle>스터디 그룹 이름</InputTitle>
+      <InputForm
+        placeholder="원하는 스터디 그룹 이름을 적어주세요"
+        value={value}
+        onChange={onChange}
+      />
+    </>
+  );
+};
+
+export default StudyNameInput;

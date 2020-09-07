@@ -52,21 +52,21 @@ type Props = {
   onChange: any;
 };
 
-export default class CategoryCircle extends React.Component<Props> {
-  render() {
-    return (
-      <CircleWrapper>
-        <CircleContent>
-          <img src={this.props.icon} alt={this.props.value}></img>
-          <p>{this.props.children}</p>
-        </CircleContent>
-        <Circle
-          type="radio"
-          name="category"
-          value={this.props.value}
-          onChange={this.props.onChange}
-        />
-      </CircleWrapper>
-    );
-  }
-}
+const CategoryCircle: React.FC<Props> = ({
+  icon,
+  value,
+  onChange,
+  children,
+}) => {
+  return (
+    <CircleWrapper>
+      <CircleContent>
+        <img src={icon} alt={value} />
+        <p>{children}</p>
+      </CircleContent>
+      <Circle type="radio" name="category" value={value} onChange={onChange} />
+    </CircleWrapper>
+  );
+};
+
+export default CategoryCircle;

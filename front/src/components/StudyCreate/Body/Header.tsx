@@ -22,12 +22,12 @@ const BarButton = styled.button`
   margin-right: 52px;
 `;
 
-export default class Header extends React.Component {
-  render() {
-    return (
-      <HeaderStyle>
-        <BarButton />
-      </HeaderStyle>
-    );
-  }
-}
+const Header: React.FC = () => {
+  return (
+    <HeaderStyle>
+      <BarButton />
+    </HeaderStyle>
+  );
+};
+
+export default Header;

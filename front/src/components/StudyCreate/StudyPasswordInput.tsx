@@ -5,11 +5,6 @@ const InputTitle = styled.p`
   font-family: "Gmarket Sans";
   font-size: 20px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
 `;
 
@@ -29,17 +24,17 @@ type Props = {
   value: string;
 };
 
-export default class StudyPasswordInput extends React.Component<Props> {
-  render() {
-    return (
-      <>
-        <InputTitle>비밀번호</InputTitle>
-        <InputForm
-          placeholder="(4자리~15자리 영문, 숫자로 입력해주세요.)"
-          value={this.props.value}
-          onChange={this.props.onChange}
-        />
-      </>
-    );
-  }
-}
+const StudyPasswordInput: React.FC<Props> = ({ value, onChange }) => {
+  return (
+    <>
+      <InputTitle>비밀번호</InputTitle>
+      <InputForm
+        placeholder="(4자리~15자리 영문, 숫자로 입력해주세요.)"
+        value={value}
+        onChange={onChange}
+      />
+    </>
+  );
+};
+
+export default StudyPasswordInput;
