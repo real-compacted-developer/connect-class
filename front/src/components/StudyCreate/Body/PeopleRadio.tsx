@@ -58,18 +58,13 @@ type Props = {
   onChange: any;
 };
 
-export default class PeopleRadio extends React.Component<Props> {
-  render() {
-    return (
-      <SelectWrapper>
-        <SelectText>{this.props.children}</SelectText>
-        <Select
-          type="radio"
-          name="button"
-          value={this.props.value}
-          onChange={this.props.onChange}
-        />
-      </SelectWrapper>
-    );
-  }
-}
+const PeopleRadio: React.FC<Props> = ({ value, onChange, children }) => {
+  return (
+    <SelectWrapper>
+      <SelectText>{children}</SelectText>
+      <Select type="radio" name="button" value={value} onChange={onChange} />
+    </SelectWrapper>
+  );
+};
+
+export default PeopleRadio;

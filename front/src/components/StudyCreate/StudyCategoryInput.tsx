@@ -6,11 +6,6 @@ const InputTitle = styled.p`
   font-family: "Gmarket Sans";
   font-size: 20px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
   margin-bottom: 0;
 `;
@@ -18,12 +13,6 @@ const InputTitle = styled.p`
 const InputSubTitle = styled.p`
   font-family: "Spoqa Han Sans";
   font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.17;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
   margin-top: 4px;
 `;
@@ -39,39 +28,27 @@ type Props = {
   onChange: any;
 };
 
-export default class StudyCategoryInput extends React.Component<Props> {
-  render() {
-    return (
-      <>
-        <InputTitle>카테고리 선택</InputTitle>
-        <InputSubTitle>개설할 스터디 카테고리를 선택해주세요.</InputSubTitle>
+const StudyCategoryInput: React.FC<Props> = ({ onChange }) => {
+  return (
+    <>
+      <InputTitle>카테고리 선택</InputTitle>
+      <InputSubTitle>개설할 스터디 카테고리를 선택해주세요.</InputSubTitle>
 
-        <CircleList>
-          <CategoryCircle
-            icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
-            value="IT분야"
-            onChange={this.props.onChange}
-          >
-            IT 분야
-          </CategoryCircle>
+      <CircleList>
+        <CategoryCircle
+          icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
+          value="IT분야"
+          onChange={onChange}
+        >
+          IT 분야
+        </CategoryCircle>
 
-          <CategoryCircle
-            icon=""
-            value=""
-            onChange={this.props.onChange}
-          ></CategoryCircle>
-          <CategoryCircle
-            icon=""
-            value=""
-            onChange={this.props.onChange}
-          ></CategoryCircle>
-          <CategoryCircle
-            icon=""
-            value=""
-            onChange={this.props.onChange}
-          ></CategoryCircle>
-        </CircleList>
-      </>
-    );
-  }
-}
+        <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+        <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+        <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+      </CircleList>
+    </>
+  );
+};
+
+export default StudyCategoryInput;
