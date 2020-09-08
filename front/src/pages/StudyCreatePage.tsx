@@ -23,7 +23,7 @@ const BodyWrapper = styled.div`
 `;
 
 const Body = styled.div`
-  margin: auto 14vw;
+  margin-left: 14vw;
   margin-top: 65px;
 `;
 

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderStyle = styled.nav`
-  width: 1609px;
+  width: calc(100vw - 311px);
   height: 60px;
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.06);
   background-color: #ffffff;
