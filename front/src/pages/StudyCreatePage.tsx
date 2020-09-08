@@ -31,23 +31,12 @@ const Title = styled.h1`
   font-family: "Gmarket Sans";
   font-size: 30px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #34363b;
 `;
 
 const SubTitle = styled.p`
   font-family: "Spoqa Han Sans";
   font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
 `;
 
