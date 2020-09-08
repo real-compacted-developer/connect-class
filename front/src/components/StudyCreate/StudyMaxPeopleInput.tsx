@@ -35,21 +35,11 @@ const StudyMaxPeopleInput: React.FC<Props> = ({ onChange }) => {
       <InputSubTitle>원하시는 스터디 최대인원을 설정해주세요.</InputSubTitle>
 
       <SelectList>
-        <PeopleRadio value="2" onChange={onChange}>
-          2명
-        </PeopleRadio>
-        <PeopleRadio value="3" onChange={onChange}>
-          3명
-        </PeopleRadio>
-        <PeopleRadio value="4" onChange={onChange}>
-          4명
-        </PeopleRadio>
-        <PeopleRadio value="5" onChange={onChange}>
-          5명
-        </PeopleRadio>
-        <PeopleRadio value="6" onChange={onChange}>
-          6명
-        </PeopleRadio>
+        <PeopleRadio value="2" onChange={onChange} text="2명" />
+        <PeopleRadio value="3" onChange={onChange} text="3명" />
+        <PeopleRadio value="4" onChange={onChange} text="4명" />
+        <PeopleRadio value="5" onChange={onChange} text="5명" />
+        <PeopleRadio value="6" onChange={onChange} text="6명" />
       </SelectList>
     </>
   );
