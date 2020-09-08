@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PeopleRadio from "./Body/PeopleRadio";
+import PeopleRadio from "./CreateForm/PeopleRadio";
 
 const InputTitle = styled.p`
   font-family: "Gmarket Sans";

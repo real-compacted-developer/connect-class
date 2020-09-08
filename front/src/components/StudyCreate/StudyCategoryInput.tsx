@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import CategoryCircle from "./Body/CategoryCircle";
+import CategoryCircle from "./CreateForm/CategoryCircle";
 
 const InputTitle = styled.p`
   font-family: "Gmarket Sans";

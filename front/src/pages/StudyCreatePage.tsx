@@ -6,12 +6,12 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import config from "../config";
 
 import CreateSideBar from "../components/StudyCreate/CreateSideBar";
-import Header from "../components/StudyCreate/Body/Header";
+import Header from "../components/StudyCreate/Header";
 import StudyNameInput from "../components/StudyCreate/StudyNameInput";
 import StudyCategoryInput from "../components/StudyCreate/StudyCategoryInput";
 import StudyMaxPeopleInput from "../components/StudyCreate/StudyMaxPeopleInput";
 import StudyPasswordInput from "../components/StudyCreate/StudyPasswordInput";
-import CreateButton from "../components/StudyCreate/CreateButton";
+import CreateButton from "../components/StudyCreate/CreateForm/CreateButton";
 
 const Wrapper = styled.div`
   display: flex;
