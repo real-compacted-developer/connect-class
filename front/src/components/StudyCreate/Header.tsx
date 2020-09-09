@@ -13,6 +13,7 @@ const HeaderStyle = styled.nav`
 
   @media screen and (max-width: 1000px) {
     width: 100vw;
+    background-color: #346bff;
   }
 `;
 
