@@ -24,6 +24,23 @@ const CircleList = styled.div`
   flex-direction: row;
 `;
 
+const PCWrapper = styled.div`
+  display: block;
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+`;
+
+const MobileWrapper = styled.div`
+  display: none;
+
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 type Props = {
   onChange: any;
 };
@@ -34,19 +51,38 @@ const StudyCategoryInput: React.FC<Props> = ({ onChange }) => {
       <InputTitle>카테고리 선택</InputTitle>
       <InputSubTitle>개설할 스터디 카테고리를 선택해주세요.</InputSubTitle>
 
-      <CircleList>
-        <CategoryCircle
-          icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
-          value="IT분야"
-          onChange={onChange}
-        >
-          IT 분야
-        </CategoryCircle>
+      <PCWrapper>
+        <CircleList>
+          <CategoryCircle
+            icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
+            value="IT분야"
+            onChange={onChange}
+          >
+            IT 분야
+          </CategoryCircle>
 
-        <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
-        <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
-        <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
-      </CircleList>
+          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+        </CircleList>
+      </PCWrapper>
+
+      <MobileWrapper>
+        <CircleList>
+          <CategoryCircle
+            icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
+            value="IT분야"
+            onChange={onChange}
+          >
+            IT 분야
+          </CategoryCircle>
+          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+        </CircleList>
+        <CircleList>
+          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+        </CircleList>
+      </MobileWrapper>
     </>
   );
 };
