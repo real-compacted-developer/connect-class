@@ -10,6 +10,10 @@ const HeaderStyle = styled.nav`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+
+  @media screen and (max-width: 1000px) {
+    width: 100vw;
+  }
 `;
 
 const BarButton = styled.button`

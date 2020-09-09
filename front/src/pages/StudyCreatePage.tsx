@@ -25,6 +25,10 @@ const BodyWrapper = styled.div`
 const Body = styled.div`
   margin-left: 14vw;
   margin-top: 65px;
+
+  @media screen and (max-width: 1000px) {
+    margin-left: 5rem;
+  }
 `;
 
 const Title = styled.h1`

@@ -6,6 +6,10 @@ import SideItem from "./CreateSideBar/SideItem";
 const Wrapper = styled.nav`
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const Body = styled.div`
