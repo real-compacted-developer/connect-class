@@ -27,7 +27,7 @@ const Body = styled.div`
   margin-top: 65px;
 
   @media screen and (max-width: 1000px) {
-    margin-left: 5rem;
+    margin-left: 2rem;
   }
 `;
 
