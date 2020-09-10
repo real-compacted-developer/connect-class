@@ -6,7 +6,12 @@ const SelectWrapper = styled.div`
   width: 139px;
   height: 64px;
 
-  margin-right: 68px;
+  margin-right: 20px;
+
+  @media screen and (max-width: 1000px) {
+    width: 80px;
+    height: 64px;
+  }
 `;
 
 const Select = styled.input<{ text?: string }>`
@@ -39,6 +44,11 @@ const Select = styled.input<{ text?: string }>`
   &:checked {
     box-shadow: 0 5px 10px 0 rgba(52, 107, 255, 0.2);
     color: #346bff;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 80px;
+    height: 64px;
   }
 `;
 

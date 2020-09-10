@@ -21,6 +21,11 @@ const Button = styled.button`
     background-color: #346bff;
     color: #ffffff;
   }
+
+  @media screen and (max-width: 1000px) {
+    width: 200px;
+    font-size: 18px;
+  }
 `;
 
 type Props = {

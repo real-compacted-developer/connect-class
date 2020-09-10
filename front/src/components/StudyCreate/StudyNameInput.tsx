@@ -17,6 +17,10 @@ const InputForm = styled.input`
   color: #346bff;
   font-weight: bold;
   font-family: "Spoqa Han Sans";
+
+  @media screen and (max-width: 1000px) {
+    width: 300px;
+  }
 `;
 
 type Props = {
