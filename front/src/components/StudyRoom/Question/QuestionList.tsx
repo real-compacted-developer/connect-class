@@ -1,7 +1,10 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import Question from "./Question";
+import Question from "./Question/Question";
+
+import getQuestionData from "../../../fetchs/getQuestionData";
+import { IQuestionInfo } from "../../../types/question";
 
 const Wrapper = styled.ul`
   width: 100%;
@@ -16,14 +19,20 @@ type Props = {};
 
 type States = {};
 
-export default class QuestionList extends Component<Props, States> {
-  render() {
-    return (
-      <Wrapper>
-        <Question></Question>
-        <Question></Question>
-        <Question></Question>
-      </Wrapper>
-    );
-  }
-}
+export default (): JSX.Element => {
+  const [questions, setQuestions] = useState<IQuestionInfo[]>();
+
+  useEffect(() => {
+    getQuestionData(1).then((questionData) => {
+      setQuestions(questionData);
+    });
+  }, []);
+
+  return (
+    <Wrapper>
+      {questions?.map((cur) => (
+        <Question userInfo={cur.userInfo} content={cur.content} />
+      ))}
+    </Wrapper>
+  );
+};

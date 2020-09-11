@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.li`
@@ -24,11 +24,13 @@ const User = styled.div`
   padding: 10px 0 10px 0;
 `;
 
-const Icon = styled.div`
+const Icon = styled.div<{ imageURL: string }>`
   width: 35px;
   height: 35px;
 
   background-color: blue;
+  background-image: url(${(props): string => props.imageURL});
+  background-size: 35px 35px;
   border-radius: 35px;
   object-fit: contain;
 `;
@@ -49,21 +51,24 @@ const Name = styled.p`
   padding: 0;
 `;
 
-type Props = {};
+type Props = {
+  userInfo: {
+    userName: string;
+    profileImageURL: string;
+  };
+  content: string;
+};
 
 type States = {};
 
-export default class QuestionList extends Component<Props, States> {
-  render() {
-    return (
-      <Wrapper>
-        <User>
-          <Icon></Icon>
-          <Name>유저네임</Name>
-        </User>
-
-        <Content></Content>
-      </Wrapper>
-    );
-  }
-}
+export default (props: Props): JSX.Element => {
+  return (
+    <Wrapper>
+      <User>
+        <Icon imageURL={props.userInfo.profileImageURL} />
+        <Name>{props.userInfo.userName}</Name>
+      </User>
+      <Content>{props.content}</Content>
+    </Wrapper>
+  );
+};
