@@ -6,23 +6,15 @@ const SelectWrapper = styled.div`
   width: 139px;
   height: 64px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-right: 20px;
 
-  font-family: "Gmarket Sans";
-  font-size: 16px;
-  font-weight: 500;
-  color: #9a9fac;
-
-  margin-right: 68px;
-
-  &:hover {
-    color: #346bff;
+  @media screen and (max-width: 1000px) {
+    width: 80px;
+    height: 64px;
   }
 `;
 
-const Select = styled.input`
+const Select = styled.input<{ text?: string }>`
   position: absolute;
   appearance: none;
 
@@ -40,29 +32,42 @@ const Select = styled.input`
   border: none;
   cursor: pointer;
 
+  font-family: "Gmarket Sans";
+  font-size: 16px;
+  font-weight: 500;
+  color: #9a9fac;
+
+  &:after {
+    content: "${(props) => props.text}";
+  }
+
   &:checked {
     box-shadow: 0 5px 10px 0 rgba(52, 107, 255, 0.2);
+    color: #346bff;
   }
-`;
 
-const SelectText = styled.div`
-  position: absolute;
-
-  z-index: 1;
-  margin-left: 6px;
-  margin-top: 3px;
+  @media screen and (max-width: 1000px) {
+    width: 80px;
+    height: 64px;
+  }
 `;
 
 type Props = {
   value: string;
   onChange: any;
+  text?: string;
 };
 
-const PeopleRadio: React.FC<Props> = ({ value, onChange, children }) => {
+const PeopleRadio: React.FC<Props> = ({ value, onChange, text }) => {
   return (
     <SelectWrapper>
-      <SelectText>{children}</SelectText>
-      <Select type="radio" name="button" value={value} onChange={onChange} />
+      <Select
+        type="radio"
+        name="button"
+        value={value}
+        onChange={onChange}
+        text={text}
+      />
     </SelectWrapper>
   );
 };

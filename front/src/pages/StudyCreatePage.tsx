@@ -6,12 +6,12 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import config from "../config";
 
 import CreateSideBar from "../components/StudyCreate/CreateSideBar";
-import Header from "../components/StudyCreate/Body/Header";
+import Header from "../components/StudyCreate/Header";
 import StudyNameInput from "../components/StudyCreate/StudyNameInput";
 import StudyCategoryInput from "../components/StudyCreate/StudyCategoryInput";
 import StudyMaxPeopleInput from "../components/StudyCreate/StudyMaxPeopleInput";
 import StudyPasswordInput from "../components/StudyCreate/StudyPasswordInput";
-import CreateButton from "../components/StudyCreate/CreateButton";
+import CreateButton from "../components/StudyCreate/CreateForm/CreateButton";
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,31 +23,24 @@ const BodyWrapper = styled.div`
 `;
 
 const Body = styled.div`
-  margin: auto 14vw;
+  margin-left: 14vw;
   margin-top: 65px;
+
+  @media screen and (max-width: 1000px) {
+    margin-left: 2rem;
+  }
 `;
 
 const Title = styled.h1`
   font-family: "Gmarket Sans";
   font-size: 30px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #34363b;
 `;
 
 const SubTitle = styled.p`
   font-family: "Spoqa Han Sans";
   font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
 `;
 
