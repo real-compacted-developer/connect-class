@@ -37,10 +37,10 @@ const Button = styled.button`
   }
 `;
 
-const AudioChat: React.FC = () => {
-  let peer: any = undefined;
-  let myAudioStream: any = undefined;
+let peer: any = undefined;
+let myAudioStream: any = undefined;
 
+const AudioChat: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const bindEvents = (p: any) => {
     p.on("error", (err: Error) => {
@@ -73,7 +73,6 @@ const AudioChat: React.FC = () => {
           audio: true,
         });
 
-        console.log(stream);
         peer = new SimplePeer({
           initiator: true,
           stream,

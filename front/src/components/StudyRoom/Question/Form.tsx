@@ -55,7 +55,7 @@ export default class Form extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <Input placeholder="질문을 입력하세요"></Input>
+        <Input placeholder="질문을 입력하세요" />
         <Button>질문하기</Button>
       </Wrapper>
     );
