@@ -31,7 +31,11 @@ export default (): JSX.Element => {
   return (
     <Wrapper>
       {questions?.map((cur) => (
-        <Question userInfo={cur.userInfo} content={cur.content} />
+        <Question
+          userInfo={cur.userInfo}
+          content={cur.content}
+          slideInfo={cur.slideInfo}
+        />
       ))}
     </Wrapper>
   );
