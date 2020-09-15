@@ -3,12 +3,11 @@ import styled from "styled-components";
 import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-
 import { drawState } from "./SlideCanvas";
-
 import PencilButton from "./Buttons/PencilButton";
 import PresentButton from "./Buttons/PresentButton";
 import ExitButton from "./Buttons/ExitButton";
+import { SketchPicker } from "react-color";
 
 const Wrapper = styled.div`
   width: 300px;
@@ -23,10 +22,26 @@ const Wrapper = styled.div`
   right: 0;
 `;
 
+const ContextMenu = styled.div`
+  position: absolute;
+  margin-top: -12.2rem;
+  z-index: 2000;
+`;
+
+const ContextCover = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
+
 type Props = {};
 
 type States = {
   toggleDraw: boolean;
+  isDisplayColorPicker: boolean;
+  color: any;
 };
 
 type Params = {
@@ -40,10 +55,14 @@ class StudyButton extends Component<
   constructor(props: Props & RouteComponentProps<Params>) {
     super(props);
     this.exit = this.exit.bind(this);
-    this.toggleDraw = this.toggleDraw.bind(this);
+    this.handleDrawClick = this.handleDrawClick.bind(this);
+    this.closeColorPicker = this.closeColorPicker.bind(this);
+    this.handleChangeColor = this.handleChangeColor.bind(this);
 
     this.state = {
       toggleDraw: true,
+      isDisplayColorPicker: false,
+      color: "#FF00FF",
     };
   }
 
@@ -55,23 +74,55 @@ class StudyButton extends Component<
     });
   }
 
-  toggleDraw() {
-    this.setState((v) => ({
-      toggleDraw: !v.toggleDraw,
+  closeColorPicker() {
+    this.setState((current) => ({
+      ...current,
+      isDisplayColorPicker: false,
     }));
 
-    if (this.state.toggleDraw) {
-      const input = prompt("색깔(HEX) 미입력 시 빨간색으로 설정됩니다.");
-      drawState.color = input || "#FF0000";
+    drawState.isDraw = true;
+  }
+
+  handleDrawClick(e: any) {
+    e.preventDefault();
+
+    if (e.type === "contextmenu") {
+      drawState.isDraw = false;
+      return;
     }
 
-    drawState.isDraw = this.state.toggleDraw;
+    this.setState((current) => ({
+      ...current,
+      isDisplayColorPicker: !current.isDisplayColorPicker,
+    }));
+
+    drawState.isDraw = this.state.isDisplayColorPicker;
+  }
+
+  handleChangeColor(color: any) {
+    this.setState((current) => ({
+      ...current,
+      color: color.hex,
+    }));
+    drawState.color = color.hex;
   }
 
   render() {
     return (
       <Wrapper>
-        <PencilButton onClick={this.toggleDraw} />
+        {this.state.isDisplayColorPicker && (
+          <ContextMenu>
+            <ContextCover onClick={this.closeColorPicker} />
+            <SketchPicker
+              color={this.state.color}
+              onChange={this.handleChangeColor}
+            />
+          </ContextMenu>
+        )}
+        <PencilButton
+          onClick={this.handleDrawClick}
+          onContextMenu={this.handleDrawClick}
+        />
         <PresentButton />
         <ExitButton onClick={this.exit}>종료</ExitButton>
       </Wrapper>
