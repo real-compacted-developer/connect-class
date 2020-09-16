@@ -3,6 +3,7 @@ import SOCKET_TYPE from "../../../constants/socket-type";
 
 export const drawState = {
   isDraw: false,
+  isErase: false,
   color: "#FF0000",
   slideId: 0,
 };
@@ -15,7 +16,7 @@ const sketch = (s: any) => {
 
     socket.on(SOCKET_TYPE.DRAW, (data: Record<string, unknown>) => {
       s.stroke(data.color);
-      s.strokeWeight(data.strokeWidth);
+      s.strokeWeight(4);
       s.line(data.x, data.y, data.px, data.py);
     });
 
@@ -46,7 +47,6 @@ const sketch = (s: any) => {
       px: pX,
       py: pY,
       color: drawState.color,
-      strokeWidth: 4,
     };
     socket.emit(SOCKET_TYPE.DRAW, data);
   };
