@@ -8,9 +8,10 @@ import PencilButton from "./Buttons/PencilButton";
 import PresentButton from "./Buttons/PresentButton";
 import ExitButton from "./Buttons/ExitButton";
 import { SketchPicker } from "react-color";
+import EraseButton from "./Buttons/EraseButton";
 
 const Wrapper = styled.div`
-  width: 300px;
+  width: 360px;
   padding: 0 50px 0 50px;
   height: 80px;
 
@@ -107,6 +108,10 @@ class StudyButton extends Component<
     drawState.color = color.hex;
   }
 
+  handleEraseClick() {
+    drawState.isErase = !drawState.isErase;
+  }
+
   render() {
     return (
       <Wrapper>
@@ -123,6 +128,7 @@ class StudyButton extends Component<
           onClick={this.handleDrawClick}
           onContextMenu={this.handleDrawClick}
         />
+        <EraseButton onClick={this.handleEraseClick} />
         <PresentButton />
         <ExitButton onClick={this.exit}>종료</ExitButton>
       </Wrapper>
