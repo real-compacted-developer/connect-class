@@ -1,5 +1,6 @@
 module.exports = {
   DRAW: "draw",
+  ERASE: "erase",
 
   IMAGE_PREV: "imagePrev",
   IMAGE_NEXT: "imageNext",
