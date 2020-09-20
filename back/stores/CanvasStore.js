@@ -5,10 +5,10 @@ class CanvasStore {
 
   addDraw(slideId, data) {
     if (this.canvasList[slideId] === undefined) {
-      this.canvasList[slideId] = [];
+      this.canvasList[slideId] = new Set([]);
     }
 
-    this.canvasList[slideId].push(data);
+    this.canvasList[slideId].add(data);
 
     return this.canvasList[slideId][this.canvasList.length - 1];
   }
