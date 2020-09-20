@@ -10,7 +10,10 @@ export const drawState = {
 
 const sketch = (s: any) => {
   s.setup = () => {
-    const cv = s.createCanvas(1000, 1000);
+    const content = document.getElementById("Slide__content");
+    if (!content) return;
+
+    const cv = s.createCanvas(content.clientWidth, content.clientHeight);
     cv.id("Slide__canvas");
     cv.parent("Slide__content");
 
