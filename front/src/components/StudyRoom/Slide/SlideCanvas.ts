@@ -26,10 +26,17 @@ const sketch = (s: any) => {
       s.clear();
     });
 
+    socket.on(SOCKET_TYPE.ERASE, (data: Record<string, unknown>) => {
+      if (data.slideId === drawState.slideId) s.clear();
+    });
+
     const eraseButton = document.getElementById("Slide__erase");
     if (!eraseButton) return;
     eraseButton.addEventListener("click", () => {
       s.clear();
+      socket.emit(SOCKET_TYPE.ERASE, {
+        slideId: drawState.slideId,
+      });
     });
   };
 

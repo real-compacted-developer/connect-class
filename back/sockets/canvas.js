@@ -8,4 +8,11 @@ module.exports = function (socket) {
     Canvas.addDraw(slideId, data);
     socket.broadcast.emit(SOCKET_TYPE.DRAW, data);
   });
+
+  socket.on(SOCKET_TYPE.ERASE, (data) => {
+    const { slideId } = data;
+
+    Canvas.deleteDraw(slideId);
+    socket.broadcast.emit(SOCKET_TYPE.ERASE, data);
+  });
 };
