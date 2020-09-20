@@ -108,10 +108,6 @@ class StudyButton extends Component<
     drawState.color = color.hex;
   }
 
-  handleEraseClick() {
-    drawState.isErase = !drawState.isErase;
-  }
-
   render() {
     return (
       <Wrapper>
@@ -128,7 +124,7 @@ class StudyButton extends Component<
           onClick={this.handleDrawClick}
           onContextMenu={this.handleDrawClick}
         />
-        <EraseButton onClick={this.handleEraseClick} />
+        <EraseButton id="Slide__erase" />
         <PresentButton />
         <ExitButton onClick={this.exit}>종료</ExitButton>
       </Wrapper>
