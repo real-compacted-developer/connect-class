@@ -9,28 +9,48 @@ export const drawState = {
 
 const sketch = (s: any) => {
   s.setup = () => {
-    const cv = s.createCanvas(1000, 1000);
+    const content = document.getElementById("Slide__content");
+    if (!content) return;
+
+    const cv = s.createCanvas(content.clientWidth, content.clientHeight);
     cv.id("Slide__canvas");
     cv.parent("Slide__content");
 
     socket.on(SOCKET_TYPE.DRAW, (data: Record<string, unknown>) => {
       s.stroke(data.color);
-      s.strokeWeight(data.strokeWidth);
+      s.strokeWeight(4);
       s.line(data.x, data.y, data.px, data.py);
     });
 
     socket.on(SOCKET_TYPE.IMAGE_CHANGE, () => {
       s.clear();
     });
+
+    socket.on(SOCKET_TYPE.ERASE, (data: Record<string, unknown>) => {
+      if (data.slideId === drawState.slideId) s.clear();
+    });
+
+    const eraseButton = document.getElementById("Slide__erase");
+    if (!eraseButton) return;
+    eraseButton.addEventListener("click", () => {
+      s.clear();
+      socket.emit(SOCKET_TYPE.ERASE, {
+        slideId: drawState.slideId,
+      });
+    });
   };
 
-  s.mouseDragged = () => {
-    if (!drawState.isDraw) return;
+  s.mouseDragged = (e: any) => {
+    if (s.mouseButton !== "left") return;
 
-    s.stroke(drawState.color);
-    s.strokeWeight(4);
-    s.line(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY);
-    sendDrawDataToServer(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY);
+    s.noFill();
+
+    if (drawState.isDraw) {
+      s.stroke(drawState.color);
+      s.strokeWeight(4);
+      s.line(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY);
+      sendDrawDataToServer(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY);
+    }
   };
 
   const sendDrawDataToServer = (
@@ -41,12 +61,11 @@ const sketch = (s: any) => {
   ) => {
     const data = {
       slideId: drawState.slideId,
-      x: x,
-      y: y,
-      px: pX,
-      py: pY,
+      x: Math.round(x),
+      y: Math.round(y),
+      px: Math.round(pX),
+      py: Math.round(pY),
       color: drawState.color,
-      strokeWidth: 4,
     };
     socket.emit(SOCKET_TYPE.DRAW, data);
   };
