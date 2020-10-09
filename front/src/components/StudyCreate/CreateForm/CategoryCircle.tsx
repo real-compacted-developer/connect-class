@@ -63,7 +63,7 @@ const Image = styled.img`
 
 type Props = {
   icon?: string;
-  value: string;
+  value?: string;
   onChange?: any;
 };
 
