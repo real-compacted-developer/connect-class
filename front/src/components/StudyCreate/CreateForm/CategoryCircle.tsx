@@ -62,9 +62,9 @@ const Image = styled.img`
 `;
 
 type Props = {
-  icon: string;
+  icon?: string;
   value: string;
-  onChange: any;
+  onChange?: any;
 };
 
 const CategoryCircle: React.FC<Props> = ({
