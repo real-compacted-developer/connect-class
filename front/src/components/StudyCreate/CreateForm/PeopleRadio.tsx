@@ -53,8 +53,8 @@ const Select = styled.input<{ text?: string }>`
 `;
 
 type Props = {
-  value: string;
-  onChange: any;
+  value?: string;
+  onChange?: any;
   text?: string;
 };
 
