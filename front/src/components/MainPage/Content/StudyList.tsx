@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import StudyCard from "./StudyCard";
 
+import dummy from "../../../dummyDatas/StudyCardDummy";
+
 const Wrapper = styled.div`
   width: 100%;
   padding: 30px 110px;
@@ -38,12 +40,15 @@ const StudyList: React.FC = () => {
       <Title>스터디 목록</Title>
 
       <List>
-        <StudyCard />
-        <StudyCard />
-        <StudyCard />
-        <StudyCard />
-        <StudyCard />
-        <StudyCard />
+        {dummy.map((cur, index) => (
+          <StudyCard
+            title={cur.title}
+            imageURL={cur.imageURL}
+            currentPeople={cur.currentPeople}
+            totalPeople={cur.totalPeople}
+            key={`StudyCard:${index}`}
+          />
+        ))}
       </List>
     </Wrapper>
   );
