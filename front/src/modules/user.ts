@@ -1,9 +1,11 @@
-import { handleActions } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import { IUser } from "../types/user";
 
-const GET = "user/GET" as const;
+const GET_USER = "user/GET" as const;
+const INIT_USER = "user/INIT" as const;
 
-export const getUser = () => ({ type: GET });
+export const getUser = createAction(GET_USER);
+export const initUser = createAction(INIT_USER);
 
 type UserAction = ReturnType<typeof getUser>;
 interface UserState {
@@ -16,16 +18,16 @@ const initialState: UserState = {
 
 const user = handleActions(
   {
-    [GET]: (state, action) => ({
-      user: {
-        id: "dummyId",
-        nickname: "홍길동",
-        email: "testEmail",
-        profileImage: "http://connectclass.io",
-        isPremium: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+    [GET_USER]: (state, action) => state,
+    [INIT_USER]: (state, action) => ({
+      ...state,
+      id: "dummyId",
+      nickname: "홍길동",
+      email: "testEmail",
+      profileImage: "http://connectclass.io",
+      isPremium: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }),
   },
   initialState

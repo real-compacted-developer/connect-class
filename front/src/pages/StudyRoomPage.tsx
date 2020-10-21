@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useRouteMatch } from "react-router-dom";
-
 import QuestionList from "../components/StudyRoom/QuestionList";
 import SlideView from "../components/StudyRoom/SlideView";
-
 import { socket } from "../index";
 import SOCKET_TYPE from "../constants/socket-type";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../modules";
+import { initUser } from "../modules/user";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -21,6 +22,8 @@ type Params = {
 
 const StudyRoom: React.FC = () => {
   const match = useRouteMatch<Params>();
+  const user = useSelector((state: RootState) => state.user.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const roomId = match.params.id;
@@ -29,7 +32,9 @@ const StudyRoom: React.FC = () => {
       roomId: roomId,
       userId: "사용자1",
     });
-  }, [match]);
+
+    dispatch(initUser());
+  }, [match, dispatch]);
 
   return (
     <Wrapper>
