@@ -5,9 +5,8 @@ import QuestionList from "../components/StudyRoom/QuestionList";
 import SlideView from "../components/StudyRoom/SlideView";
 import { socket } from "../index";
 import SOCKET_TYPE from "../constants/socket-type";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../modules";
-import { fetchUser } from "../modules/user";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -23,18 +22,15 @@ type Params = {
 const StudyRoom: React.FC = () => {
   const match = useRouteMatch<Params>();
   const user = useSelector((state: RootState) => state.user.user);
-  const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!user) return;
     const roomId = match.params.id;
-    // TODO: 유저 ID 가져오는거 구현
     socket.emit(SOCKET_TYPE.JOIN, {
       roomId: roomId,
-      userId: "사용자1",
+      userId: user.id,
     });
-
-    dispatch(fetchUser());
-  }, [match, dispatch]);
+  }, [match, user]);
 
   return (
     <Wrapper>
