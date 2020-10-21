@@ -1,4 +1,3 @@
-import { type } from "os";
 import { handleActions } from "redux-actions";
 import { IUser } from "../types/user";
 
