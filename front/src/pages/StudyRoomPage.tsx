@@ -7,7 +7,7 @@ import { socket } from "../index";
 import SOCKET_TYPE from "../constants/socket-type";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../modules";
-import { initUser } from "../modules/user";
+import { fetchUser } from "../modules/user";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -33,7 +33,7 @@ const StudyRoom: React.FC = () => {
       userId: "사용자1",
     });
 
-    dispatch(initUser());
+    dispatch(fetchUser());
   }, [match, dispatch]);
 
   return (
