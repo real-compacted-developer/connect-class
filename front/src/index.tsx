@@ -3,14 +3,24 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import Router from "./router";
 import io from "socket.io-client";
-
 import config from "./config";
+import rootReducer from "./modules";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 import "./stylesheets/main.css";
 
+const store = createStore(
+  rootReducer,
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 const index = (
   <React.StrictMode>
-    <Router />
+    <Provider store={store}>
+      <Router />
+    </Provider>
   </React.StrictMode>
 );
 
