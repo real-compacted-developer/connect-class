@@ -10,7 +10,15 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: undefined,
+  user: {
+    id: "dummyId",
+    nickname: "홍길동",
+    email: "testEmail",
+    profileImage: "http://connectclass.io",
+    isPremium: false,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 };
 
 const user = handleActions(
