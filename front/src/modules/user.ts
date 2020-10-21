@@ -1,11 +1,10 @@
 import { createAction, handleActions } from "redux-actions";
 import { IUser } from "../types/user";
 
-const GET_USER = "user/GET" as const;
+const FETCH_USER = "user/FETCH" as const;
 
-export const getUser = createAction(GET_USER);
+export const fetchUser = createAction(FETCH_USER);
 
-type UserAction = ReturnType<typeof getUser>;
 interface UserState {
   user: IUser | undefined;
 }
@@ -16,7 +15,7 @@ const initialState: UserState = {
 
 const user = handleActions(
   {
-    [GET_USER]: (state, action) => state,
+    [FETCH_USER]: (state, action) => ({
       ...state,
       id: "dummyId",
       nickname: "홍길동",
