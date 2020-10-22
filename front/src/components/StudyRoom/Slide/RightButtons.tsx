@@ -1,20 +1,14 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
-import {
-  RouteComponentProps,
-  useRouteMatch,
-  withRouter,
-} from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import { drawState } from "./SlideCanvas";
 import PencilButton from "./Buttons/PencilButton";
 import PresentButton from "./Buttons/PresentButton";
 import ExitButton from "./Buttons/ExitButton";
 import { SketchPicker } from "react-color";
 import EraseButton from "./Buttons/EraseButton";
-import { RootState } from "../../../modules";
-import { useSelector } from "react-redux";
+import useSocket from "../../../hooks/useSocket";
 
 const Wrapper = styled.div`
   width: 360px;
@@ -62,7 +56,7 @@ const StudyButton: React.FC<Props> = () => {
     isDisplayColorPicker: false,
     color: "#FF00FF",
   });
-  const socket = useSelector((state: RootState) => state.socket);
+  const socket = useSocket();
 
   const exit = () => {
     // TODO: 로그인 & 회원가입 추가 후 userId(이메일) 가져오는거 구현

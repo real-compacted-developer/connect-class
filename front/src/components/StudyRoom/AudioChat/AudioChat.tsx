@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import SimplePeer from "simple-peer";
 import styled from "styled-components";
-
-import { socket } from "../../../index";
+import useSocket from "../../../hooks/useSocket";
 
 import microphoneImage from "./microphone.svg";
 
@@ -41,6 +40,8 @@ let peer: any = undefined;
 let myAudioStream: any = undefined;
 
 const AudioChat: React.FC = () => {
+  const socket = useSocket();
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const bindEvents = (p: any) => {
     p.on("error", (err: Error) => {
