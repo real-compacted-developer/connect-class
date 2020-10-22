@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useRouteMatch } from "react-router-dom";
 import QuestionList from "../components/StudyRoom/QuestionList";
 import SlideView from "../components/StudyRoom/SlideView";
-import { socket } from "../index";
 import SOCKET_TYPE from "../constants/socket-type";
 import { useSelector } from "react-redux";
 import { RootState } from "../modules";
+import useSocket from "../hooks/useSocket";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -22,6 +22,7 @@ type Params = {
 const StudyRoom: React.FC = () => {
   const match = useRouteMatch<Params>();
   const user = useSelector((state: RootState) => state.user.user);
+  const socket = useSocket();
 
   useEffect(() => {
     if (!user) return;
@@ -30,7 +31,7 @@ const StudyRoom: React.FC = () => {
       roomId: roomId,
       userId: user.id,
     });
-  }, [match, user]);
+  }, [match, user, socket]);
 
   return (
     <Wrapper>

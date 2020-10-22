@@ -122,7 +122,7 @@ const AudioChat: React.FC = () => {
       }
       peer.signal(data);
     });
-  }, []);
+  }, [socket]);
 
   const startAudioChat = async () => {
     try {
