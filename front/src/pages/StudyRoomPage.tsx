@@ -4,9 +4,8 @@ import { useRouteMatch } from "react-router-dom";
 import QuestionList from "../components/StudyRoom/QuestionList";
 import SlideView from "../components/StudyRoom/SlideView";
 import SOCKET_TYPE from "../constants/socket-type";
-import { useSelector } from "react-redux";
-import { RootState } from "../modules";
 import useSocket from "../hooks/useSocket";
+import useUser from "../hooks/useUser";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -21,7 +20,7 @@ type Params = {
 
 const StudyRoom: React.FC = () => {
   const match = useRouteMatch<Params>();
-  const user = useSelector((state: RootState) => state.user.user);
+  const { user, error } = useUser();
   const socket = useSocket();
 
   useEffect(() => {
