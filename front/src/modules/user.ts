@@ -1,6 +1,5 @@
 import Axios from "axios";
 import { createAction, handleActions } from "redux-actions";
-import config from "../config";
 import { IUser } from "../types/user";
 
 const FETCH_USER_SUCCESS = "user/FETCH_SUCCESS" as const;
@@ -21,7 +20,11 @@ const initialState: UserState = {
 
 export const fetchUserAsync = () => async (dispatch: any) => {
   try {
-    const user = await Axios.get(`${config.API}/auth/me`);
+    const user = await Axios.get("http://validation.api.connectclass.io/user", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+      },
+    });
 
     dispatch(fetchUserSuccess(user.data));
   } catch (e) {
