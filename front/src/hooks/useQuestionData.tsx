@@ -1,25 +1,26 @@
 import React from "react";
 
 import { IQuestionInfo } from "../types/question";
-import questionDummy from "../dummyDatas/QuestionDummy";
+import getQuestionData from "../fetchs/getQuestionData";
 
-export default (url: RequestInfo, options: RequestInit) => {
+export default (
+  roomNumber: string
+): { response: null | IQuestionInfo[]; error: null } => {
   const [response, setResponse] = React.useState<null | IQuestionInfo[]>(null);
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        // const res = await fetch(url, options);
-        // const json = await res.json();
+        const questionData = await getQuestionData(roomNumber);
 
-        setResponse(questionDummy);
+        setResponse(questionData);
       } catch (error) {
         setError(error);
       }
     };
     fetchData();
-  }, []);
+  }, [roomNumber]);
 
   return { response, error };
 };

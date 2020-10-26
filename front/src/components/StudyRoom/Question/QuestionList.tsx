@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import Question from "./Question/Question";
@@ -14,17 +14,16 @@ const Wrapper = styled.ul`
   margin: 0;
 `;
 
-type Props = {};
+const QuestionList = (): JSX.Element => {
+  const roomNumber = window.location.pathname.split("/study/")[1];
 
-type States = {};
-
-export default (): JSX.Element => {
-  const { response, error } = useQuestionData("", {});
+  const { response } = useQuestionData(roomNumber);
 
   return (
     <Wrapper>
-      {response?.map((cur) => (
+      {response?.map((cur, index) => (
         <Question
+          key={`question-${index}`}
           userInfo={cur.userInfo}
           content={cur.content}
           slideInfo={cur.slideInfo}
@@ -33,3 +32,5 @@ export default (): JSX.Element => {
     </Wrapper>
   );
 };
+
+export default QuestionList;
