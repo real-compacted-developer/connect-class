@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 import Question from "./Question/Question";
 
-import getQuestionData from "../../../fetchs/getQuestionData";
-import { IQuestionInfo } from "../../../types/question";
+import useQuestionData from "../../../hooks/useQuestionData";
 
 const Wrapper = styled.ul`
   width: 100%;
@@ -20,18 +19,16 @@ type Props = {};
 type States = {};
 
 export default (): JSX.Element => {
-  const [questions, setQuestions] = useState<IQuestionInfo[]>();
-
-  useEffect(() => {
-    getQuestionData(1).then((questionData) => {
-      setQuestions(questionData);
-    });
-  }, []);
+  const { response, error } = useQuestionData("", {});
 
   return (
     <Wrapper>
-      {questions?.map((cur) => (
-        <Question userInfo={cur.userInfo} content={cur.content} />
+      {response?.map((cur) => (
+        <Question
+          userInfo={cur.userInfo}
+          content={cur.content}
+          slideInfo={cur.slideInfo}
+        />
       ))}
     </Wrapper>
   );
