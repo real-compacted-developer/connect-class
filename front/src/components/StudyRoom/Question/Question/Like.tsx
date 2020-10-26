@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div``;
@@ -7,8 +7,8 @@ interface IProps {
   count: number;
 }
 
-export default (props: IProps): JSX.Element => {
-  const [likeCount, setLikeCount] = useState(props.count);
-
-  return <Wrapper>{likeCount}</Wrapper>;
+const Like = (props: IProps): JSX.Element => {
+  return <Wrapper>{props.count}</Wrapper>;
 };
+
+export default Like;
