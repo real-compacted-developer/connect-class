@@ -2,21 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import Router from "./router";
-import io from "socket.io-client";
-
-import config from "./config";
+import rootReducer from "./modules";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore } from "redux";
+import ReduxThunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import "./stylesheets/main.css";
 
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(ReduxThunk))
+);
+
 const index = (
   <React.StrictMode>
-    <Router />
+    <Provider store={store}>
+      <Router />
+    </Provider>
   </React.StrictMode>
 );
 
-export const socket = io.connect(config.API);
-
-ReactDOM.render(index, document.getElementById("root"));
+export const socket = ReactDOM.render(index, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

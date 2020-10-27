@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { socket } from "../../../index";
 import SOCKET_TYPE from "../../../constants/socket-type";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import { drawState } from "./SlideCanvas";
 import PencilButton from "./Buttons/PencilButton";
 import PresentButton from "./Buttons/PresentButton";
 import ExitButton from "./Buttons/ExitButton";
 import { SketchPicker } from "react-color";
 import EraseButton from "./Buttons/EraseButton";
+import useSocket from "../../../hooks/useSocket";
 
 const Wrapper = styled.div`
   width: 360px;
@@ -49,42 +49,33 @@ type Params = {
   id: string;
 };
 
-class StudyButton extends Component<
-  Props & RouteComponentProps<Params>,
-  States
-> {
-  constructor(props: Props & RouteComponentProps<Params>) {
-    super(props);
-    this.exit = this.exit.bind(this);
-    this.handleDrawClick = this.handleDrawClick.bind(this);
-    this.closeColorPicker = this.closeColorPicker.bind(this);
-    this.handleChangeColor = this.handleChangeColor.bind(this);
+const StudyButton: React.FC<Props> = () => {
+  const match = useRouteMatch<Params>();
+  const [drawSetting, setDrawSetting] = useState<States>({
+    toggleDraw: true,
+    isDisplayColorPicker: false,
+    color: "#FF00FF",
+  });
+  const socket = useSocket();
 
-    this.state = {
-      toggleDraw: true,
-      isDisplayColorPicker: false,
-      color: "#FF00FF",
-    };
-  }
-
-  exit() {
+  const exit = () => {
     // TODO: 로그인 & 회원가입 추가 후 userId(이메일) 가져오는거 구현
     socket.emit(SOCKET_TYPE.EXIT, {
-      roomId: this.props.match.params.id,
+      roomId: match.params.id,
       userId: "사용자1",
     });
-  }
+  };
 
-  closeColorPicker() {
-    this.setState((current) => ({
+  const closeColorPicker = () => {
+    setDrawSetting((current) => ({
       ...current,
       isDisplayColorPicker: false,
     }));
 
     drawState.isDraw = true;
-  }
+  };
 
-  handleDrawClick(e: any) {
+  const handleDrawClick = (e: React.MouseEvent) => {
     e.preventDefault();
 
     if (e.type === "contextmenu") {
@@ -92,44 +83,39 @@ class StudyButton extends Component<
       return;
     }
 
-    this.setState((current) => ({
+    setDrawSetting((current) => ({
       ...current,
       isDisplayColorPicker: !current.isDisplayColorPicker,
     }));
 
-    drawState.isDraw = this.state.isDisplayColorPicker;
-  }
+    drawState.isDraw = drawSetting.isDisplayColorPicker;
+  };
 
-  handleChangeColor(color: any) {
-    this.setState((current) => ({
+  const handleChangeColor = (color: any) => {
+    setDrawSetting((current) => ({
       ...current,
       color: color.hex,
     }));
     drawState.color = color.hex;
-  }
+  };
 
-  render() {
-    return (
-      <Wrapper>
-        {this.state.isDisplayColorPicker && (
-          <ContextMenu>
-            <ContextCover onClick={this.closeColorPicker} />
-            <SketchPicker
-              color={this.state.color}
-              onChange={this.handleChangeColor}
-            />
-          </ContextMenu>
-        )}
-        <PencilButton
-          onClick={this.handleDrawClick}
-          onContextMenu={this.handleDrawClick}
-        />
-        <EraseButton id="Slide__erase" />
-        <PresentButton />
-        <ExitButton onClick={this.exit}>종료</ExitButton>
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper>
+      {drawSetting.isDisplayColorPicker && (
+        <ContextMenu>
+          <ContextCover onClick={closeColorPicker} />
+          <SketchPicker
+            color={drawSetting.color}
+            onChange={handleChangeColor}
+          />
+        </ContextMenu>
+      )}
+      <PencilButton onClick={handleDrawClick} onContextMenu={handleDrawClick} />
+      <EraseButton id="Slide__erase" />
+      <PresentButton />
+      <ExitButton onClick={exit}>종료</ExitButton>
+    </Wrapper>
+  );
+};
 
-export default withRouter(StudyButton);
+export default StudyButton;
