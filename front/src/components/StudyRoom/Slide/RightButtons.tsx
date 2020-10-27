@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { useRouteMatch } from "react-router-dom";
@@ -9,6 +9,9 @@ import ExitButton from "./Buttons/ExitButton";
 import { SketchPicker } from "react-color";
 import EraseButton from "./Buttons/EraseButton";
 import useSocket from "../../../hooks/useSocket";
+import useUser from "../../../hooks/useUser";
+import { useDispatch } from "react-redux";
+import { fetchUserAsync, fetchUserError } from "../../../modules/user";
 
 const Wrapper = styled.div`
   width: 360px;
@@ -51,18 +54,24 @@ type Params = {
 
 const StudyButton: React.FC<Props> = () => {
   const match = useRouteMatch<Params>();
+  const { user } = useUser();
   const [drawSetting, setDrawSetting] = useState<States>({
     toggleDraw: true,
     isDisplayColorPicker: false,
     color: "#FF00FF",
   });
   const socket = useSocket();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserAsync());
+  }, [dispatch]);
 
   const exit = () => {
-    // TODO: 로그인 & 회원가입 추가 후 userId(이메일) 가져오는거 구현
+    if (!user) return;
     socket.emit(SOCKET_TYPE.EXIT, {
       roomId: match.params.id,
-      userId: "사용자1",
+      userId: user.id,
     });
   };
 
@@ -76,6 +85,8 @@ const StudyButton: React.FC<Props> = () => {
   };
 
   const handleDrawClick = (e: React.MouseEvent) => {
+    if (!user) return;
+
     e.preventDefault();
 
     if (e.type === "contextmenu") {
@@ -88,6 +99,7 @@ const StudyButton: React.FC<Props> = () => {
       isDisplayColorPicker: !current.isDisplayColorPicker,
     }));
 
+    drawState.userId = user.id;
     drawState.isDraw = drawSetting.isDisplayColorPicker;
   };
 
