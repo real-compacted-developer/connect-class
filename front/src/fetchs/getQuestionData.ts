@@ -13,8 +13,6 @@ async function getQuestionData(roomNumber: string): Promise<IQuestionInfo[]> {
     }
   ).then((res) => res.json());
 
-  console.log(response);
-
   if (response.success === false) {
     return [];
   }
