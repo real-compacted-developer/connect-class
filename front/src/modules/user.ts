@@ -20,11 +20,14 @@ const initialState: UserState = {
 
 export const fetchUserAsync = () => async (dispatch: any) => {
   try {
-    const user = await Axios.get("http://validation.api.connectclass.io/user", {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-      },
-    });
+    const user = await Axios.get(
+      `${process.env.REACT_APP_VALIDATION_LAYER}/user`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+        },
+      }
+    );
 
     dispatch(fetchUserSuccess(user.data));
   } catch (e) {
