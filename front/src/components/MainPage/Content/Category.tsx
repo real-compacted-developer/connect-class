@@ -72,9 +72,10 @@ const Category: React.FC = () => {
 
       <ButtonWrapper>
         <Button className={"active"}>전체</Button>
-        <Button>IT분야</Button>
-        <Button>취업분야</Button>
-        <Button>공무원분야</Button>
+        <Button>IT</Button>
+        <Button>취업</Button>
+        <Button>공무원</Button>
+        <Button>독서논술</Button>
       </ButtonWrapper>
     </Wrapper>
   );
