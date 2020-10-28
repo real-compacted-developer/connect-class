@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
+
+import useQuestionData from "../../hooks/useQuestionData";
 
 import Header from "./Question/Header";
 import Content from "./Question/Content";
@@ -14,18 +16,18 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 
-type Props = {};
+const QuestionList = (): JSX.Element => {
+  const roomNumber = window.location.pathname.split("/study/")[1];
 
-type States = {};
+  const { questions, addQuestions } = useQuestionData(roomNumber);
 
-export default class QuestionList extends Component<Props, States> {
-  render() {
-    return (
-      <Wrapper>
-        <Header></Header>
-        <Content></Content>
-        <Form></Form>
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper>
+      <Header />
+      <Content questions={questions !== null ? questions : []}></Content>
+      <Form addQuestions={addQuestions} />
+    </Wrapper>
+  );
+};
+
+export default QuestionList;

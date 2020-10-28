@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import Question from "./Question/Question";
 
-import useQuestionData from "../../../hooks/useQuestionData";
+import { IQuestionInfo } from "../../../types/question";
 
 const Wrapper = styled.ul`
   width: 100%;
@@ -14,14 +14,22 @@ const Wrapper = styled.ul`
   margin: 0;
 `;
 
-const QuestionList = (): JSX.Element => {
-  const roomNumber = window.location.pathname.split("/study/")[1];
+type Props = {
+  questions: IQuestionInfo[];
+};
 
-  const { response } = useQuestionData(roomNumber);
+const QuestionList = (props: Props): JSX.Element => {
+  const { questions } = props;
 
   return (
-    <Wrapper>
-      {response?.map((cur, index) => (
+    <Wrapper
+      ref={(element: HTMLUListElement | null) => {
+        if (element === null) return;
+        element.scrollTo({ top: element.scrollHeight, behavior: "smooth" });
+        console.log("useEffect");
+      }}
+    >
+      {questions?.map((cur, index) => (
         <Question
           key={`question-${index}`}
           userInfo={cur.userInfo}
