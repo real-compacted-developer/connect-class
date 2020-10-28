@@ -95,7 +95,7 @@ const Form = (props: Props): JSX.Element => {
       title: "질문",
       content: content,
     };
-    // createQuestionData(data);
+    createQuestionData(data);
 
     const questionData: IQuestionInfo = {
       slideInfo: {
