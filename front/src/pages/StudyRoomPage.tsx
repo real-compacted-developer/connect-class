@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useRouteMatch } from "react-router-dom";
-import QuestionList from "../components/StudyRoom/QuestionList";
+import QuestionSection from "../components/StudyRoom/QuestionSection";
 import SlideView from "../components/StudyRoom/SlideView";
 import SOCKET_TYPE from "../constants/socket-type";
 import useSocket from "../hooks/useSocket";
@@ -35,7 +35,7 @@ const StudyRoom: React.FC = () => {
   return (
     <Wrapper>
       <SlideView></SlideView>
-      <QuestionList></QuestionList>
+      <QuestionSection></QuestionSection>
     </Wrapper>
   );
 };
