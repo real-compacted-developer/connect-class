@@ -60,9 +60,12 @@ const StudyCategoryInput: React.FC<Props> = ({ onChange }) => {
           >
             IT 분야
           </CategoryCircle>
-
-          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
-          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+          <CategoryCircle icon="" value="취업분야" onChange={onChange}>
+            취업분야
+          </CategoryCircle>
+          <CategoryCircle icon="" value="공무원분야" onChange={onChange}>
+            공무원분야
+          </CategoryCircle>
           <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
         </CircleList>
       </PCWrapper>
@@ -74,12 +77,16 @@ const StudyCategoryInput: React.FC<Props> = ({ onChange }) => {
             value="IT분야"
             onChange={onChange}
           >
-            IT 분야
+            IT분야
           </CategoryCircle>
-          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+          <CategoryCircle icon="" value="취업분야" onChange={onChange}>
+            취업분야
+          </CategoryCircle>
         </CircleList>
         <CircleList>
-          <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
+          <CategoryCircle icon="" value="공무원분야" onChange={onChange}>
+            공무원분야
+          </CategoryCircle>
           <CategoryCircle icon="" value="" onChange={onChange}></CategoryCircle>
         </CircleList>
       </MobileWrapper>
