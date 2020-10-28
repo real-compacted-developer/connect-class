@@ -11,8 +11,6 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.span`
-  width: 77px;
-  height: 20px;
   font-family: GmarketSans;
   font-size: 20px;
   font-weight: bold;
@@ -27,8 +25,6 @@ const Title = styled.span`
 const Text = styled.p`
   margin-top: 20px;
 
-  width: 319px;
-  height: 14px;
   font-family: GmarketSans;
   font-size: 14px;
   font-weight: 500;
@@ -58,17 +54,14 @@ const Button = styled.button`
   border-radius: 30px;
   border: solid 1.5px #9a9fac;
   background-color: #ffffff;
-  outline: none;
 
   font-family: GmarketSans;
   font-size: 13px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.23;
-  letter-spacing: normal;
-  text-align: left;
+  text-align: center;
   color: #9a9fac;
+
+  cursor: pointer;
 `;
 
 const Category: React.FC = () => {
