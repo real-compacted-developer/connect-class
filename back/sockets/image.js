@@ -76,7 +76,7 @@ module.exports = function (socket) {
     SlideInstance.setSlideIndex(data.index);
     SlideInstance.setSlideUrl(data.urlInfo);
     io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
-    sendStoredDrawData(socket, SlideInstance.getSlideIndex());
+    sendStoredDrawData(socket, SlideInstance.getSlideIndex(), data.userId);
   });
 
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {

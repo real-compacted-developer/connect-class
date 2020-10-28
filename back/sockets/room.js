@@ -31,7 +31,7 @@ module.exports = function (socket) {
     console.log(`${userId}가 ${roomId} 스터디룸에 입장하였습니다.`);
 
     setTimeout(() => {
-      initStoredDrawData(socket, SlideInstance.getSlideIndex());
+      initStoredDrawData(socket, SlideInstance.getSlideIndex(), userId);
     }, 100);
   });
 

@@ -23,7 +23,7 @@ const ImageSection = styled.div`
   margin: 10px 0;
 `;
 
-const LikeSection = styled.div``;
+// const LikeSection = styled.div``;
 
 interface IProps {
   slideInfo: {
@@ -33,7 +33,7 @@ interface IProps {
   content: string;
 }
 
-export default (props: IProps): JSX.Element => {
+const Content = (props: IProps): JSX.Element => {
   return (
     <Wrapper>
       <TextSection>{props.content}</TextSection>
@@ -48,3 +48,5 @@ export default (props: IProps): JSX.Element => {
     </Wrapper>
   );
 };
+
+export default Content;

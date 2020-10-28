@@ -6,8 +6,10 @@ export default {
   component: Form,
 };
 
+const dummyFunction = (): void => {};
+
 export const QuestionFormStory = () => {
-  return <Form />;
+  return <Form addQuestions={dummyFunction} />;
 };
 
 QuestionFormStory.story = {

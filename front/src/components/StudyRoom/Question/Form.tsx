@@ -1,5 +1,11 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
+import createQuestionData from "../../../fetchs/createQuestionData";
+import useSocket from "../../../hooks/useSocket";
+
+import { IQuestionInfo } from "../../../types/question";
+import SOCKET_TYPE from "../../../constants/socket-type";
 
 const Wrapper = styled.div`
   width: calc(100% - 104px);
@@ -47,17 +53,85 @@ const Button = styled.button`
   }
 `;
 
-type Props = {};
+const dummySlide = {
+  slidePage: 1,
+  slideImageURL:
+    "https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F24283C3858F778CA2EFABE",
+};
 
-type States = {};
+type Props = {
+  addQuestions: (data: IQuestionInfo) => void;
+};
 
-export default class Form extends Component<Props, States> {
-  render() {
-    return (
-      <Wrapper>
-        <Input placeholder="질문을 입력하세요" />
-        <Button>질문하기</Button>
-      </Wrapper>
-    );
-  }
-}
+const Form = (props: Props): JSX.Element => {
+  const roomNumber = window.location.pathname.split("/study/")[1];
+
+  const { addQuestions } = props;
+  const [content, setContent] = useState<string>("");
+  const socket = useSocket();
+
+  useEffect(() => {
+    socket.on(SOCKET_TYPE.GET_NEW_QUESTION, (data: IQuestionInfo) => {
+      addQuestions(data);
+    });
+  }, [socket]);
+
+  let inputTag: HTMLInputElement | null = null;
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setContent(event.target.value);
+  };
+
+  const fetchCreate = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (content.length === 0) return;
+
+    const data = {
+      roomNumber: roomNumber,
+      userId: "kakao1472290927",
+      slidePage: dummySlide.slidePage,
+      slideImageURL: dummySlide.slideImageURL,
+      title: "질문",
+      content: content,
+    };
+    createQuestionData(data);
+
+    const questionData: IQuestionInfo = {
+      slideInfo: {
+        page: dummySlide.slidePage,
+        imageURL: dummySlide.slideImageURL,
+      },
+      content: content,
+      userInfo: {
+        userName: "남궁권",
+        profileImageURL:
+          "http://k.kakaocdn.net/dn/CItX8/btqGvQ5a7B7/6IyKbRGltQPiyyfyS703VK/img_110x110.jpg",
+      },
+    };
+
+    addQuestions(questionData);
+
+    socket.emit(SOCKET_TYPE.CREATE_NEW_QUESTION, { roomNumber, questionData });
+
+    if (inputTag) inputTag.value = "";
+    setContent("");
+  };
+
+  return (
+    <Wrapper>
+      <Input
+        placeholder="질문을 입력하세요"
+        onChange={onChange}
+        ref={(element: HTMLInputElement | null) => {
+          inputTag = element;
+        }}
+      />
+      <Button type="reset" onClick={fetchCreate}>
+        질문하기
+      </Button>
+    </Wrapper>
+  );
+};
+
+export default Form;
