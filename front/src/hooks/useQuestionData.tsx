@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { IQuestionInfo } from "../types/question";
 import getQuestionData from "../fetchs/getQuestionData";
@@ -20,11 +20,13 @@ export default (roomNumber: string) => {
     fetchData();
   }, [roomNumber]);
 
-  const addQuestions = (data: IQuestionInfo): void => {
-    if (questions === null) return;
-
-    setQuestions([...questions, data]);
-  };
+  const addQuestions = useCallback(
+    (data: IQuestionInfo): void => {
+      if (questions === null) return;
+      setQuestions([...questions, data]);
+    },
+    [questions]
+  );
 
   return { questions, error, addQuestions };
 };
