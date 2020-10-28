@@ -13,4 +13,7 @@ export default {
   JOIN: "join",
   EXIT: "exit",
   UPDATE_USER_LIST: "updateUserList",
+
+  GET_NEW_QUESTION: "getNewQuestion",
+  CREATE_NEW_QUESTION: "createNewQuestion",
 };
