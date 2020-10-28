@@ -9,14 +9,10 @@ const api = require("./apis");
 const CanvasStore = require("./stores/CanvasStore");
 const SlideStore = require("./stores/SlideStore");
 
-const { sequelize } = require("./models");
-
 const CanvasInstance = new CanvasStore();
 const SlideInstance = new SlideStore();
 
 const app = express();
-
-sequelize.sync();
 
 app.use(logger("dev"));
 app.use(cors());
