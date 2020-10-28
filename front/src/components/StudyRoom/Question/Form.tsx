@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import createQuestionData from "../../../fetchs/createQuestionData";
+import useSocket from "../../../hooks/useSocket";
+
 import { IQuestionInfo } from "../../../types/question";
+import SOCKET_TYPE from "../../../constants/socket-type";
 
 const Wrapper = styled.div`
   width: calc(100% - 104px);
@@ -65,11 +68,17 @@ const Form = (props: Props): JSX.Element => {
 
   const { addQuestions } = props;
   const [content, setContent] = useState<string>("");
+  const socket = useSocket();
+
+  useEffect(() => {
+    socket.on(SOCKET_TYPE.GET_NEW_QUESTION, (data: IQuestionInfo) => {
+      addQuestions(data);
+    });
+  }, [socket]);
 
   let inputTag: HTMLInputElement | null = null;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    // console.log(event.type, event.target.value);
     setContent(event.target.value);
   };
 
@@ -88,7 +97,7 @@ const Form = (props: Props): JSX.Element => {
     };
     // createQuestionData(data);
 
-    addQuestions({
+    const questionData: IQuestionInfo = {
       slideInfo: {
         page: dummySlide.slidePage,
         imageURL: dummySlide.slideImageURL,
@@ -99,7 +108,11 @@ const Form = (props: Props): JSX.Element => {
         profileImageURL:
           "http://k.kakaocdn.net/dn/CItX8/btqGvQ5a7B7/6IyKbRGltQPiyyfyS703VK/img_110x110.jpg",
       },
-    });
+    };
+
+    addQuestions(questionData);
+
+    socket.emit(SOCKET_TYPE.CREATE_NEW_QUESTION, { roomNumber, questionData });
 
     if (inputTag) inputTag.value = "";
     setContent("");
