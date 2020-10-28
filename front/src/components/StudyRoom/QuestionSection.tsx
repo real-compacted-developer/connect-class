@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 
-const QuestionList = (): JSX.Element => {
+const QuestionSection = (): JSX.Element => {
   const roomNumber = window.location.pathname.split("/study/")[1];
 
   const { questions, addQuestions } = useQuestionData(roomNumber);
@@ -30,4 +30,4 @@ const QuestionList = (): JSX.Element => {
   );
 };
 
-export default QuestionList;
+export default QuestionSection;
