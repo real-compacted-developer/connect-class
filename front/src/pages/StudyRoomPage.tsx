@@ -20,7 +20,7 @@ type Params = {
 
 const StudyRoom: React.FC = () => {
   const match = useRouteMatch<Params>();
-  const { user, error } = useUser();
+  const { user } = useUser();
   const socket = useSocket();
 
   useEffect(() => {

@@ -12,7 +12,6 @@ const Wrapper = styled.div`
 `;
 
 const MainPage: React.FC = () => {
-  const { user, error } = useUser();
   const dispatch = useDispatch();
 
   useEffect(() => {

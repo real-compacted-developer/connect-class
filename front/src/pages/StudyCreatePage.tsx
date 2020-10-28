@@ -2,9 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Axios from "axios";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-
-import config from "../config";
-
 import CreateSideBar from "../components/StudyCreate/CreateSideBar";
 import Header from "../components/StudyCreate/Header";
 import StudyNameInput from "../components/StudyCreate/StudyNameInput";

@@ -11,7 +11,7 @@ import EraseButton from "./Buttons/EraseButton";
 import useSocket from "../../../hooks/useSocket";
 import useUser from "../../../hooks/useUser";
 import { useDispatch } from "react-redux";
-import { fetchUserAsync, fetchUserError } from "../../../modules/user";
+import { fetchUserAsync } from "../../../modules/user";
 
 const Wrapper = styled.div`
   width: 360px;
