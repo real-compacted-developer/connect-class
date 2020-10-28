@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 import SOCKET_TYPE from "../../../constants/socket-type";
-import { socket } from "../../../index";
+import useSocket from "../../../hooks/useSocket";
 import { drawState } from "./SlideCanvas";
 
 const Wrapper = styled.div`
@@ -22,76 +21,65 @@ const ImageWrapper = styled.div<{ imageURL: string }>`
 
   background-image: url("${(props): string => props.imageURL}");
   background-repeat: no-repeat;
-  /* background-size: auto; */
   background-size: contain;
 
-  background-position:center center;
+  background-position: center center;
 `;
-
-type Props = {};
 
 type States = {
   index: number;
   urlInfo: string;
 };
 
-class SlideImage extends Component<Props, States> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      index: 0,
-      urlInfo: "",
-    };
+const SlideImage: React.FC = () => {
+  const [image, setImage] = useState<States>({
+    index: 0,
+    urlInfo: "",
+  });
+  const socket = useSocket();
 
-    this.onPrevImage = this.onPrevImage.bind(this);
-    this.onNextImage = this.onNextImage.bind(this);
-    this.renderImage = this.renderImage.bind(this);
-  }
-  // toggleImage = () => {
-  //   const { index, urlInfo } = this.state;
-  //   socket.emit("image Change", { index, urlInfo });
-  // }
-  componentDidMount() {
+  useEffect(() => {
     socket.on(SOCKET_TYPE.SYNC, ({ idx, url }: any) => {
-      this.setState({
+      setImage({
         index: idx,
         urlInfo: url,
       });
     });
     socket.on(SOCKET_TYPE.IMAGE_CHANGE, (data: any) => {
-      console.log("imageChange : ", data);
-      this.setState({
+      setImage({
         index: data.index,
         urlInfo: data.urlInfo,
       });
       drawState.slideId = data.index;
     });
-  }
-  onPrevImage() {
-    let { index, urlInfo } = this.state;
+  }, [socket]);
+
+  const onPrevImage = () => {
+    const { index, urlInfo } = image;
     const data = { index: index, urlInfo: urlInfo };
     socket.emit(SOCKET_TYPE.IMAGE_PREV, data);
-  }
-  onNextImage() {
-    const { index, urlInfo } = this.state;
+  };
+
+  const onNextImage = () => {
+    const { index, urlInfo } = image;
     const data = { index: index, urlInfo: urlInfo };
     socket.emit(SOCKET_TYPE.IMAGE_NEXT, data);
-  }
-  renderImage() {
-    let { urlInfo } = this.state;
+  };
+
+  const renderImage = () => {
+    const { urlInfo } = image;
     return <ImageWrapper imageURL={urlInfo} />;
-  }
-  render() {
-    return (
-      <Wrapper>
-        <ButtonWrapper>
-          <button onClick={this.onPrevImage}> 이전 슬라이드</button>
-          <button onClick={this.onNextImage}> 다음 슬라이드</button>
-        </ButtonWrapper>
-        {this.renderImage()}
-      </Wrapper>
-    );
-  }
-}
+  };
+
+  return (
+    <Wrapper>
+      <ButtonWrapper>
+        <button onClick={onPrevImage}> 이전 슬라이드</button>
+        <button onClick={onNextImage}> 다음 슬라이드</button>
+      </ButtonWrapper>
+      {renderImage()}
+    </Wrapper>
+  );
+};
 
 export default SlideImage;

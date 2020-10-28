@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { RouteComponentProps } from "react-router-dom";
-
-import QuestionSection from "../components/StudyRoom/QuestionSection";
+import { useRouteMatch } from "react-router-dom";
+import QuestionList from "../components/StudyRoom/QuestionList";
 import SlideView from "../components/StudyRoom/SlideView";
-
-import { socket } from "../index";
 import SOCKET_TYPE from "../constants/socket-type";
+import useSocket from "../hooks/useSocket";
+import useUser from "../hooks/useUser";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -19,24 +18,26 @@ type Params = {
   id: string;
 };
 
-class StudyRoom extends React.Component<RouteComponentProps<Params>> {
-  componentDidMount() {
-    const roomId = this.props.match.params.id;
-    // TODO: 실제 방 ID하고 유저 ID 가져오는거 구현
+const StudyRoom: React.FC = () => {
+  const match = useRouteMatch<Params>();
+  const { user, error } = useUser();
+  const socket = useSocket();
+
+  useEffect(() => {
+    if (!user) return;
+    const roomId = match.params.id;
     socket.emit(SOCKET_TYPE.JOIN, {
       roomId: roomId,
-      userId: "사용자1",
+      userId: user.id,
     });
-  }
+  }, [match, user, socket]);
 
-  render() {
-    return (
-      <Wrapper>
-        <SlideView></SlideView>
-        <QuestionSection></QuestionSection>
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper>
+      <SlideView></SlideView>
+      <QuestionList></QuestionList>
+    </Wrapper>
+  );
+};
 
 export default StudyRoom;
