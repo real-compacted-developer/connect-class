@@ -22,7 +22,7 @@ interface IProps {
   content: string;
 }
 
-export default (props: IProps): JSX.Element => {
+const Question = (props: IProps): JSX.Element => {
   return (
     <Wrapper>
       <UserProfile userInfo={props.userInfo} />
@@ -30,3 +30,5 @@ export default (props: IProps): JSX.Element => {
     </Wrapper>
   );
 };
+
+export default Question;

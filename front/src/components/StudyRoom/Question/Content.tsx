@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { IQuestionInfo } from "../../../types/question";
 
 import QuestionList from "./QuestionList";
 
@@ -75,7 +76,9 @@ const Gradation = styled.div`
   background-image: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0));
 `;
 
-type Props = {};
+type Props = {
+  questions: IQuestionInfo[];
+};
 
 type States = {};
 
@@ -87,8 +90,8 @@ export default class Content extends Component<Props, States> {
           <Best>Best</Best>
           <Recent>Recent</Recent>
         </Menu>
-        <Gradation></Gradation>
-        <QuestionList></QuestionList>
+        <Gradation />
+        <QuestionList questions={this.props.questions} />
       </Wrapper>
     );
   }
