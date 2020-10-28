@@ -4,6 +4,7 @@ export const drawState = {
   isDraw: false,
   color: "#FF0000",
   slideId: 0,
+  userId: "",
 };
 
 const sketch = (socket: SocketIOClient.Socket) => {
@@ -36,6 +37,7 @@ const sketch = (socket: SocketIOClient.Socket) => {
         s.clear();
         socket.emit(SOCKET_TYPE.ERASE, {
           slideId: drawState.slideId,
+          userId: drawState.userId,
         });
       });
     };
@@ -61,6 +63,7 @@ const sketch = (socket: SocketIOClient.Socket) => {
     ) => {
       const data = {
         slideId: drawState.slideId,
+        userId: drawState.userId,
         x: Math.round(x),
         y: Math.round(y),
         px: Math.round(pX),

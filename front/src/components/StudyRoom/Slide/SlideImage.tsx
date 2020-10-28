@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import useSocket from "../../../hooks/useSocket";
+import useUser from "../../../hooks/useUser";
 import { drawState } from "./SlideCanvas";
 
 const Wrapper = styled.div`
@@ -37,6 +38,7 @@ const SlideImage: React.FC = () => {
     urlInfo: "",
   });
   const socket = useSocket();
+  const { user } = useUser();
 
   useEffect(() => {
     socket.on(SOCKET_TYPE.SYNC, ({ idx, url }: any) => {
@@ -55,14 +57,16 @@ const SlideImage: React.FC = () => {
   }, [socket]);
 
   const onPrevImage = () => {
+    if (!user) return;
     const { index, urlInfo } = image;
-    const data = { index: index, urlInfo: urlInfo };
+    const data = { index: index, urlInfo: urlInfo, userId: user.id };
     socket.emit(SOCKET_TYPE.IMAGE_PREV, data);
   };
 
   const onNextImage = () => {
+    if (!user) return;
     const { index, urlInfo } = image;
-    const data = { index: index, urlInfo: urlInfo };
+    const data = { index: index, urlInfo: urlInfo, userId: user.id };
     socket.emit(SOCKET_TYPE.IMAGE_NEXT, data);
   };
 
