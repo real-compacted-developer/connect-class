@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import useQuestionData from "../../hooks/useQuestionData";
+// import useUser from "../../hooks/useUser";
 
 import Header from "./Question/Header";
 import Content from "./Question/Content";
