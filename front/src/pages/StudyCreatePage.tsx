@@ -117,10 +117,10 @@ class StudyCreate extends React.Component<RouteComponentProps, State> {
       return;
     }
 
-    await Axios.post(`${config.API}/api/study`, {
+    await Axios.post(`${process.env.REACT_APP_STUDY_LAYER}/group`, {
       title: this.state.name,
       category: this.state.category,
-      limitCount: this.state.people,
+      maxPeople: this.state.people,
       password: this.state.password,
       isPremium: false,
     });
