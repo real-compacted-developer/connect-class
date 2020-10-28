@@ -19,12 +19,6 @@ const MainPage: React.FC = () => {
     dispatch(fetchUserAsync());
   }, [dispatch]);
 
-  // TEST CODE
-  useEffect(() => {
-    if (!user) return;
-    console.log(user);
-  }, [user]);
-
   return (
     <Wrapper>
       <Header />
