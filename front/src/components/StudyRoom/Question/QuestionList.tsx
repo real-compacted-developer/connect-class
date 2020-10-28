@@ -26,7 +26,6 @@ const QuestionList = (props: Props): JSX.Element => {
       ref={(element: HTMLUListElement | null) => {
         if (element === null) return;
         element.scrollTo({ top: element.scrollHeight, behavior: "smooth" });
-        console.log("useEffect");
       }}
     >
       {questions?.map((cur, index) => (
