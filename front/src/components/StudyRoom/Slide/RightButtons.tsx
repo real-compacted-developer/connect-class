@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import { useRouteMatch } from "react-router-dom";
@@ -10,8 +10,6 @@ import { SketchPicker } from "react-color";
 import EraseButton from "./Buttons/EraseButton";
 import useSocket from "../../../hooks/useSocket";
 import useUser from "../../../hooks/useUser";
-import { useDispatch } from "react-redux";
-import { fetchUserAsync } from "../../../modules/user";
 
 const Wrapper = styled.div`
   width: 360px;
@@ -61,11 +59,6 @@ const StudyButton: React.FC<Props> = () => {
     color: "#FF00FF",
   });
   const socket = useSocket();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUserAsync());
-  }, [dispatch]);
 
   const exit = () => {
     if (!user) return;
