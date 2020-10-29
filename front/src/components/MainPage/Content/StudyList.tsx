@@ -52,21 +52,43 @@ const IT_IMAGE =
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80";
 
-const StudyList: React.FC = () => {
-  const [studyList, setStudyList] = useState<StudyGroupType[]>([]);
+interface StudyListProps {
+  readonly categoryState: [
+    string,
+    React.Dispatch<React.SetStateAction<string>>
+  ];
+}
+
+const StudyList: React.FC<StudyListProps> = ({ categoryState }) => {
+  const [originStudyList, setOriginStudyList] = useState<StudyGroupType[]>([]);
+  const [showStudyList, setShowStudyList] = useState<StudyGroupType[]>([]);
+  const [category] = categoryState;
 
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_STUDY_LAYER}/group`).then((res) =>
-      setStudyList(res.data.data)
-    );
+    Axios.get(`${process.env.REACT_APP_STUDY_LAYER}/group`).then((res) => {
+      setOriginStudyList(res.data.data);
+      setShowStudyList(res.data.data);
+    });
   }, []);
+
+  useEffect(() => {
+    if (category.trim() === "") {
+      setShowStudyList(originStudyList);
+      return;
+    }
+
+    const search = originStudyList.filter(
+      (study) => study.category === category
+    );
+    setShowStudyList(search);
+  }, [originStudyList, category]);
 
   return (
     <Wrapper>
       <Title>스터디 목록</Title>
 
       <List>
-        {studyList.map((cur, index) => (
+        {showStudyList.map((cur, index) => (
           <StudyCard
             title={cur.title}
             imageURL={cur.category === "IT분야" ? IT_IMAGE : DEFAULT_IMAGE}

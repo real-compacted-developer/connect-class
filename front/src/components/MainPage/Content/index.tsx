@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Category from "./Category";
@@ -15,10 +15,12 @@ const Wrapper = styled.div`
 `;
 
 const Content: React.FC = () => {
+  const categoryState = useState<string>("");
+
   return (
     <Wrapper>
-      <Category />
-      <StudyList />
+      <Category categoryState={categoryState} />
+      <StudyList categoryState={categoryState} />
     </Wrapper>
   );
 };

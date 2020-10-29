@@ -64,18 +64,33 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Category: React.FC = () => {
+interface CategoryProps {
+  readonly categoryState: [
+    string,
+    React.Dispatch<React.SetStateAction<string>>
+  ];
+}
+
+const Category: React.FC<CategoryProps> = ({ categoryState }) => {
+  const [, setCategory] = categoryState;
+
+  const onButtonClick = (category: string) => () => {
+    setCategory(category);
+  };
+
   return (
     <Wrapper>
       <Title>카테고리</Title>
       <Text>스터디에 참여하고 싶은 카테고리 분야를 선택하세요.</Text>
 
       <ButtonWrapper>
-        <Button className={"active"}>전체</Button>
-        <Button>IT</Button>
-        <Button>취업</Button>
-        <Button>공무원</Button>
-        <Button>독서논술</Button>
+        <Button className={"active"} onClick={onButtonClick("")}>
+          전체
+        </Button>
+        <Button onClick={onButtonClick("IT")}>IT</Button>
+        <Button onClick={onButtonClick("취업")}>취업</Button>
+        <Button onClick={onButtonClick("공무원")}>공무원</Button>
+        <Button onClick={onButtonClick("독서논술")}>독서논술</Button>
       </ButtonWrapper>
     </Wrapper>
   );
