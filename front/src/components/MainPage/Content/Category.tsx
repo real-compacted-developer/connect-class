@@ -74,8 +74,20 @@ interface CategoryProps {
 const Category: React.FC<CategoryProps> = ({ categoryState }) => {
   const [, setCategory] = categoryState;
 
-  const onButtonClick = (category: string) => () => {
+  const onButtonClick = (category: string) => (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     setCategory(category);
+
+    const buttons = document.querySelector(".button-list")?.children;
+    if (!buttons) return;
+
+    const buttonArray = Array.from(buttons);
+    buttonArray.forEach((button) => {
+      button.classList.remove("active");
+    });
+
+    e.currentTarget.classList.add("active");
   };
 
   return (
@@ -83,7 +95,7 @@ const Category: React.FC<CategoryProps> = ({ categoryState }) => {
       <Title>카테고리</Title>
       <Text>스터디에 참여하고 싶은 카테고리 분야를 선택하세요.</Text>
 
-      <ButtonWrapper>
+      <ButtonWrapper className={"button-list"}>
         <Button className={"active"} onClick={onButtonClick("")}>
           전체
         </Button>
