@@ -10,6 +10,8 @@ const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  cursor: pointer;
 `;
 
 const Content = styled.div`
