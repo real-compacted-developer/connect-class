@@ -50,6 +50,15 @@ interface StudyGroupType {
 const IT_IMAGE =
   "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80";
 
+const EMPLOY_IMAGE =
+  "https://images.unsplash.com/photo-1506784926709-22f1ec395907?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1948&q=80";
+
+const OFFICIAL_IMAGE =
+  "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80";
+
+const BOOK_IMAGE =
+  "https://images.unsplash.com/photo-1557244252-04610dfe5790?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80";
+
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80";
 
@@ -94,6 +103,14 @@ const StudyList: React.FC<StudyListProps> = ({ categoryState }) => {
     });
   };
 
+  const renderCoverImage = (category: string) => {
+    if (category === "IT") return IT_IMAGE;
+    if (category === "취업") return EMPLOY_IMAGE;
+    if (category === "공무원") return OFFICIAL_IMAGE;
+    if (category === "독서논술") return BOOK_IMAGE;
+    return DEFAULT_IMAGE;
+  };
+
   return (
     <Wrapper>
       <Title>스터디 목록</Title>
@@ -103,7 +120,7 @@ const StudyList: React.FC<StudyListProps> = ({ categoryState }) => {
           <StudyCard
             onClick={onStudyCardClick(cur.id)}
             title={cur.title}
-            imageURL={cur.category === "IT분야" ? IT_IMAGE : DEFAULT_IMAGE}
+            imageURL={renderCoverImage(cur.category)}
             currentPeople={0}
             totalPeople={cur.maxPeople}
             key={`StudyCard:${index}`}
