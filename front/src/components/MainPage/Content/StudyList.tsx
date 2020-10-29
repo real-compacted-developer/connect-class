@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import StudyCard from "./StudyCard";
 import Axios from "axios";
+import { useHistory } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -60,6 +61,7 @@ interface StudyListProps {
 }
 
 const StudyList: React.FC<StudyListProps> = ({ categoryState }) => {
+  const history = useHistory();
   const [originStudyList, setOriginStudyList] = useState<StudyGroupType[]>([]);
   const [showStudyList, setShowStudyList] = useState<StudyGroupType[]>([]);
   const [category] = categoryState;
@@ -83,6 +85,15 @@ const StudyList: React.FC<StudyListProps> = ({ categoryState }) => {
     setShowStudyList(search);
   }, [originStudyList, category]);
 
+  const onStudyCardClick = (studyGroupId: string) => () => {
+    Axios.get(
+      `${process.env.REACT_APP_STUDY_LAYER}/group/data/${studyGroupId}`
+    ).then((res) => {
+      if (!res.data.data) return;
+      history.push(`/study/${res.data.data.id}`);
+    });
+  };
+
   return (
     <Wrapper>
       <Title>스터디 목록</Title>
@@ -90,6 +101,7 @@ const StudyList: React.FC<StudyListProps> = ({ categoryState }) => {
       <List>
         {showStudyList.map((cur, index) => (
           <StudyCard
+            onClick={onStudyCardClick(cur.id)}
             title={cur.title}
             imageURL={cur.category === "IT분야" ? IT_IMAGE : DEFAULT_IMAGE}
             currentPeople={0}
