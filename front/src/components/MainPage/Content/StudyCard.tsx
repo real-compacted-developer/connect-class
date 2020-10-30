@@ -10,6 +10,8 @@ const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  cursor: pointer;
 `;
 
 const Content = styled.div`
@@ -64,11 +66,12 @@ type Props = {
   title: string;
   currentPeople: number;
   totalPeople: number;
+  onClick?: React.MouseEventHandler;
 };
 
 const StudyCard: (props: Props) => JSX.Element = (props: Props) => {
   return (
-    <Wrapper>
+    <Wrapper onClick={props.onClick}>
       <LazyImage width={"100%"} height={"330px"} imageURL={props.imageURL} />
       <Content>
         <Title>{props.title}</Title>
