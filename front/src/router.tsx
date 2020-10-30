@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import StudyRoomPage from "./pages/StudyRoomPage";
 import StudyCreatePage from "./pages/StudyCreatePage";
 import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
 import { useDispatch } from "react-redux";
 import { fetchUserAsync } from "./modules/user";
 
@@ -19,6 +20,7 @@ const Router: React.FC = () => {
         <Route exact path="/" component={MainPage} />
         <Route exact path="/study/create" component={StudyCreatePage} />
         <Route exact path="/study/:id" component={StudyRoomPage} />
+        <Route exact path="/login" component={LoginPage} />
       </Switch>
     </BrowserRouter>
   );
