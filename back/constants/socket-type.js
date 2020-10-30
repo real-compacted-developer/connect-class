@@ -1,5 +1,6 @@
 module.exports = {
   DRAW: "draw",
+  ERASE: "erase",
 
   IMAGE_PREV: "imagePrev",
   IMAGE_NEXT: "imageNext",
@@ -12,4 +13,7 @@ module.exports = {
   JOIN: "join",
   EXIT: "exit",
   UPDATE_USER_LIST: "updateUserList",
+
+  GET_NEW_QUESTION: "getNewQuestion",
+  CREATE_NEW_QUESTION: "createNewQuestion",
 };

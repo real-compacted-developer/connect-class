@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import SimplePeer from "simple-peer";
 import styled from "styled-components";
-
-import { socket } from "../../../index";
+import useSocket from "../../../hooks/useSocket";
 
 import microphoneImage from "./microphone.svg";
 
@@ -37,9 +36,11 @@ const Button = styled.button`
   }
 `;
 
+let peer: any = undefined;
+let myAudioStream: any = undefined;
+
 const AudioChat: React.FC = () => {
-  let peer: any = undefined;
-  let myAudioStream: any = undefined;
+  const socket = useSocket();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const bindEvents = (p: any) => {
@@ -73,7 +74,6 @@ const AudioChat: React.FC = () => {
           audio: true,
         });
 
-        console.log(stream);
         peer = new SimplePeer({
           initiator: true,
           stream,
@@ -122,7 +122,7 @@ const AudioChat: React.FC = () => {
       }
       peer.signal(data);
     });
-  }, []);
+  }, [socket]);
 
   const startAudioChat = async () => {
     try {

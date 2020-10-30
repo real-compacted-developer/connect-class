@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderStyle = styled.nav`
-  width: 1609px;
+  width: calc(100vw - 311px);
   height: 60px;
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.06);
   background-color: #ffffff;
@@ -10,6 +10,11 @@ const HeaderStyle = styled.nav`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+
+  @media screen and (max-width: 1000px) {
+    width: 100vw;
+    background-color: #346bff;
+  }
 `;
 
 const BarButton = styled.button`
@@ -22,12 +27,12 @@ const BarButton = styled.button`
   margin-right: 52px;
 `;
 
-export default class Header extends React.Component {
-  render() {
-    return (
-      <HeaderStyle>
-        <BarButton />
-      </HeaderStyle>
-    );
-  }
-}
+const Header: React.FC = () => {
+  return (
+    <HeaderStyle>
+      <BarButton />
+    </HeaderStyle>
+  );
+};
+
+export default Header;

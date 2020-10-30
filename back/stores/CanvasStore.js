@@ -3,39 +3,49 @@ class CanvasStore {
     this.canvasList = [];
   }
 
-  addDraw(slideId, data) {
+  initDrawData(slideId, userId) {
     if (this.canvasList[slideId] === undefined) {
       this.canvasList[slideId] = [];
     }
 
-    this.canvasList[slideId].push(data);
-
-    return this.canvasList[slideId][this.canvasList.length - 1];
+    if (this.canvasList[slideId][userId] === undefined) {
+      this.canvasList[slideId][userId] = new Set([]);
+    }
   }
 
-  getDrawData(slideId) {
-    return this.canvasList[slideId];
+  addDraw(slideId, userId, data) {
+    this.initDrawData(slideId, userId);
+
+    this.canvasList[slideId][userId].add(data);
+
+    return this.canvasList[slideId][userId][this.canvasList.length - 1];
   }
 
-  deleteDrawWithIndex(slideId, index) {
-    const tempEachDraw = this.canvasList[slideId][index];
-    delete this.canvasList[slideId][index];
+  getDrawData(slideId, userId) {
+    this.initDrawData(slideId, userId);
+
+    return this.canvasList[slideId][userId];
+  }
+
+  deleteDrawWithIndex(slideId, userId, index) {
+    const tempEachDraw = this.canvasList[slideId][userId][index];
+    delete this.canvasList[slideId][userId][index];
     return tempEachDraw;
   }
 
-  deleteDraw(slideId) {
-    const tempDraw = this.canvasList[slideId];
-    delete this.canvasList[slideId];
+  deleteDraw(slideId, userId) {
+    const tempDraw = this.canvasList[slideId][userId];
+    delete this.canvasList[slideId][userId];
     return tempDraw;
   }
 
-  updateDraw(slideId, index, data) {
-    if (!this.roomList[slideId]) {
+  updateDraw(slideId, userId, index, data) {
+    if (!this.roomList[slideId][userId]) {
       return undefined;
     }
 
-    this.canvasList[slideId][index] = data;
-    return this.canvasList[slideId][index];
+    this.canvasList[slideId][userId][index] = data;
+    return this.canvasList[slideId][userId][index];
   }
 }
 

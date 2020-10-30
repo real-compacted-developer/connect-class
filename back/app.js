@@ -3,20 +3,17 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-
 const api = require("./apis");
-
 const CanvasStore = require("./stores/CanvasStore");
 const SlideStore = require("./stores/SlideStore");
 
-const { sequelize } = require("./models");
+// const { sequelize } = require("./models");
+// sequelize.sync();
 
 const CanvasInstance = new CanvasStore();
 const SlideInstance = new SlideStore();
 
 const app = express();
-
-sequelize.sync();
 
 app.use(logger("dev"));
 app.use(cors());

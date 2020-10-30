@@ -15,10 +15,15 @@ const CircleWrapper = styled.div`
   font-weight: bold;
   text-align: center;
 
-  margin-right: 53px;
+  margin-right: 30px;
 
   &:hover {
     color: #346bff;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 100px;
+    height: 100px;
   }
 `;
 
@@ -44,29 +49,39 @@ const Circle = styled.input`
   &:checked {
     box-shadow: 0 5px 10px 0 rgba(52, 107, 255, 0.2);
   }
+
+  @media screen and (max-width: 1000px) {
+    width: 100px;
+    height: 100px;
+  }
+`;
+
+const Image = styled.img`
+  width: 70%;
+  margin-bottom: -10px;
 `;
 
 type Props = {
-  icon: string;
-  value: string;
-  onChange: any;
+  icon?: string;
+  value?: string;
+  onChange?: any;
 };
 
-export default class CategoryCircle extends React.Component<Props> {
-  render() {
-    return (
-      <CircleWrapper>
-        <CircleContent>
-          <img src={this.props.icon} alt={this.props.value}></img>
-          <p>{this.props.children}</p>
-        </CircleContent>
-        <Circle
-          type="radio"
-          name="category"
-          value={this.props.value}
-          onChange={this.props.onChange}
-        />
-      </CircleWrapper>
-    );
-  }
-}
+const CategoryCircle: React.FC<Props> = ({
+  icon,
+  value,
+  onChange,
+  children,
+}) => {
+  return (
+    <CircleWrapper>
+      <CircleContent>
+        <Image src={icon} alt={value} />
+        <p>{children}</p>
+      </CircleContent>
+      <Circle type="radio" name="category" value={value} onChange={onChange} />
+    </CircleWrapper>
+  );
+};
+
+export default CategoryCircle;

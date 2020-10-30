@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import Question from "./Question";
+import Question from "./Question/Question";
+
+import { IQuestionInfo } from "../../../types/question";
 
 const Wrapper = styled.ul`
   width: 100%;
@@ -12,18 +14,30 @@ const Wrapper = styled.ul`
   margin: 0;
 `;
 
-type Props = {};
+type Props = {
+  questions: IQuestionInfo[];
+};
 
-type States = {};
+const QuestionList = (props: Props): JSX.Element => {
+  const { questions } = props;
 
-export default class QuestionList extends Component<Props, States> {
-  render() {
-    return (
-      <Wrapper>
-        <Question></Question>
-        <Question></Question>
-        <Question></Question>
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper
+      ref={(element: HTMLUListElement | null) => {
+        if (element === null) return;
+        element.scrollTo({ top: element.scrollHeight, behavior: "smooth" });
+      }}
+    >
+      {questions?.map((cur, index) => (
+        <Question
+          key={`question-${index}`}
+          userInfo={cur.userInfo}
+          content={cur.content}
+          slideInfo={cur.slideInfo}
+        />
+      ))}
+    </Wrapper>
+  );
+};
+
+export default QuestionList;
