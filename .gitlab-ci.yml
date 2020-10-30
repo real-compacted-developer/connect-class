@@ -12,7 +12,7 @@ build:
   script:
     - cd front
     - npm install
-    - npm run build
+    - set CI=true && npm run build
   artifacts:
     expire_in: 1 hour
     paths:
