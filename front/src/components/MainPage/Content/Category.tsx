@@ -11,8 +11,6 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.span`
-  width: 77px;
-  height: 20px;
   font-family: GmarketSans;
   font-size: 20px;
   font-weight: bold;
@@ -27,8 +25,6 @@ const Title = styled.span`
 const Text = styled.p`
   margin-top: 20px;
 
-  width: 319px;
-  height: 14px;
   font-family: GmarketSans;
   font-size: 14px;
   font-weight: 500;
@@ -58,31 +54,55 @@ const Button = styled.button`
   border-radius: 30px;
   border: solid 1.5px #9a9fac;
   background-color: #ffffff;
-  outline: none;
 
   font-family: GmarketSans;
   font-size: 13px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.23;
-  letter-spacing: normal;
-  text-align: left;
+  text-align: center;
   color: #9a9fac;
+
+  cursor: pointer;
 `;
 
-const Category: React.FC = () => {
+interface CategoryProps {
+  readonly categoryState: [
+    string,
+    React.Dispatch<React.SetStateAction<string>>
+  ];
+}
+
+const Category: React.FC<CategoryProps> = ({ categoryState }) => {
+  const [, setCategory] = categoryState;
+
+  const onButtonClick = (category: string) => (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setCategory(category);
+
+    const buttons = document.querySelector(".button-list")?.children;
+    if (!buttons) return;
+
+    const buttonArray = Array.from(buttons);
+    buttonArray.forEach((button) => {
+      button.classList.remove("active");
+    });
+
+    e.currentTarget.classList.add("active");
+  };
+
   return (
     <Wrapper>
       <Title>카테고리</Title>
       <Text>스터디에 참여하고 싶은 카테고리 분야를 선택하세요.</Text>
 
-      <ButtonWrapper>
-        <Button className={"active"}>전체</Button>
-        <Button>IT분야</Button>
-        <Button>IT분야</Button>
-        <Button>IT분야</Button>
-        <Button>IT분야</Button>
+      <ButtonWrapper className={"button-list"}>
+        <Button className={"active"} onClick={onButtonClick("")}>
+          전체
+        </Button>
+        <Button onClick={onButtonClick("IT")}>IT</Button>
+        <Button onClick={onButtonClick("취업")}>취업</Button>
+        <Button onClick={onButtonClick("공무원")}>공무원</Button>
+        <Button onClick={onButtonClick("독서논술")}>독서논술</Button>
       </ButtonWrapper>
     </Wrapper>
   );

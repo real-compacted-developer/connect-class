@@ -38,12 +38,12 @@ export const fetchUserAsync = () => async (dispatch: any) => {
 const user = handleActions(
   {
     [FETCH_USER_SUCCESS]: (state, action: any) => ({
-      user: action.payload,
+      user: action.payload.data,
       error: undefined,
     }),
     [FETCH_USER_ERROR]: (state, action: any) => ({
       user: undefined,
-      error: action.payload,
+      error: action.payload.message,
     }),
   },
   initialState
