@@ -1,27 +1,31 @@
 image: node:12
 
-variables:
-  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID 
-  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
- 
 stages:
   - build
   - deploy
+
 cache:
   paths:
-  - node_modules/
+    - front/node_modules/
+
 build:
-  only:
-    - release
   stage: build
   script:
     - cd front
     - npm install
-    - npm run build
-deploy:
+    - CI= npm run build
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - front/build
   only:
     - release
+
+deploy:
+  image: python:latest
   stage: deploy
   script:
-    - cd front
-    - npm run deploy
+    - pip install awscli
+    - aws s3 sync front/build s3://connectclass.io --acl public-read
+  only:
+    - release
