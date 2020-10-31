@@ -1,3 +1,3 @@
 export default {
-  API: "http://localhost:8080",
+  API: "https://api.connectclass.io",
 };
