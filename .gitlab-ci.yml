@@ -7,7 +7,7 @@ stages:
 variables:
   AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-  REACT_APP_QUESTION_LAYER: "http://api.connectclass.io"
+  REACT_APP_QUESTION_LAYER: "http://15.164.241.174"
   REACT_APP_VALIDATION_LAYER: "http://validation.api.connectclass.io"
   REACT_APP_STUDY_LAYER: "http://study.api.connectclass.io"
 
