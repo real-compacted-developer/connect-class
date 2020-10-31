@@ -16,14 +16,13 @@ build:
   artifacts:
     expire_in: 1 hour
     paths:
-      - build
+      - front/build
 
 deploy-to-s3:
   image: python:latest
   stage: deploy
   script:
     - pip install awscli
-    - aws s3 sync build s3://connectclass.io --acl public-read
+    - aws s3 sync front/build s3://connectclass.io --acl public-read
   only:
     - release
-  when: manual
