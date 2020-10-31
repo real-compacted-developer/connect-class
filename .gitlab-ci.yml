@@ -7,6 +7,7 @@ stages:
 cache:
   paths:
     - front/node_modules/
+
 build:
   stage: build
   script:
@@ -17,6 +18,8 @@ build:
     expire_in: 1 hour
     paths:
       - front/build
+  only:
+    - release
 
 deploy:
   image: python:latest
