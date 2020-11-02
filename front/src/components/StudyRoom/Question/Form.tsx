@@ -68,7 +68,7 @@ const Form = (props: Props): JSX.Element => {
 
   const { addQuestions } = props;
   const [content, setContent] = useState<string>("");
-  const socket = useSocket();
+  const { main: socket } = useSocket();
 
   useEffect(() => {
     socket.on(SOCKET_TYPE.GET_NEW_QUESTION, (data: IQuestionInfo) => {

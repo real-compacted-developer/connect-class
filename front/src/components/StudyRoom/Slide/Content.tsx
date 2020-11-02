@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const StudyButton: React.FC = () => {
-  const socket = useSocket();
+  const { main: socket } = useSocket();
 
   useEffect(() => {
     new p5(SlideCanvas(socket));

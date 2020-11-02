@@ -58,7 +58,7 @@ const StudyButton: React.FC<Props> = () => {
     isDisplayColorPicker: false,
     color: "#FF00FF",
   });
-  const socket = useSocket();
+  const { main: socket } = useSocket();
 
   const exit = () => {
     if (!user) return;

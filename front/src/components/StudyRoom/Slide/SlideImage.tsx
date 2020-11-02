@@ -37,7 +37,7 @@ const SlideImage: React.FC = () => {
     index: 0,
     urlInfo: "",
   });
-  const socket = useSocket();
+  const { main: socket } = useSocket();
   const { user } = useUser();
 
   useEffect(() => {
