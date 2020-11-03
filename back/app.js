@@ -3,12 +3,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const api = require("./apis");
 const CanvasStore = require("./stores/CanvasStore");
 const SlideStore = require("./stores/SlideStore");
-
-// const { sequelize } = require("./models");
-// sequelize.sync();
 
 const CanvasInstance = new CanvasStore();
 const SlideInstance = new SlideStore();
@@ -20,8 +16,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-app.use("/api", api);
 
 app.use(function (req, res, next) {
   next(createError(404));
