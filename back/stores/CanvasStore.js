@@ -1,11 +1,11 @@
 class CanvasStore {
   constructor() {
-    this.canvasList = [];
+    this.canvasList = {};
   }
 
   initDrawData(slideId, userId) {
     if (this.canvasList[slideId] === undefined) {
-      this.canvasList[slideId] = [];
+      this.canvasList[slideId] = {};
     }
 
     if (this.canvasList[slideId][userId] === undefined) {
