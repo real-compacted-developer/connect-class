@@ -65,30 +65,42 @@ module.exports = function (socket) {
   });
 
   socket.on(SOCKET_TYPE.IMAGE_PREV, (data) => {
-    if (data.index == 0) {
-      data.index = size - 1;
+    const { userId, roomId } = data;
+    let { index, urlInfo } = data;
+
+    if (index == 0) {
+      index = size - 1;
     } else {
-      data.index -= 1;
+      index -= 1;
     }
 
-    data.urlInfo = imagesPath[data.index];
-    SlideInstance.setSlideIndex(data.index);
-    SlideInstance.setSlideUrl(data.urlInfo);
-    io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
-    sendStoredDrawData(socket, SlideInstance.getSlideIndex(), data.userId);
+    urlInfo = imagesPath[index];
+
+    SlideInstance.setSlideIndex(index);
+    SlideInstance.setSlideUrl(urlInfo);
+
+    io.sockets.in(roomId).emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+
+    sendStoredDrawData(roomId, SlideInstance.getSlideIndex(), userId);
   });
 
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
-    if (data.index >= size - 1) {
-      data.index = 0;
+    const { userId, roomId } = data;
+    let { index, urlInfo } = data;
+    
+    if (index >= size - 1) {
+      index = 0;
     } else {
-      data.index += 1;
+      index += 1;
     }
 
-    data.urlInfo = imagesPath[data.index];
-    SlideInstance.setSlideIndex(data.index);
-    SlideInstance.setSlideUrl(data.urlInfo);
-    io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
-    sendStoredDrawData(socket, SlideInstance.getSlideIndex());
+    urlInfo = imagesPath[index];
+
+    SlideInstance.setSlideIndex(index);
+    SlideInstance.setSlideUrl(urlInfo);
+
+    io.sockets.in(roomId).emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+
+    sendStoredDrawData(roomId, SlideInstance.getSlideIndex(), userId);
   });
 };
