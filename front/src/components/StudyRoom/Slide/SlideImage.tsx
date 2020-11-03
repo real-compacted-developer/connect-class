@@ -10,10 +10,34 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const ButtonWrapper = styled.div`
-  position: fixed;
-  top: 0;
+const MoveButton = styled.button`
+  width: 30px;
+  height: 80px;
+  background-color: #fff3;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  transition: background-color ease 0.5s;
   z-index: 5000;
+  position: absolute;
+  height: 100%;
+
+  :hover {
+    background-color: #fff7;
+  }
+
+  &.prev {
+    background-image: url("https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/47B3F988-F999-425F-BED7-7A3624DC7787.svg");
+    left: 5px;
+  }
+
+  &.next {
+    background-image: url("https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/BDAF98EA-E012-4426-B54C-6838E7C85CE8.svg");
+    right: 5px;
+  }
 `;
 
 const ImageWrapper = styled.div<{ imageURL: string }>`
@@ -59,6 +83,7 @@ const SlideImage: React.FC = () => {
   const onPrevImage = () => {
     if (!user) return;
     const { index, urlInfo } = image;
+
     const data = { index: index, urlInfo: urlInfo, userId: user.id };
     socket.emit(SOCKET_TYPE.IMAGE_PREV, data);
   };
@@ -66,22 +91,16 @@ const SlideImage: React.FC = () => {
   const onNextImage = () => {
     if (!user) return;
     const { index, urlInfo } = image;
+
     const data = { index: index, urlInfo: urlInfo, userId: user.id };
     socket.emit(SOCKET_TYPE.IMAGE_NEXT, data);
   };
 
-  const renderImage = () => {
-    const { urlInfo } = image;
-    return <ImageWrapper imageURL={urlInfo} />;
-  };
-
   return (
     <Wrapper>
-      <ButtonWrapper>
-        <button onClick={onPrevImage}> 이전 슬라이드</button>
-        <button onClick={onNextImage}> 다음 슬라이드</button>
-      </ButtonWrapper>
-      {renderImage()}
+      <MoveButton className={"prev"} onClick={onPrevImage} />
+      <MoveButton className={"next"} onClick={onNextImage} />
+      <ImageWrapper imageURL={image.urlInfo} />
     </Wrapper>
   );
 };
