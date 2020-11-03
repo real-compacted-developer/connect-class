@@ -104,7 +104,7 @@ const StudyCreate: React.FC = () => {
       return;
     }
 
-    await Axios.post(`${process.env.REACT_APP_STUDY_LAYER}/group`, {
+    const res = await Axios.post(`${process.env.REACT_APP_STUDY_LAYER}/group`, {
       title: input.name,
       category: input.category,
       maxPeople: input.people,
@@ -113,8 +113,13 @@ const StudyCreate: React.FC = () => {
       isPremium: false,
     });
 
-    alert("스터디가 생성되었습니다! 스터디로 이동합니다.");
-    history.push(`/study/${input.name}`);
+    Axios.get(
+      `${process.env.REACT_APP_STUDY_LAYER}/group/data/${res.data.data.id}`
+    ).then((res) => {
+      if (!res.data.data) return;
+      alert("스터디가 생성되었습니다! 스터디로 이동합니다.");
+      history.push(`/study/${res.data.data.id}`);
+    });
   };
 
   return (
