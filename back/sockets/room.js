@@ -6,6 +6,10 @@ module.exports = function (socket) {
   socket.on(SOCKET_TYPE.JOIN, async (data) => {
     const { roomId, userId } = data;
     socket.join(roomId);
+    socket.emit(SOCKET_TYPE.SYNC, {
+      idx: SlideInstance.getSlideIndex(),
+      url: SlideInstance.getSlideUrl(),
+    });
     setTimeout(() => {
       initStoredDrawData(socket, SlideInstance.getSlideIndex(), userId);
     }, 100);

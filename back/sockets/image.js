@@ -50,34 +50,28 @@ const imagesPath = [
   "https://connect-class-test.s3.ap-northeast-2.amazonaws.com/StudyGroup2/CONNECTCLASS_%EC%B5%9C%EC%A2%85.pdf-47.png",
 ];
 
-const io = require("../bin/www").io;
 const size = imagesPath.length;
 
 module.exports = function (socket) {
+  const io = require("../bin/www").io;
   const { SlideInstance } = require("../app");
 
   SlideInstance.setSlideIndex(0);
   SlideInstance.setSlideUrl(imagesPath[0]);
 
-  socket.emit(SOCKET_TYPE.SYNC, {
-    idx: SlideInstance.getSlideIndex(),
-    url: SlideInstance.getSlideUrl(),
-  });
-
   socket.on(SOCKET_TYPE.IMAGE_PREV, (data) => {
     const { userId, roomId } = data;
-    let { index, urlInfo } = data;
 
-    if (index == 0) {
-      index = size - 1;
+    if (data.index == 0) {
+      data.index = size - 1;
     } else {
-      index -= 1;
+      data.index -= 1;
     }
 
-    urlInfo = imagesPath[index];
+    data.urlInfo = imagesPath[data.index];
 
-    SlideInstance.setSlideIndex(index);
-    SlideInstance.setSlideUrl(urlInfo);
+    SlideInstance.setSlideIndex(data.index);
+    SlideInstance.setSlideUrl(data.urlInfo);
 
     io.sockets.in(roomId).emit(SOCKET_TYPE.IMAGE_CHANGE, data);
 
@@ -86,18 +80,17 @@ module.exports = function (socket) {
 
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
     const { userId, roomId } = data;
-    let { index, urlInfo } = data;
     
-    if (index >= size - 1) {
-      index = 0;
+    if (data.index >= size - 1) {
+      data.index = 0;
     } else {
-      index += 1;
+      data.index += 1;
     }
 
-    urlInfo = imagesPath[index];
+    data.urlInfo = imagesPath[data.index];
 
-    SlideInstance.setSlideIndex(index);
-    SlideInstance.setSlideUrl(urlInfo);
+    SlideInstance.setSlideIndex(data.index);
+    SlideInstance.setSlideUrl(data.urlInfo);
 
     io.sockets.in(roomId).emit(SOCKET_TYPE.IMAGE_CHANGE, data);
 
