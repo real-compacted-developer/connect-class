@@ -1,6 +1,5 @@
 const SOCKET_TYPE = require("../constants/socket-type");
 const { sendStoredDrawData } = require("../services/draw");
-// const { Slide, StudyData } = require("../models/index");
 
 const imagesPath = [
   "https://connect-class-test.s3.ap-northeast-2.amazonaws.com/StudyGroup2/CONNECTCLASS_%EC%B5%9C%EC%A2%85.pdf-01.png",
