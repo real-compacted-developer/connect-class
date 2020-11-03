@@ -61,6 +61,8 @@ const Icon = styled.div`
   background-image: url("https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/D5C47D8D-E9A0-4B15-8348-2FC2A2CB32EA.svg");
   background-repeat: no-repeat;
   background-size: 58px 20px;
+  background-size: contain;
+  background-position: center center;
 
   margin-right: 20px;
 `;

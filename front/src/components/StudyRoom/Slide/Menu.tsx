@@ -24,8 +24,8 @@ export default class Menu extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <LeftButtons></LeftButtons>
-        <RightButtons></RightButtons>
+        <LeftButtons />
+        <RightButtons />
       </Wrapper>
     );
   }

@@ -10,14 +10,11 @@ export default styled.button`
   background-repeat: no-repeat;
   background-size: 50px 50px;
   background-position: center center;
+  background-image: url("https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/ECC903DE-B218-4DAE-BDE1-3024AAA62F36.svg");
 
   border-radius: 20px;
 
   transition: background-color 0.5s ease;
-
-  &:after {
-    content: "지우개";
-  }
 
   :hover {
     background-color: #ccc;
