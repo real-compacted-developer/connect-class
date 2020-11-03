@@ -1,5 +1,8 @@
-import React, { Component } from "react";
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router";
 import styled from "styled-components";
+import useSocket from "../../../hooks/useSocket";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -62,20 +65,34 @@ const Icon = styled.div`
   margin-right: 20px;
 `;
 
-type Props = {};
+const Information: React.FC = () => {
+  const [title, setTitle] = useState<string>("커넥트클래스 | 불러오는 중...");
+  const [people, setPeople] = useState<number>(0);
+  const match = useRouteMatch<{ id: string }>();
+  const { study } = useSocket();
 
-type States = {};
+  useEffect(() => {
+    Axios.get(
+      `${process.env.REACT_APP_STUDY_LAYER!}/group/info/${match.params.id}`
+    ).then((res) => {
+      setTitle(res.data.data.title);
+    });
 
-export default class Information extends Component<Props, States> {
-  render() {
-    return (
-      <Wrapper>
-        <Title>SW마에스트로 11기 | 커넥트클래스</Title>
-        <FooterWrapper>
-          <Icon></Icon>
-          <SubInformation>1명 참여중</SubInformation>
-        </FooterWrapper>
-      </Wrapper>
-    );
-  }
-}
+    study.on("getPeople", (data: any) => {
+      console.log(data);
+      setPeople(data);
+    });
+  }, [match, study]);
+
+  return (
+    <Wrapper>
+      <Title>{title}</Title>
+      <FooterWrapper>
+        <Icon></Icon>
+        <SubInformation>{people}명 참여중</SubInformation>
+      </FooterWrapper>
+    </Wrapper>
+  );
+};
+
+export default Information;

@@ -1,10 +1,15 @@
 import { handleActions } from "redux-actions";
 import io from "socket.io-client";
-import config from "../config";
 
-type SocketState = SocketIOClient.Socket;
+interface SocketState {
+  readonly main: SocketIOClient.Socket;
+  readonly study: SocketIOClient.Socket;
+}
 
-const initialState: SocketState = io.connect(config.API);
+const initialState: SocketState = {
+  main: io.connect(process.env.REACT_APP_BACKEND!),
+  study: io.connect(process.env.REACT_APP_STUDY_LAYER!),
+};
 
 const socket = handleActions({}, initialState);
 

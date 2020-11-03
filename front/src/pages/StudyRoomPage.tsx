@@ -21,16 +21,22 @@ type Params = {
 const StudyRoom: React.FC = () => {
   const match = useRouteMatch<Params>();
   const { user } = useUser();
-  const socket = useSocket();
+  const { main: socket, study } = useSocket();
 
   useEffect(() => {
     if (!user) return;
     const roomId = match.params.id;
+
     socket.emit(SOCKET_TYPE.JOIN, {
-      roomId: roomId,
+      roomId,
       userId: user.id,
     });
-  }, [match, user, socket]);
+
+    study.emit(SOCKET_TYPE.JOIN, {
+      roomId,
+      userId: user.id,
+    });
+  }, [match, user, socket, study]);
 
   return (
     <Wrapper>

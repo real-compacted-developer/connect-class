@@ -40,7 +40,7 @@ let peer: any = undefined;
 let myAudioStream: any = undefined;
 
 const AudioChat: React.FC = () => {
-  const socket = useSocket();
+  const { main: socket } = useSocket();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const bindEvents = (p: any) => {

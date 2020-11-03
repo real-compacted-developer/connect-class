@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import p5 from "p5";
-
 import Information from "./Information";
 import SlideCanvas from "./SlideCanvas";
 import SlideImage from "./SlideImage";
@@ -22,7 +21,7 @@ const Wrapper = styled.div`
 `;
 
 const StudyButton: React.FC = () => {
-  const socket = useSocket();
+  const { main: socket } = useSocket();
 
   useEffect(() => {
     new p5(SlideCanvas(socket));
