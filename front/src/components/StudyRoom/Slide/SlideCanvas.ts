@@ -2,7 +2,7 @@ import SOCKET_TYPE from "../../../constants/socket-type";
 
 export const drawState = {
   isDraw: false,
-  color: "#FF0000",
+  color: "#000000",
   slideId: 0,
   userId: "",
 };
