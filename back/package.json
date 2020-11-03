@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www.js",
+    "dev": "nodemon",
     "test": "jest"
   },
   "dependencies": {
@@ -15,6 +16,7 @@
     "http-errors": "~1.6.3",
     "machinepack-zip": "^1.1.0",
     "morgan": "~1.9.1",
+    "nodemon": "^2.0.6",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
