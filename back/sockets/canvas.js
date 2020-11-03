@@ -6,14 +6,14 @@ module.exports = function (socket) {
   socket.on(SOCKET_TYPE.DRAW, (data) => {
     const { roomId, slideId, userId } = data;
 
-    Canvas.addDraw(slideId, userId, data);
+    Canvas.addDraw(roomId, slideId, userId, data);
     io.sockets.in(roomId).emit(SOCKET_TYPE.DRAW, data);
   });
 
   socket.on(SOCKET_TYPE.ERASE, (data) => {
     const { roomId, slideId, userId } = data;
 
-    Canvas.deleteDraw(slideId, userId);
+    Canvas.deleteDraw(roomId, slideId, userId);
     io.sockets.in(roomId).emit(SOCKET_TYPE.ERASE, data);
   });
 };

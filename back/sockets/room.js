@@ -11,7 +11,7 @@ module.exports = function (socket) {
       url: SlideInstance.getSlideUrl(),
     });
     setTimeout(() => {
-      initStoredDrawData(socket, SlideInstance.getSlideIndex(), userId);
+      initStoredDrawData(socket, roomId, SlideInstance.getSlideIndex(), userId);
     }, 100);
   });
 
