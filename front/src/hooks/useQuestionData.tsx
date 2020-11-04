@@ -20,15 +20,9 @@ export default (roomNumber: string) => {
     fetchData();
   }, [roomNumber]);
 
-  const addQuestions = useCallback(
-    (data: IQuestionInfo): void => {
-      const newQuestions = questions;
+  const addQuestion = useCallback((data: IQuestionInfo) => {
+    setQuestions((questionsData) => [...questionsData, data]);
+  }, []);
 
-      newQuestions.push(data);
-      setQuestions([...newQuestions]);
-    },
-    [questions]
-  );
-
-  return { questions, error, addQuestions };
+  return { questions, error, addQuestion };
 };
