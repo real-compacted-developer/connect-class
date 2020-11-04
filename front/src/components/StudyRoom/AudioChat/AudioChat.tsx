@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useRouteMatch } from "react-router";
 import SimplePeer from "simple-peer";
 import styled from "styled-components";
 import useSocket from "../../../hooks/useSocket";
@@ -41,6 +42,7 @@ let myAudioStream: any = undefined;
 
 const AudioChat: React.FC = () => {
   const { main: socket } = useSocket();
+  const match = useRouteMatch<{ id: string }>();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const bindEvents = (p: any) => {
@@ -49,7 +51,10 @@ const AudioChat: React.FC = () => {
     });
 
     p.on("signal", (data: any) => {
-      socket?.emit("createOffer", data);
+      socket?.emit("createOffer", {
+        roomId: match.params.id,
+        webrtc: data,
+      });
     });
 
     p.on("stream", (stream: any) => {
@@ -126,7 +131,7 @@ const AudioChat: React.FC = () => {
 
   const startAudioChat = async () => {
     try {
-      socket?.emit("askAudio");
+      socket?.emit("askAudio", { roomId: match.params.id });
     } catch (e) {
       console.log(e.message);
     }

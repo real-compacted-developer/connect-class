@@ -2,11 +2,10 @@ const app = require("../app").app;
 const debug = require("debug")("back:server");
 const http = require("http");
 const socket = require("socket.io");
-const config = require("../config");
 
 const initSocket = require("../sockets");
 
-const port = normalizePort(process.env.PORT || config.DEFAULT_PORT);
+const port = normalizePort(process.env.PORT || 8080);
 app.set("port", port);
 
 const server = http.createServer(app);

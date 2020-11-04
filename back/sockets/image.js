@@ -1,6 +1,5 @@
 const SOCKET_TYPE = require("../constants/socket-type");
 const { sendStoredDrawData } = require("../services/draw");
-// const { Slide, StudyData } = require("../models/index");
 
 const imagesPath = [
   "https://connect-class-test.s3.ap-northeast-2.amazonaws.com/StudyGroup2/CONNECTCLASS_%EC%B5%9C%EC%A2%85.pdf-01.png",
@@ -51,21 +50,18 @@ const imagesPath = [
   "https://connect-class-test.s3.ap-northeast-2.amazonaws.com/StudyGroup2/CONNECTCLASS_%EC%B5%9C%EC%A2%85.pdf-47.png",
 ];
 
-const io = require("../bin/www").io;
 const size = imagesPath.length;
 
 module.exports = function (socket) {
+  const io = require("../bin/www").io;
   const { SlideInstance } = require("../app");
 
   SlideInstance.setSlideIndex(0);
   SlideInstance.setSlideUrl(imagesPath[0]);
 
-  socket.emit(SOCKET_TYPE.SYNC, {
-    idx: SlideInstance.getSlideIndex(),
-    url: SlideInstance.getSlideUrl(),
-  });
-
   socket.on(SOCKET_TYPE.IMAGE_PREV, (data) => {
+    const { userId, roomId } = data;
+
     if (data.index == 0) {
       data.index = size - 1;
     } else {
@@ -73,13 +69,18 @@ module.exports = function (socket) {
     }
 
     data.urlInfo = imagesPath[data.index];
+
     SlideInstance.setSlideIndex(data.index);
     SlideInstance.setSlideUrl(data.urlInfo);
-    io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
-    sendStoredDrawData(socket, SlideInstance.getSlideIndex(), data.userId);
+
+    io.sockets.in(roomId).emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+
+    sendStoredDrawData(roomId, SlideInstance.getSlideIndex(), userId);
   });
 
   socket.on(SOCKET_TYPE.IMAGE_NEXT, (data) => {
+    const { userId, roomId } = data;
+    
     if (data.index >= size - 1) {
       data.index = 0;
     } else {
@@ -87,9 +88,12 @@ module.exports = function (socket) {
     }
 
     data.urlInfo = imagesPath[data.index];
+
     SlideInstance.setSlideIndex(data.index);
     SlideInstance.setSlideUrl(data.urlInfo);
-    io.emit(SOCKET_TYPE.IMAGE_CHANGE, data);
-    sendStoredDrawData(socket, SlideInstance.getSlideIndex());
+
+    io.sockets.in(roomId).emit(SOCKET_TYPE.IMAGE_CHANGE, data);
+
+    sendStoredDrawData(roomId, SlideInstance.getSlideIndex(), userId);
   });
 };

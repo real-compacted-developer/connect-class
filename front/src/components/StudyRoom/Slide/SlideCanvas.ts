@@ -2,12 +2,15 @@ import SOCKET_TYPE from "../../../constants/socket-type";
 
 export const drawState = {
   isDraw: false,
-  color: "#FF0000",
+  color: "#000000",
   slideId: 0,
-  userId: "",
 };
 
-const sketch = (socket: SocketIOClient.Socket) => {
+const sketch = (
+  roomId: string,
+  userId: string,
+  socket: SocketIOClient.Socket
+) => {
   return (s: any) => {
     s.setup = () => {
       const content = document.getElementById("Slide__content");
@@ -36,8 +39,9 @@ const sketch = (socket: SocketIOClient.Socket) => {
       eraseButton.addEventListener("click", () => {
         s.clear();
         socket.emit(SOCKET_TYPE.ERASE, {
+          roomId,
           slideId: drawState.slideId,
-          userId: drawState.userId,
+          userId,
         });
       });
     };
@@ -62,8 +66,9 @@ const sketch = (socket: SocketIOClient.Socket) => {
       pY: number
     ) => {
       const data = {
+        roomId,
         slideId: drawState.slideId,
-        userId: drawState.userId,
+        userId,
         x: Math.round(x),
         y: Math.round(y),
         px: Math.round(pX),

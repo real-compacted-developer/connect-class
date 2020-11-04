@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router";
 import styled from "styled-components";
 import SOCKET_TYPE from "../../../constants/socket-type";
 import useSocket from "../../../hooks/useSocket";
@@ -63,6 +64,7 @@ const SlideImage: React.FC = () => {
   });
   const { main: socket } = useSocket();
   const { user } = useUser();
+  const match = useRouteMatch<{ id: string }>();
 
   useEffect(() => {
     socket.on(SOCKET_TYPE.SYNC, ({ idx, url }: any) => {
@@ -84,7 +86,12 @@ const SlideImage: React.FC = () => {
     if (!user) return;
     const { index, urlInfo } = image;
 
-    const data = { index: index, urlInfo: urlInfo, userId: user.id };
+    const data = {
+      index: index,
+      urlInfo: urlInfo,
+      userId: user.id,
+      roomId: match.params.id,
+    };
     socket.emit(SOCKET_TYPE.IMAGE_PREV, data);
   };
 
@@ -92,7 +99,12 @@ const SlideImage: React.FC = () => {
     if (!user) return;
     const { index, urlInfo } = image;
 
-    const data = { index: index, urlInfo: urlInfo, userId: user.id };
+    const data = {
+      index: index,
+      urlInfo: urlInfo,
+      userId: user.id,
+      roomId: match.params.id,
+    };
     socket.emit(SOCKET_TYPE.IMAGE_NEXT, data);
   };
 

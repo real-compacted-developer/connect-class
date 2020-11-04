@@ -1,21 +1,19 @@
 const Canvas = require("../app").CanvasInstance;
 const SOCKET_TYPE = require("../constants/socket-type");
 
-function initStoredDrawData(socket, slideId, userId) {
-  const drawDataList = Canvas.getDrawData(slideId, userId);
+function initStoredDrawData(socket, roomId, slideId, userId) {
+  const drawDataList = Canvas.getDrawData(roomId, slideId, userId);
   if (drawDataList === undefined) return;
   drawDataList.forEach((draw) => {
     socket.emit(SOCKET_TYPE.DRAW, draw);
   });
 }
 
-function sendStoredDrawData(socket, slideId, userId) {
-  const drawDataList = Canvas.getDrawData(slideId, userId);
+function sendStoredDrawData(roomId, slideId, userId) {
+  const io = require("../bin/www").io;
+  const drawDataList = Canvas.getDrawData(roomId, slideId, userId);
   if (drawDataList === undefined) return;
-  drawDataList.forEach((draw) => {
-    socket.emit(SOCKET_TYPE.DRAW, draw); // broadcast는 자기 자신을 제외하고 보냅니다.
-    socket.broadcast.emit(SOCKET_TYPE.DRAW, draw);
-  });
+  drawDataList.forEach((draw) => io.sockets.in(roomId).emit(SOCKET_TYPE.DRAW, draw));
 }
 
 exports.initStoredDrawData = initStoredDrawData;

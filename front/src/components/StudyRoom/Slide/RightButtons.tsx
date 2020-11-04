@@ -92,7 +92,6 @@ const StudyButton: React.FC<Props> = () => {
       isDisplayColorPicker: !current.isDisplayColorPicker,
     }));
 
-    drawState.userId = user.id;
     drawState.isDraw = drawSetting.isDisplayColorPicker;
   };
 

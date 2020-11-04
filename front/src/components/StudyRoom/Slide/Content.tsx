@@ -5,6 +5,8 @@ import Information from "./Information";
 import SlideCanvas from "./SlideCanvas";
 import SlideImage from "./SlideImage";
 import useSocket from "../../../hooks/useSocket";
+import { useRouteMatch } from "react-router";
+import useUser from "../../../hooks/useUser";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -22,10 +24,13 @@ const Wrapper = styled.div`
 
 const StudyButton: React.FC = () => {
   const { main: socket } = useSocket();
+  const { user } = useUser();
+  const match = useRouteMatch<{ id: string }>();
 
   useEffect(() => {
-    new p5(SlideCanvas(socket));
-  }, [socket]);
+    if (!user) return;
+    new p5(SlideCanvas(match.params.id, user.id, socket));
+  }, [socket, user, match]);
 
   return (
     <Wrapper id="Slide__content">
