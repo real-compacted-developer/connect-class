@@ -9,7 +9,7 @@ export default {
 const dummyFunction = (): void => {};
 
 export const QuestionFormStory = () => {
-  return <Form addQuestions={dummyFunction} />;
+  return <Form />;
 };
 
 QuestionFormStory.story = {

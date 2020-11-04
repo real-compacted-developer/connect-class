@@ -59,14 +59,10 @@ const dummySlide = {
     "https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F24283C3858F778CA2EFABE",
 };
 
-type Props = {
-  addQuestions: (data: IQuestionInfo) => void;
-};
+type Props = {};
 
 const Form = (props: Props): JSX.Element => {
   const roomNumber = window.location.pathname.split("/study/")[1];
-
-  const { addQuestions } = props;
   const [content, setContent] = useState<string>("");
   const { main: socket } = useSocket();
 
@@ -98,13 +94,11 @@ const Form = (props: Props): JSX.Element => {
       },
       content: content,
       userInfo: {
-        userName: "남궁권",
+        userName: "조찬기",
         profileImageURL:
-          "http://k.kakaocdn.net/dn/CItX8/btqGvQ5a7B7/6IyKbRGltQPiyyfyS703VK/img_110x110.jpg",
+          "https://avatars2.githubusercontent.com/u/38618187?s=460&u=905eb85086c3790b9d5cc247ab2cee100bf569e3&v=4",
       },
     };
-
-    addQuestions(questionData);
 
     socket.emit(SOCKET_TYPE.CREATE_NEW_QUESTION, { roomNumber, questionData });
 
