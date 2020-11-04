@@ -70,12 +70,6 @@ const Form = (props: Props): JSX.Element => {
   const [content, setContent] = useState<string>("");
   const { main: socket } = useSocket();
 
-  useEffect(() => {
-    socket.on(SOCKET_TYPE.GET_NEW_QUESTION, (data: IQuestionInfo) => {
-      addQuestions(data);
-    });
-  }, [socket]);
-
   let inputTag: HTMLInputElement | null = null;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
