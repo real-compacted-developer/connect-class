@@ -11,28 +11,18 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.span`
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
   font-size: 20px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #34363b;
 `;
 
 const Text = styled.p`
   margin-top: 20px;
 
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
   font-size: 14px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.21;
-  letter-spacing: normal;
-  text-align: left;
   color: #9a9fac;
 `;
 
@@ -43,6 +33,7 @@ const ButtonWrapper = styled.div`
     background-color: #346bff;
     color: #ffffff;
     border: solid 1.5px #346bff;
+    font-weight: bold;
   }
 `;
 
@@ -55,9 +46,10 @@ const Button = styled.button`
   border: solid 1.5px #9a9fac;
   background-color: #ffffff;
 
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
+  line-height: 33px;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 500;
   text-align: center;
   color: #9a9fac;
 

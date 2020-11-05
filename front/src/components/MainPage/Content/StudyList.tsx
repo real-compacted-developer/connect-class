@@ -14,14 +14,9 @@ const Wrapper = styled.div`
 
 const Title = styled.span`
   height: 20px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
   font-size: 20px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-align: left;
   color: #34363b;
 `;
 

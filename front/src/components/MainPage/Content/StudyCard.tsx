@@ -21,14 +21,9 @@ const Content = styled.div`
 const Title = styled.span`
   width: 149px;
   height: 18px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
   font-size: 18px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.22;
-  letter-spacing: normal;
-  text-align: left;
   color: #34363b;
 `;
 
@@ -50,14 +45,9 @@ const PeopleIcon = styled.div`
 
 const PeopleCount = styled.p`
   height: 20px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
   font-size: 17px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.18;
-  letter-spacing: 3.4px;
-  text-align: left;
   color: #d0d4de;
 `;
 
