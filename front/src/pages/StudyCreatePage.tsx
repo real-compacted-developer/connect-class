@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-import CreateSideBar from "../components/StudyCreate/CreateSideBar";
-import Header from "../components/StudyCreate/Header";
+import SideBar from "../components/SideBar";
+import Header from "../components/MainPage/Header";
 import StudyNameInput from "../components/StudyCreate/StudyNameInput";
 import StudyCategoryInput from "../components/StudyCreate/StudyCategoryInput";
 import StudyMaxPeopleInput from "../components/StudyCreate/StudyMaxPeopleInput";
@@ -12,21 +12,28 @@ import CreateButton from "../components/StudyCreate/CreateForm/CreateButton";
 import useUser from "../hooks/useUser";
 
 const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+
   display: flex;
-  flex-direction: row;
 `;
 
 const BodyWrapper = styled.div`
-  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
 `;
 
 const Body = styled.div`
-  margin-left: 14vw;
-  margin-top: 65px;
+  margin-left: 110px;
+  margin-top: 125px;
 
-  @media screen and (max-width: 1000px) {
-    margin-left: 2rem;
-  }
+  width: calc(100% - 311px);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 const Title = styled.h1`
@@ -124,32 +131,37 @@ const StudyCreate: React.FC = () => {
 
   return (
     <Wrapper>
-      <CreateSideBar />
+      <Header />
       <BodyWrapper>
-        <Header />
+        <SideBar />
         <Body>
-          <Title>스터디 개설하기</Title>
-          <SubTitle>만들고 싶은 스터디를 직접 만들고 참여해보세요.</SubTitle>
+          <div>
+            <Title>스터디 개설하기</Title>
+            <SubTitle>만들고 싶은 스터디를 직접 만들고 참여해보세요.</SubTitle>
 
-          <Blank value={65} />
-          <StudyNameInput onChange={onInputChange("name")} value={input.name} />
+            <Blank value={65} />
+            <StudyNameInput
+              onChange={onInputChange("name")}
+              value={input.name}
+            />
 
-          <Blank value={85} />
-          <StudyCategoryInput onChange={onInputChange("category")} />
+            <Blank value={85} />
+            <StudyCategoryInput onChange={onInputChange("category")} />
 
-          <Blank value={85} />
-          <StudyMaxPeopleInput onChange={onInputChange("people")} />
+            <Blank value={85} />
+            <StudyMaxPeopleInput onChange={onInputChange("people")} />
 
-          <Blank value={85} />
-          <StudyPasswordInput
-            onChange={onInputChange("password")}
-            value={input.password}
-          />
+            <Blank value={85} />
+            <StudyPasswordInput
+              onChange={onInputChange("password")}
+              value={input.password}
+            />
 
-          <Blank value={81} />
-          <ButtonWrapper>
-            <CreateButton onClick={createStudy} />
-          </ButtonWrapper>
+            <Blank value={81} />
+            <ButtonWrapper>
+              <CreateButton onClick={createStudy} />
+            </ButtonWrapper>
+          </div>
         </Body>
       </BodyWrapper>
     </Wrapper>

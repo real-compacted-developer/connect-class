@@ -6,7 +6,7 @@ import Menu from "./Menu";
 const Wrapper = styled.div`
   margin-top: 52px;
   width: 311px;
-  height: 100%;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
