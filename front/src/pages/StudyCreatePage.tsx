@@ -26,14 +26,14 @@ const BodyWrapper = styled.div`
 `;
 
 const Body = styled.div`
-  margin-left: 110px;
   margin-top: 125px;
 
   width: calc(100% - 311px);
   height: 100%;
 
   display: flex;
-  flex-direction: column;
+
+  justify-content: center;
 `;
 
 const Title = styled.h1`
