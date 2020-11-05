@@ -4,7 +4,7 @@ import styled from "styled-components";
 import LazyImage from "../../common/LazyImage";
 
 const Wrapper = styled.div`
-  margin: 0px 20px 20px 0;
+  margin: 0px 35px 35px 0;
   width: 330px;
   height: 330px;
 
@@ -12,6 +12,8 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   cursor: pointer;
+
+  box-shadow: 0 5px 10px 0 rgba(154, 159, 172, 0.17);
 `;
 
 const Content = styled.div`
