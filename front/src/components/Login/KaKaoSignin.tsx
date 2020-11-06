@@ -1,13 +1,12 @@
-import React, { Fragment } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import KaKaoLogin from 'react-kakao-login';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import KakaoLogin from 'react-kakao-login';
 dotenv.config();
 
 export const KaKaoSignin = () => {
-  const history = useHistory();
+	const history = useHistory();
 	const responseKaKao = async (res: any) => {
 		const config = {
 			headers: {
@@ -29,7 +28,7 @@ export const KaKaoSignin = () => {
 			const token = await axios.post('http://localhost:5500/token', JSON.stringify(user.data.data), config);
 			localStorage.setItem('token', token.data.token);
 			if (localStorage.token) {
-        history.goBack();
+				history.goBack();
 			}
 		} else {
 			try {
@@ -38,8 +37,8 @@ export const KaKaoSignin = () => {
 				const msg: string = JSON.stringify(res.data.success);
 				if (msg === 'true') {
 					const token = await axios.post('http://localhost:5500/token', body, config);
-          localStorage.setItem('token', token.data.token);
-          history.goBack();
+					localStorage.setItem('token', token.data.token);
+					history.goBack();
 				} else {
 				}
 			} catch (err) {
@@ -53,29 +52,26 @@ export const KaKaoSignin = () => {
 	// Redirect if logged in
 
 	return (
-		
-			<KaKaoBtn
-				token={process.env.REACT_APP_KAKAO_KEY!}
-				onSuccess={responseKaKao}
-				onFail={responseFail}
-			>카카오톡 로그인</KaKaoBtn>
+		<KakaoLogin
+			token={process.env.REACT_APP_KAKAO_KEY!}
+			onSuccess={responseKaKao}
+			onFail={responseFail}
+			style={{
+				width: '295px',
+				height: '61px',
+				borderRadius: '35px',
+				backgroundColor: '#ffe600',
+				fontFamily: 'GmarketSans',
+				fontSize: '18px',
+				fontWeight: 'bold',
+				fontStretch: 'normal',
+				fontStyle: 'normal',
+				lineHeight: 1.67,
+				letterSpacing: 'normal',
+				textAlign: 'center',
+			}}
+		>
+			카카오로 시작하기
+		</KakaoLogin>
 	);
 };
-
-const KaKaoBtn = styled(KaKaoLogin)`
-	padding: 0;
-	width: 190px;
-	height: 44px;
-	line-height: 44px;
-	color: #783c00;
-	background-color: #ffeb00;
-	border: 1px solid transparent;
-	border-radius: 3px;
-	font-size: 16px;
-	font-weight: bold;
-	text-align: center;
-	cursor: pointer;
-	&:hover {
-		box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
-	}
-`;

@@ -1,13 +1,14 @@
-import React, { Fragment } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
-import GoogleLogin from 'react-google-login';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import GoogleLogin from 'react-google-login';
+import GoogleButton from './Buttons/GoogleButton';
 
 dotenv.config();
 
 export const GoogleSignin = () => {
-  const history = useHistory();
+	const history = useHistory();
 	const responseGoogle = async (res: any) => {
 		const config = {
 			headers: {
@@ -27,8 +28,8 @@ export const GoogleSignin = () => {
 		const isUser: string = JSON.stringify(user.data.success);
 		if (isUser === 'true') {
 			const token = await axios.post('http://localhost:5500/token', JSON.stringify(user.data.data), config);
-      localStorage.setItem('token', token.data.token);
-      history.goBack();
+			localStorage.setItem('token', token.data.token);
+			history.goBack();
 		} else {
 			try {
 				const body = JSON.stringify(data);
@@ -36,8 +37,8 @@ export const GoogleSignin = () => {
 				const msg: string = JSON.stringify(res.data.success);
 				if (msg === 'true') {
 					const token = await axios.post('http://localhost:5500/token', body, config);
-          localStorage.setItem('token', token.data.token);
-          history.goBack();
+					localStorage.setItem('token', token.data.token);
+					history.goBack();
 				} else {
 					alert('DB 오류입니다.');
 				}
@@ -46,17 +47,16 @@ export const GoogleSignin = () => {
 			}
 		}
 	};
-	if (localStorage.token) {
-		return <Redirect to='/' />;
-	}
 	return (
-		<Fragment>
-			<GoogleLogin
-				clientId={process.env.REACT_APP_GOOGLE_KEY!}
-				buttonText='구글 계정으로 로그인'
-				onSuccess={responseGoogle}
-				onFailure={(result : any) => console.log(result)}
-			/>
-		</Fragment>
+		<GoogleLogin
+			clientId={process.env.REACT_APP_GOOGLE_KEY!}
+			render={(renderProps) => (
+				<GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled}>
+					구글로 시작하기
+				</GoogleButton>
+			)}
+			onSuccess={responseGoogle}
+			onFailure={(result: any) => console.log(result)}
+		/>
 	);
 };
