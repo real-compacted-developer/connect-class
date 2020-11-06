@@ -4,7 +4,7 @@ import styled from "styled-components";
 import LazyImage from "../../common/LazyImage";
 
 const Wrapper = styled.div`
-  margin: 0px 20px 20px 0;
+  margin: 0px 35px 35px 0;
   width: 330px;
   height: 330px;
 
@@ -12,6 +12,8 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   cursor: pointer;
+
+  box-shadow: 0 5px 10px 0 rgba(154, 159, 172, 0.17);
 `;
 
 const Content = styled.div`
@@ -21,14 +23,9 @@ const Content = styled.div`
 const Title = styled.span`
   width: 149px;
   height: 18px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
   font-size: 18px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.22;
-  letter-spacing: normal;
-  text-align: left;
   color: #34363b;
 `;
 
@@ -50,14 +47,9 @@ const PeopleIcon = styled.div`
 
 const PeopleCount = styled.p`
   height: 20px;
-  font-family: GmarketSans;
+  font-family: "Gmarket Sans", sans-serif;
   font-size: 17px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.18;
-  letter-spacing: 3.4px;
-  text-align: left;
   color: #d0d4de;
 `;
 

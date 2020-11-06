@@ -9,6 +9,11 @@ const Wrapper = styled.div`
   flex-direction: row;
 
   align-items: center;
+
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Icon = styled.div<{ url: string }>`
