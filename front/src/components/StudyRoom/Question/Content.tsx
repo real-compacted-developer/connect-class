@@ -86,11 +86,11 @@ export default class Content extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <Menu>
+        {/* <Menu>
           <Best>Best</Best>
           <Recent>Recent</Recent>
         </Menu>
-        <Gradation />
+        <Gradation /> */}
         <QuestionList questions={this.props.questions} />
       </Wrapper>
     );

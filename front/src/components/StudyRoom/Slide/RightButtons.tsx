@@ -116,7 +116,7 @@ const StudyButton: React.FC<Props> = () => {
       )}
       <PencilButton onClick={handleDrawClick} onContextMenu={handleDrawClick} />
       <EraseButton id="Slide__erase" />
-      <PresentButton />
+      {/* <PresentButton /> */}
       <ExitButton onClick={exit}>종료</ExitButton>
     </Wrapper>
   );
