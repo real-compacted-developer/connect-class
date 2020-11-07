@@ -24,19 +24,23 @@ export const GoogleSignin = () => {
 			isPremium: false,
 		};
 		const userId = 'google' + res.profileObj.googleId;
-		const user = await axios.get(`http://db.api.connectclass.io/user/${userId}`);
+		const user = await axios.get(`${process.env.REACT_APP_DB_LAYER}/user/${userId}`);
 		const isUser: string = JSON.stringify(user.data.success);
 		if (isUser === 'true') {
-			const token = await axios.post('http://localhost:5500/token', JSON.stringify(user.data.data), config);
+			const token = await axios.post(
+				`${process.env.REACT_APP_AUTH_LAYER}/token`,
+				JSON.stringify(user.data.data),
+				config
+			);
 			localStorage.setItem('token', token.data.token);
 			history.goBack();
 		} else {
 			try {
 				const body = JSON.stringify(data);
-				const res = await axios.post('http://db.api.connectclass.io/user', body, config);
+				const res = await axios.post(`${process.env.REACT_APP_DB_LAYER}/user`, body, config);
 				const msg: string = JSON.stringify(res.data.success);
 				if (msg === 'true') {
-					const token = await axios.post('http://localhost:5500/token', body, config);
+					const token = await axios.post(`${process.env.REACT_APP_DB_LAYER}/token`, body, config);
 					localStorage.setItem('token', token.data.token);
 					history.goBack();
 				} else {

@@ -20,7 +20,9 @@ const UploadButton: React.FC = () => {
 		const formData = new FormData();
 		formData.append('file', file); // appending file
 		axios
-			.post('http://localhost:8080/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+			.post(`${process.env.REACT_APP_UPLOAD_LAYER}/upload`, formData, {
+				headers: { 'Content-Type': 'multipart/form-data' },
+			})
 			.then(async (res) => {
 				const studyData = res.data.data;
 				const studyGroupId = '73a9c2a5-6954-44e9-b1c8-99c5c85c8f9e';

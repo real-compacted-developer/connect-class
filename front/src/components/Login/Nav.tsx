@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import NaverButton from './Buttons/NaverButton';
@@ -42,7 +42,7 @@ export const Nav = () => {
 					Authorization: loca,
 				},
 			};
-			const token = await axios.get('http://localhost:5500/login/callback', config);
+			const token = await axios.get(`${process.env.REACT_APP_AUTH_LAYER}/login/callback`, config);
 			localStorage.setItem('token', token.data.token);
 		}
 	}
