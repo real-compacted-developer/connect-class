@@ -16,15 +16,6 @@ const TextSection = styled.div`
   margin-bottom: 10px;
 `;
 
-const ImageSection = styled.div`
-  width: 100%;
-  height: 160px;
-
-  margin: 10px 0;
-`;
-
-// const LikeSection = styled.div``;
-
 interface IProps {
   slideInfo: {
     page: number;
@@ -37,14 +28,6 @@ const Content = (props: IProps): JSX.Element => {
   return (
     <Wrapper>
       <TextSection>{props.content}</TextSection>
-      <ImageSection>
-        <LazyImage
-          width={"100%"}
-          height={"100%"}
-          imageURL={props.slideInfo.imageURL}
-        />
-      </ImageSection>
-      <Like count={0} />
     </Wrapper>
   );
 };

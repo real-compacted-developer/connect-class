@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import LeftButtons from "./LeftButtons";
+// import LeftButtons from "./LeftButtons";
 import RightButtons from "./RightButtons";
 
 const Wrapper = styled.div`
@@ -24,7 +24,7 @@ export default class Menu extends Component<Props, States> {
   render() {
     return (
       <Wrapper>
-        <LeftButtons />
+        {/* <LeftButtons /> */}
         <RightButtons />
       </Wrapper>
     );
