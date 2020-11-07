@@ -29,7 +29,8 @@
     "simple-peer": "^9.7.2",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.1",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "uuidv4": "^6.2.5"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.0.21",
