@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.button`
-	width: 295px;
-	height: 61px;
+  width: 548px;
+  height: 61px;
 	border-radius: 35px;
 	background-color: #f4f4f4;
 	font-family: GmarketSans;
@@ -13,5 +13,14 @@ export default styled.button`
 	line-height: 1.67;
 	letter-spacing: normal;
 	text-align: center;
-	color: #34363b;
+  color: #34363b;
+  border: none;
+
+  outline: none;
+
+  transition: all ease 0.5s;
+
+  &:hover{
+    background-color: #afafaf;
+  }
 `;
