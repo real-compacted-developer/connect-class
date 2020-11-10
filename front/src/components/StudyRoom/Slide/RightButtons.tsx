@@ -4,7 +4,6 @@ import SOCKET_TYPE from "../../../constants/socket-type";
 import { useRouteMatch } from "react-router-dom";
 import { drawState } from "./SlideCanvas";
 import PencilButton from "./Buttons/PencilButton";
-import PresentButton from "./Buttons/PresentButton";
 import ExitButton from "./Buttons/ExitButton";
 import { SketchPicker } from "react-color";
 import EraseButton from "./Buttons/EraseButton";
