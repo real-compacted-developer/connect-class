@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import SOCKET_TYPE from "../../../constants/socket-type";
-import { useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { drawState } from "./SlideCanvas";
 import PencilButton from "./Buttons/PencilButton";
 import ExitButton from "./Buttons/ExitButton";
@@ -50,6 +50,7 @@ type Params = {
 };
 
 const StudyButton: React.FC<Props> = () => {
+  const history = useHistory();
   const match = useRouteMatch<Params>();
   const { user } = useUser();
   const [drawSetting, setDrawSetting] = useState<States>({
@@ -57,14 +58,24 @@ const StudyButton: React.FC<Props> = () => {
     isDisplayColorPicker: false,
     color: "#FF00FF",
   });
-  const { main: socket } = useSocket();
+  const { main: socket, study } = useSocket();
 
   const exit = () => {
     if (!user) return;
+
+    // 백엔드 레이어 방 퇴장
     socket.emit(SOCKET_TYPE.EXIT, {
       roomId: match.params.id,
       userId: user.id,
     });
+
+    // 스터디 레이어 방 퇴장
+    study.emit(SOCKET_TYPE.EXIT, {
+      roomId: match.params.id,
+      userId: user.id,
+    });
+
+    history.push("/");
   };
 
   const closeColorPicker = () => {
