@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
 import styled from "styled-components";
+import SOCKET_TYPE from "../../../constants/socket-type";
 import useSocket from "../../../hooks/useSocket";
 
 const Wrapper = styled.div`
@@ -80,9 +81,13 @@ const Information: React.FC = () => {
       setTitle(res.data.data.title);
     });
 
-    study.on("getPeople", (data: any) => {
+    study.on(SOCKET_TYPE.GET_PEOPLE, (data: any) => {
       setPeople(data);
     });
+
+    return () => {
+      study.off(SOCKET_TYPE.GET_PEOPLE);
+    };
   }, [match, study]);
 
   return (
