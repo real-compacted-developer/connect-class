@@ -1,17 +1,18 @@
 const SOCKET_TYPE = require("../constants/socket-type");
 const { sendStoredDrawData } = require("../services/draw");
-const io = require("../bin/www").io;
 const { SlideInstance } = require("../app");
 
 const studyData = require("../stores/study-datas");
 
 module.exports = function (socket) {
+  const io = require("../bin/www").io;
   SlideInstance.setSlideIndex(0);
 
   socket.on(SOCKET_TYPE.IMAGE_PREV, async (data) => {
     const { userId, roomId } = data;
 
     const imagesPath = await studyData.find(roomId);
+    if (imagesPath === undefined) return;
     const size = imagesPath.length;
 
     if (data.index == 0) {
@@ -34,6 +35,7 @@ module.exports = function (socket) {
     const { userId, roomId } = data;
 
     const imagesPath = await studyData.find(roomId);
+    if (imagesPath === undefined) return;
     const size = imagesPath.length;
 
     if (data.index >= size - 1) {
