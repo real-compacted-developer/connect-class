@@ -81,7 +81,6 @@ const Information: React.FC = () => {
     });
 
     study.on("getPeople", (data: any) => {
-      console.log(data);
       setPeople(data);
     });
   }, [match, study]);
