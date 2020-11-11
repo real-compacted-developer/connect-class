@@ -49,9 +49,9 @@ export const KaKaoSignin = () => {
         JSON.stringify(user.data.data),
         config
       );
-      localStorage.setItem("token", token.data.token);
+      localStorage.setItem("token", token.data.token.replace("Bearer ", ""));
       if (localStorage.token) {
-        history.goBack();
+        window.location.reload();
       }
     } else {
       try {
@@ -68,8 +68,11 @@ export const KaKaoSignin = () => {
             body,
             config
           );
-          localStorage.setItem("token", token.data.token);
-          history.goBack();
+          localStorage.setItem(
+            "token",
+            token.data.token.replace("Bearer ", "")
+          );
+          window.location.reload();
         } else {
         }
       } catch (err) {
