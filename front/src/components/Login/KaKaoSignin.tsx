@@ -1,10 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-// import dotenv from 'dotenv';
 import KakaoLogin from "react-kakao-login";
-// dotenv.config();
 
 const ButtonWrapper = styled.div`
   width: 548px;
@@ -23,7 +20,6 @@ const ButtonWrapper = styled.div`
 `;
 
 export const KaKaoSignin = () => {
-  const history = useHistory();
   const responseKaKao = async (res: any) => {
     const config = {
       headers: {

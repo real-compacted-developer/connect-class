@@ -1,11 +1,9 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
 import GoogleButton from "./Buttons/GoogleButton";
 
 export const GoogleSignin = () => {
-  const history = useHistory();
   const responseGoogle = async (res: any) => {
     const config = {
       headers: {
