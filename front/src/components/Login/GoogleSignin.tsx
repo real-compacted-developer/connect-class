@@ -34,8 +34,8 @@ export const GoogleSignin = () => {
         JSON.stringify(user.data.data),
         config
       );
-      localStorage.setItem("token", token.data.token);
-      history.goBack();
+      localStorage.setItem("token", token.data.token.replace("Bearer ", ""));
+      window.location.reload();
     } else {
       try {
         const body = JSON.stringify(data);
@@ -51,8 +51,11 @@ export const GoogleSignin = () => {
             body,
             config
           );
-          localStorage.setItem("token", token.data.token);
-          history.goBack();
+          localStorage.setItem(
+            "token",
+            token.data.token.replace("Bearer ", "")
+          );
+          window.location.reload();
         } else {
           alert("DB 오류입니다.");
         }
