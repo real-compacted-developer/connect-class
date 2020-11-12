@@ -80,6 +80,11 @@ const SlideImage: React.FC = () => {
       });
       drawState.slideId = data.index;
     });
+
+    return () => {
+      socket.off(SOCKET_TYPE.SYNC);
+      socket.off(SOCKET_TYPE.IMAGE_CHANGE);
+    };
   }, [socket]);
 
   const onPrevImage = () => {

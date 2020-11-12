@@ -1,4 +1,4 @@
-export default {
+const SOCKET_TYPE = {
   DRAW: "draw",
   ERASE: "erase",
 
@@ -16,4 +16,8 @@ export default {
 
   GET_NEW_QUESTION: "getNewQuestion",
   CREATE_NEW_QUESTION: "createNewQuestion",
+
+  GET_PEOPLE: "getPeople",
 };
+
+export default SOCKET_TYPE;

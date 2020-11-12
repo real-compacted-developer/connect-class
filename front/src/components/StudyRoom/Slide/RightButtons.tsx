@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SOCKET_TYPE from "../../../constants/socket-type";
-import { useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { drawState } from "./SlideCanvas";
 import PencilButton from "./Buttons/PencilButton";
-import PresentButton from "./Buttons/PresentButton";
 import ExitButton from "./Buttons/ExitButton";
 import { SketchPicker } from "react-color";
 import EraseButton from "./Buttons/EraseButton";
 import useSocket from "../../../hooks/useSocket";
 import useUser from "../../../hooks/useUser";
+import useBeforeUnload from "../../../hooks/useBeforeUnload";
 
 const Wrapper = styled.div`
   width: 360px;
@@ -51,6 +51,7 @@ type Params = {
 };
 
 const StudyButton: React.FC<Props> = () => {
+  const history = useHistory();
   const match = useRouteMatch<Params>();
   const { user } = useUser();
   const [drawSetting, setDrawSetting] = useState<States>({
@@ -58,14 +59,48 @@ const StudyButton: React.FC<Props> = () => {
     isDisplayColorPicker: false,
     color: "#FF00FF",
   });
-  const { main: socket } = useSocket();
+  const { main: socket, study } = useSocket();
 
-  const exit = () => {
-    if (!user) return;
+  const beforeUnloadHandle = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
+
+    if (!user) return null;
+
+    // 백엔드 레이어 방 퇴장
     socket.emit(SOCKET_TYPE.EXIT, {
       roomId: match.params.id,
       userId: user.id,
     });
+
+    // 스터디 레이어 방 퇴장
+    study.emit(SOCKET_TYPE.EXIT, {
+      roomId: match.params.id,
+      userId: user.id,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", beforeUnloadHandle);
+    return () => window.removeEventListener("beforeunload", beforeUnloadHandle);
+  }, []);
+
+  const exit = () => {
+    if (!user) return;
+
+    // 백엔드 레이어 방 퇴장
+    socket.emit(SOCKET_TYPE.EXIT, {
+      roomId: match.params.id,
+      userId: user.id,
+    });
+
+    // 스터디 레이어 방 퇴장
+    study.emit(SOCKET_TYPE.EXIT, {
+      roomId: match.params.id,
+      userId: user.id,
+    });
+
+    history.push("/");
   };
 
   const closeColorPicker = () => {
