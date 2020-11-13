@@ -9,7 +9,6 @@ import { SketchPicker } from "react-color";
 import EraseButton from "./Buttons/EraseButton";
 import useSocket from "../../../hooks/useSocket";
 import useUser from "../../../hooks/useUser";
-import useBeforeUnload from "../../../hooks/useBeforeUnload";
 
 const Wrapper = styled.div`
   width: 360px;
