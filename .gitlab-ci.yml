@@ -21,6 +21,7 @@ variables:
   REACT_APP_NAVER_STATE: $NAVER_STATE
   REACT_APP_NAVER_APP_KEY: $NAVER_APP_KEY
 
+
 cache:
   paths:
     - front/node_modules/
