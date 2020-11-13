@@ -29,8 +29,9 @@ build:
   stage: build
   script:
     - cd front
-    - npm install
-    - CI= npm run build
+    - npm install -g yarn
+    - yarn
+    - CI= yarn build
   artifacts:
     expire_in: 1 hour
     paths:
