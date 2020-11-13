@@ -36,6 +36,8 @@ build:
       - front/build
   only:
     - release
+  tags:
+    - ci
 
 deploy:
   image: python:latest
@@ -45,3 +47,5 @@ deploy:
     - aws s3 cp --recursive --region ap-northeast-2 front/build/ s3://connectclass.io
   only:
     - release
+  tags:
+    - ci
