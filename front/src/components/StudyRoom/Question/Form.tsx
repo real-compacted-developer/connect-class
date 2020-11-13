@@ -97,9 +97,8 @@ const Form = (props: Props): JSX.Element => {
       },
       content: content,
       userInfo: {
-        userName: "조찬기",
-        profileImageURL:
-          "https://avatars2.githubusercontent.com/u/38618187?s=460&u=905eb85086c3790b9d5cc247ab2cee100bf569e3&v=4",
+        userName: user.nickname,
+        profileImageURL: user.profileImage,
       },
     };
 
