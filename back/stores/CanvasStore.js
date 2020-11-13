@@ -3,7 +3,7 @@ class CanvasStore {
     this.canvasList = {};
   }
 
-  initDrawData(roomId, slideId, userId) {
+  initSlideDrawData(roomId, slideId) {
     if (this.canvasList[roomId] === undefined) {
       this.canvasList[roomId] = {};
     }
@@ -11,6 +11,10 @@ class CanvasStore {
     if (this.canvasList[roomId][slideId] === undefined) {
       this.canvasList[roomId][slideId] = {};
     }
+  }
+
+  initDrawData(roomId, slideId, userId) {
+    this.initSlideDrawData(roomId, slideId);
 
     if (this.canvasList[roomId][slideId][userId] === undefined) {
       this.canvasList[roomId][slideId][userId] = new Set([]);
@@ -29,6 +33,11 @@ class CanvasStore {
     this.initDrawData(roomId, slideId, userId);
 
     return this.canvasList[roomId][slideId][userId];
+  }
+
+  getSlideDrawData(roomId, slideId) {
+    this.initSlideDrawData(roomId, slideId);
+    return this.canvasList[roomId][slideId];
   }
 
   deleteDrawWithIndex(roomId, slideId, userId, index) {

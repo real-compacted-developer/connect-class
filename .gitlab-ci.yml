@@ -3,14 +3,13 @@ image: node:12
 stages:
   - build
   - deploy
-  
+
 variables:
   AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
   REACT_APP_QUESTION_LAYER: $QUESTION_LAYER
   REACT_APP_VALIDATION_LAYER: $VALIDATION_LAYER
   REACT_APP_STUDY_LAYER: $STUDY_LAYER
-  REACT_APP_BACKEND: $BACKEND
   REACT_APP_DB_LAYER: $DB_LAYER
   REACT_APP_AUTH_LAYER: $AUTH_LAYER
   REACT_APP_UPLOAD_LAYER: $UPLOAD_LAYER
@@ -38,6 +37,8 @@ build:
       - front/build
   only:
     - release
+  tags:
+    - ci
 
 deploy:
   image: python:latest
@@ -47,3 +48,5 @@ deploy:
     - aws s3 cp --recursive --region ap-northeast-2 front/build/ s3://connectclass.io
   only:
     - release
+  tags:
+    - ci
