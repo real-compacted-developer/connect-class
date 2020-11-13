@@ -6,6 +6,7 @@ import useSocket from "../../../hooks/useSocket";
 
 import { IQuestionInfo } from "../../../types/question";
 import SOCKET_TYPE from "../../../constants/socket-type";
+import useUser from "../../../hooks/useUser";
 
 const Wrapper = styled.div`
   width: calc(100% - 104px);
@@ -65,6 +66,7 @@ const Form = (props: Props): JSX.Element => {
   const roomNumber = window.location.pathname.split("/study/")[1];
   const [content, setContent] = useState<string>("");
   const { main: socket } = useSocket();
+  const { user } = useUser();
 
   let inputTag: HTMLInputElement | null = null;
 
@@ -76,10 +78,11 @@ const Form = (props: Props): JSX.Element => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     if (content.length === 0) return;
+    if (!user) return;
 
     const data = {
       roomNumber: roomNumber,
-      userId: "kakao1472290927",
+      userId: user.id,
       slidePage: dummySlide.slidePage,
       slideImageURL: dummySlide.slideImageURL,
       title: "질문",
