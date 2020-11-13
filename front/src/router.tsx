@@ -22,23 +22,20 @@ const Router: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={MainPage} />
-        <PermissionRoute
+        <Route
           exact
           path="/study/create"
-          success={StudyCreatePage}
-          failure={LoginRedirect}
+          component={StudyCreatePage}
         />
-        <PermissionRoute
+        <Route
           exact
           path="/dashboard/:id"
-          success={StudyDataRoomPage}
-          failure={LoginRedirect}
+          component={StudyDataRoomPage}
         />
-        <PermissionRoute
+        <Route
           exact
           path="/study/:id"
-          success={StudyRoomPage}
-          failure={LoginRedirect}
+          component={StudyRoomPage}
         />
         <Route exact path="/login" component={LoginPage} />
       </Switch>
