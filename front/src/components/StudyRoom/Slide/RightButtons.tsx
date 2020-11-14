@@ -101,20 +101,6 @@ const StudyButton: React.FC<Props> = () => {
   }, []);
 
   const exit = () => {
-    if (!user) return;
-
-    // 백엔드 레이어 방 퇴장
-    socket.emit(SOCKET_TYPE.EXIT, {
-      roomId: match.params.id,
-      userId: user.id,
-    });
-
-    // 스터디 레이어 방 퇴장
-    study.emit(SOCKET_TYPE.EXIT, {
-      roomId: match.params.id,
-      userId: user.id,
-    });
-
     history.push("/");
   };
 
