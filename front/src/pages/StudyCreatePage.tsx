@@ -120,13 +120,8 @@ const StudyCreate: React.FC = () => {
       isPremium: false,
     });
 
-    Axios.get(
-      `${process.env.REACT_APP_STUDY_LAYER}/group/data/${res.data.data.id}`
-    ).then((res) => {
-      if (!res.data.data) return;
-      alert("스터디가 생성되었습니다! 스터디로 이동합니다.");
-      history.push(`/study/${res.data.data.id}`);
-    });
+    alert("스터디가 생성되었습니다! 스터디 자료를 업로드하여 시작하세요.");
+    history.push(`/dashboard/${res.data.data.id}`);
   };
 
   return (
