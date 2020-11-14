@@ -5,7 +5,7 @@ import { uuid } from "uuidv4";
 
 import FileBoxButton from "./Buttons/FileBoxButton";
 import InputButton from "./Buttons/InputButton";
-import { useRouteMatch } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
 
 dotenv.config();
 const config = {
@@ -14,6 +14,7 @@ const config = {
   },
 };
 const UploadButton: React.FC = () => {
+  const history = useHistory();
   const match = useRouteMatch<{ id: string }>();
   const [file, setFile] = useState("");
   const handleChange = (e: any) => {
@@ -45,6 +46,9 @@ const UploadButton: React.FC = () => {
           config
         );
         console.log(sss);
+
+        alert("스터디 데이터 추가가 완료되었습니다!");
+        history.push(`/study/${studyGroupId}/list`);
       })
       .catch((err) => console.error(err));
   };
