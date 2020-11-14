@@ -10,7 +10,7 @@ export default {
 
 export const CategoryCircleStory = () => {
   const value = text("Content", "");
-  return <CategoryCircle>{value}</CategoryCircle>;
+  return <CategoryCircle value={value} />;
 };
 
 CategoryCircleStory.story = {

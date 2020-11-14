@@ -53,45 +53,21 @@ const StudyCategoryInput: React.FC<Props> = ({ onChange }) => {
 
       <PCWrapper>
         <CircleList>
-          <CategoryCircle
-            icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
-            value="IT"
-            onChange={onChange}
-          >
-            IT
-          </CategoryCircle>
-          <CategoryCircle icon="" value="취업" onChange={onChange}>
-            취업
-          </CategoryCircle>
-          <CategoryCircle icon="" value="공무원" onChange={onChange}>
-            공무원
-          </CategoryCircle>
-          <CategoryCircle icon="" value="독서논술" onChange={onChange}>
-            독서논술
-          </CategoryCircle>
+          <CategoryCircle value="IT" onChange={onChange} />
+          <CategoryCircle value="취업" onChange={onChange} />
+          <CategoryCircle value="공무원" onChange={onChange} />
+          <CategoryCircle value="독서논술" onChange={onChange} />
         </CircleList>
       </PCWrapper>
 
       <MobileWrapper>
         <CircleList>
-          <CategoryCircle
-            icon="https://cdn.zeplin.io/5f2aa3244602602fbd41641d/assets/F5014331-BA62-4878-93B9-DB6D60ED1413.svg"
-            value="IT"
-            onChange={onChange}
-          >
-            IT
-          </CategoryCircle>
-          <CategoryCircle icon="" value="취업" onChange={onChange}>
-            취업
-          </CategoryCircle>
+          <CategoryCircle value="IT" onChange={onChange} />
+          <CategoryCircle value="취업" onChange={onChange} />
         </CircleList>
         <CircleList>
-          <CategoryCircle icon="" value="공무원" onChange={onChange}>
-            공무원
-          </CategoryCircle>
-          <CategoryCircle icon="" value="독서논술" onChange={onChange}>
-            독서논술
-          </CategoryCircle>
+          <CategoryCircle value="공무원" onChange={onChange} />
+          <CategoryCircle value="독서논술" onChange={onChange} />
         </CircleList>
       </MobileWrapper>
     </>
