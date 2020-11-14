@@ -47,7 +47,7 @@ const StudyRoom: React.FC = () => {
         }
       }
     );
-  }, [match, user, socket, study]);
+  }, [match, user, socket, study, history]);
 
   return (
     <Wrapper>
