@@ -90,12 +90,7 @@ const StudyList: React.FC<StudyListProps> = ({ categoryState }) => {
   }, [originStudyList, category]);
 
   const onStudyCardClick = (studyGroupId: string) => () => {
-    Axios.get(
-      `${process.env.REACT_APP_STUDY_LAYER}/group/data/${studyGroupId}`
-    ).then((res) => {
-      if (!res.data.data) return;
-      history.push(`/study/${res.data.data.id}`);
-    });
+    history.push(`/study/${studyGroupId}/list`);
   };
 
   const renderCoverImage = (category: string) => {
