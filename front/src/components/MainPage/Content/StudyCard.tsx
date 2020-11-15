@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import LazyImage from "../../common/LazyImage";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ studyData?: boolean }>`
   margin: 0px 35px 35px 0;
   width: 330px;
-  height: 330px;
+  height: ${(props) => (props.studyData ? "100%" : "330px")};
 
   display: flex;
   flex-direction: column;
@@ -54,7 +54,8 @@ const PeopleCount = styled.p`
 `;
 
 type Props = {
-  imageURL: string;
+  imageURL?: string;
+  isStudyData?: boolean;
   title: string;
   currentPeople: number;
   totalPeople: number;
@@ -63,8 +64,10 @@ type Props = {
 
 const StudyCard: (props: Props) => JSX.Element = (props: Props) => {
   return (
-    <Wrapper onClick={props.onClick}>
-      <LazyImage width={"100%"} height={"330px"} imageURL={props.imageURL} />
+    <Wrapper onClick={props.onClick} studyData={props.isStudyData}>
+      {props.imageURL && (
+        <LazyImage width={"100%"} height={"330px"} imageURL={props.imageURL} />
+      )}
       <Content>
         <Title>{props.title}</Title>
         <PeopleWrapper>
