@@ -8,6 +8,7 @@ import StudyDataRoomPage from "./pages/StudyDataRoomPage";
 import { useDispatch } from "react-redux";
 import { fetchUserAsync } from "./modules/user";
 import StudyDataList from "./pages/StudyDataListPage";
+import PermissionRoute from "./components/common/PermissonRoute";
 
 const Router: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,12 +20,42 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={MainPage} />
-        <Route exact path="/study/create" component={StudyCreatePage} />
-        <Route exact path="/study/:groupId/list" component={StudyDataList} />
-        <Route exact path="/dashboard/:id" component={StudyDataRoomPage} />
-        <Route exact path="/study/:id" component={StudyRoomPage} />
-        <Route exact path="/login" component={LoginPage} />
+        <PermissionRoute
+          exact
+          path="/"
+          success={MainPage}
+          failure={LoginPage}
+        />
+        <PermissionRoute
+          exact
+          path="/study/create"
+          success={StudyCreatePage}
+          failure={LoginPage}
+        />
+        <PermissionRoute
+          exact
+          path="/study/:groupId/list"
+          success={StudyDataList}
+          failure={LoginPage}
+        />
+        <PermissionRoute
+          exact
+          path="/dashboard/:id"
+          success={StudyDataRoomPage}
+          failure={LoginPage}
+        />
+        <PermissionRoute
+          exact
+          path="/study/:id"
+          success={StudyRoomPage}
+          failure={LoginPage}
+        />
+        <PermissionRoute
+          exact
+          path="/login"
+          success={MainPage}
+          failure={LoginPage}
+        />
       </Switch>
     </BrowserRouter>
   );
