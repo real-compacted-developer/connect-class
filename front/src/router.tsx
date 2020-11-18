@@ -20,12 +20,7 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <PermissionRoute
-          exact
-          path="/"
-          success={MainPage}
-          failure={LoginPage}
-        />
+        <Route exact path="/" component={MainPage} />
         <PermissionRoute
           exact
           path="/study/create"
@@ -50,12 +45,7 @@ const Router: React.FC = () => {
           success={StudyRoomPage}
           failure={LoginPage}
         />
-        <PermissionRoute
-          exact
-          path="/login"
-          success={MainPage}
-          failure={LoginPage}
-        />
+        <Route exact path="/login" component={LoginPage} />
       </Switch>
     </BrowserRouter>
   );
